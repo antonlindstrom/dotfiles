@@ -4,6 +4,11 @@ all:
 	cp -a ./gitconfig ~/.gitconfig
 	cp -a ./tmux.conf ~/.tmux.conf
 
+system:
+	bash bootstrap/docker.bash
+	bash bootstrap/install_golang.bash
+	bash bootstrap/install_golang_utils.bash
+
 destroy:
 	rm ~/.bash_profile
 	rm ~/.bash_aliases
