@@ -5,8 +5,9 @@ export CLICOLOR=1
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-export PATH=$PATH:/sbin:/usr/sbin
 export GOPATH=~/Documents/Development
+export PATH=$PATH:/sbin:/usr/sbin
+export PATH=/usr/src/go/bin:$PATH:$GOPATH/bin
 
 # .bashrc
 if [ -f ~/.bashrc ]; then
