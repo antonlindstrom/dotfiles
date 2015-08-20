@@ -3,8 +3,8 @@
 # This script installs docker but this is pretty darn dangerous. Only run this
 # if you like to live dangerously.
 
-docker version | grep "Version"
-if [ $? == 0 ]; then
+count=$(docker version | grep -c "Version" || true)
+if [ $count -gt 0 ]; then
 	echo "!! Docker seems to be installed already."
 	exit 0
 fi
