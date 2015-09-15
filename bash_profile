@@ -1,5 +1,3 @@
-export PS1="\[\033[G\]\u@\h:\e[0;34m\W\$\e[m "
-
 export CLICOLOR=1
 
 export LC_CTYPE=en_US.UTF-8
@@ -18,3 +16,5 @@ fi
 if [ -f ~/.bash_aliases ]; then
   . ~/.bash_aliases
 fi
+
+export PS1="\u@\h:\e[0;32m\W:\j$\e[m "
