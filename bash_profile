@@ -21,6 +21,7 @@ COMPLETION_DIR="__nodir__"
 
 if [ -d $COMPLETION_DIR ]; then
   . $COMPLETION_DIR/ghq-completion.bash
+  . $COMPLETION_DIR/hub.bash_completion.sh
 fi
 
 # Darwin specifics.
