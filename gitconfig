@@ -17,6 +17,12 @@
 	delete-merged-branches = "!git branch --merged | grep -v master | xargs git branch --delete"
 	prune-branches = fetch -p
 	track-remote-branches = "!for remote in `git branch -r | grep -v 'origin/HEAD'`; do git branch --track ${remote#origin/} $remote; done"
+	recent = for-each-ref --count=10 --sort=-committerdate refs/heads/ --format="%(refname:short)"                                                                                                                                                                               
+        sprint-overview = log --all --since='2 weeks' --no-merges --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit                                                                                                                         
+        sprint-stats = shortlog -sn --since='2 weeks'                                                                                                                                                                                                                                
+        all-mine = log --all --no-merges --author=lindztr@gmail.com --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit                                                                                                                       
+        today = log --since=00:00:00 --all --no-merges --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit                                                                                                                                    
+        graph = log --graph --all --decorate --stat --date=iso  
 [push]
 	default = current
 [pull]
