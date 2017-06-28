@@ -33,4 +33,4 @@ if [ $? == 0 ]; then
   fi
 fi
 
-export PS1="\u@\h:\e[0;32m\W:\j$\e[m "
+export PS1="\u@\h:\[$(tput sgr0)\]\[\033[0;32m\]\W:\j\\$\[$(tput sgr0)\]\[\033[0;32m\] \[$(tput sgr0)\]"
