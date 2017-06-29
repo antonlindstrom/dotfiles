@@ -1,16 +1,9 @@
-#
-# ~/.bashrc
-#
-
-# .bash_profile
-if [ -f ~/.bash_profile ]; then
-  . ~/.bash_profile
-fi
+export GOPATH=~/code
+export PATH=$PATH:/sbin:/usr/sbin
+export PATH=/usr/src/go/bin:$PATH:$GOPATH/bin:$HOME/.local/bin
 
 # Set aliases in separate file
-if [ -f ~/.bash_aliases ]; then
-  . ~/.bash_aliases
-fi
+[[ -f ~/.bash_aliases ]] && . ~/.bash_aliases
 
 COMPLETION_DIR="__nodir__"
 

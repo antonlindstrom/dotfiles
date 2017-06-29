@@ -1,7 +1,19 @@
 #!/usr/bin/env bash
 [[ "${TRACE}" ]] && set -x
-set -eu
-set -o pipefail
+
+configure_bash() {
+	grep ".config/bash/config" ~/.bash_profile > /dev/null
+	if [ $? == 1 ]; then
+		echo "Appending bash configuration sourcing to .bash_profile"
+		echo "[[ -f ~/.config/bash/config ]] && . ~/.config/bash/config" >> ~/.bash_profile
+	fi
+
+	grep ".config/bash/config" ~/.bashrc > /dev/null
+	if [ $? == 1 ]; then
+		echo "Appending bash configuration sourcing to .bashrc"
+		echo "[[ -f ~/.config/bash/config ]] && .  ~/.config/bash/config" >> ~/.bashrc
+	fi
+}
 
 configure_git() {
 	local target=~/.gitconfig.private
@@ -20,6 +32,8 @@ EOM
 }
 
 main() {
+	echo '==> Append bash config:'
+	configure_bash
 	echo '==> Create private git config:'
 	configure_git
 }
