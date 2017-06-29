@@ -1,15 +1,10 @@
-export CLICOLOR=1
+#
+# ~/.bashrc
+#
 
-export LC_CTYPE=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-
-export GOPATH=~/Documents/Development
-export PATH=$PATH:/sbin:/usr/sbin
-export PATH=/usr/src/go/bin:$PATH:$GOPATH/bin
-
-# .bashrc
-if [ -f ~/.bashrc ]; then
-  . ~/.bashrc
+# .bash_profile
+if [ -f ~/.bash_profile ]; then
+  . ~/.bash_profile
 fi
 
 # Set aliases in separate file
@@ -32,5 +27,10 @@ if [ $? == 0 ]; then
     . $(brew --prefix)/etc/bash_completion
   fi
 fi
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=auto'
 
 export PS1="\u@\h:\[$(tput sgr0)\]\[\033[0;32m\]\W:\j\\$\[$(tput sgr0)\]\[\033[0;32m\] \[$(tput sgr0)\]"

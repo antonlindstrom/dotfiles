@@ -1,0 +1,10 @@
+{
+        "endpoint": "https://issues.apache.org/jira",
+        "filter": {
+                "global": "Sprint IN openSprints() AND project=MESOS",
+                "todo": "AND (status='To Do' OR status='Open' OR status='Accepted')",
+                "doing": "AND status='In Progress'",
+                "done": "AND NOT (status='To Do' OR status='Open' OR status='In Progress' OR status='Accepted')"
+        }
+}
+

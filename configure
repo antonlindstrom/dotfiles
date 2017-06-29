@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+[[ "${TRACE}" ]] && set -x
+set -eu
+set -o pipefail
+
+configure_git() {
+	local target=~/.gitconfig.private
+	[ -f "${target}" ] && return 0
+
+	read -r -p "Name: " name
+	read -r -p "E-mail: " email
+	echo
+
+	echo "Writing file '${target}' with content:"
+	tee "${target}" <<EOM
+[user]
+	name = ${name}
+	email = ${email}
+EOM
+}
+
+main() {
+	echo '==> Create private git config:'
+	configure_git
+}
+
+main "$@"

@@ -1,0 +1,12 @@
+( if
+( contains ( application_name ) "termite" )
+( begin
+( spawn_async (str "transset-df -i " (window_xid) " 0.85" ))
+)
+)
+( if
+( contains ( window_class ) "conky" )
+( begin
+( spawn_async (str "transset-df -i " (window_xid) " 0.5" ))
+)
+)

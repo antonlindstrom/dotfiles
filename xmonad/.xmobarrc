@@ -1,0 +1,35 @@
+Config { font = "xft:inconsolata:size=10:antialias=true",
+       , additionalFonts = []
+       , borderColor = "black"
+       , border = TopB
+       , bgColor = "black"
+       , fgColor = "grey"
+       , alpha = 255
+       , position = Top
+       , textOffset = -1
+       , iconOffset = -1
+       , lowerOnStart = True
+       , pickBroadest = False
+       , persistent = False
+       , hideOnStart = False
+       , iconRoot = "."
+       , allDesktops = True
+       , overrideRedirect = True
+       , commands = [ Run Weather "ESGG" ["-t","<station>: <tempC>°C",
+                                          "-L","10","-H","25",
+                                          "--normal","white",
+                                          "--high","red",
+                                          "--low","lightblue"] 36000
+                    , Run Cpu ["-L","3","-H","50",
+                               "--normal","green","--high","red"] 10
+                    , Run Memory ["-t","Mem: <usedratio>%"] 10
+                    , Run Swap [] 10
+                    , Run Com "uname" ["-s","-r"] "" 36000
+                    , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+                    , Run DiskU [("/", "HDD /: <usedp>%")] ["-L", "20", "-H", "75", "-m", "1", "-p", "3", "--normal", "white", "--high", "#a0522d"] 20
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = " <fc=#8EC9E2>%hostname%</fc> | %uname% | %ESGG% }\
+                    \{ %cpu% | %memory% * %swap% | %disku% | <fc=#8EC9E2>%date%</fc> "
+       }

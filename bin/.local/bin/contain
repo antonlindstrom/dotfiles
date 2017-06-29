@@ -1,0 +1,18 @@
+#!/bin/bash
+
+CURRENT_USER=$(whoami)
+
+if [ ! -d /sys/fs/cgroup/memory/build ]; then
+  sudo cgcreate -t $CURRENT_USER:$CURRENT_USER -a $CURRENT_USER:$CURRENT_USER -g memory,cpu:build
+  echo 256 > /sys/fs/cgroup/cpu/build/cpu.shares
+  echo 2048M > /sys/fs/cgroup/memory/build/memory.limit_in_bytes
+  # echo 256M > /sys/fs/cgroup/memory/build/memory.memsw.limit_in_bytes
+  echo 0 > /sys/fs/cgroup/memory/build/memory.swappiness
+fi
+
+cpu_shares=$(cat /sys/fs/cgroup/cpu/build/cpu.shares)
+memory_limit=$(cat /sys/fs/cgroup/memory/build/memory.limit_in_bytes)
+swappiness=$(cat /sys/fs/cgroup/memory/build/memory.swappiness)
+
+echo -e "\e[33m[${cpu_shares} cpu.shares, ${memory_limit} memory.limit_in_bytes, ${swappiness} memory.swappiness]\e[0m"
+time cgexec -g cpu,memory:build "$@"

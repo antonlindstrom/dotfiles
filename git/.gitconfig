@@ -1,0 +1,38 @@
+[include]
+	path = ~/.gitconfig.private
+[core]
+	excludesfile = ~/.gitignore
+	editor = /usr/bin/vim
+[help]
+	autocorrect = 1
+[color]
+	ui = true
+[alias]
+	lol = log --oneline --decorate --graph
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	co = checkout -b
+	com = checkout master
+	rbr = "!for branch in `git branch -r | grep -v HEAD`;do echo `git show --format='%ai %Cred%h%Creset %C(green)(%cr)%Creset %C(bold blue)<%an>%Creset' $branch | head -n 1` $branch; done | sort -r"
+	delete-merged-branches = "!git branch --merged | grep -v master | xargs git branch --delete"
+	prune-branches = fetch -p
+	track-remote-branches = "!for remote in `git branch -r | grep -v 'origin/HEAD'`; do git branch --track ${remote#origin/} $remote; done"
+	recent = for-each-ref --count=10 --sort=-committerdate refs/heads/ --format="%(refname:short)"
+	sprint-overview = log --all --since='2 weeks' --no-merges --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	sprint-stats = shortlog -sn --since='2 weeks'
+	all-mine = log --all --no-merges --author=lindztr@gmail.com --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	today = log --since=00:00:00 --all --no-merges --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	graph = log --graph --all --decorate --stat --date=iso  
+[push]
+	default = current
+[pull]
+	default = current
+[diff]
+	compactionHeuristic = 1
+[submodule]
+	fetchJobs = 4
+[rebase]
+	autoSquash = 1
+[ghq]
+	root = ~/code/src
+[credential]
+	helper = cache --timeout=300
