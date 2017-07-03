@@ -31,6 +31,10 @@ configure_git() {
 EOM
 }
 
+configure_mutt() {
+	[ -d ~/.mail_aliases ] || mkdir ~/.mail_aliases
+}
+
 configure_offlineimap() {
 	local target=~/.offlineimap/password
 	[ -d ~/.offlineimap ] || mkdir ~/.offlineimap
@@ -50,6 +54,8 @@ main() {
 	configure_bash
 	echo '==> Create private git config:'
 	configure_git
+	echo '==> Add mail alias file:'
+	configure_mutt
 	echo '==> Configure offlineimap password:'
 	configure_offlineimap
 }
