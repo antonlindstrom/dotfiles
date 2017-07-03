@@ -1,0 +1,143 @@
+set folder      = ~/.mail
+set from        = anton@alley.se
+set realname    = "Anton Lindstrom"
+set signature   = ~/.mutt/signature
+
+# Alternative emails
+alternates (anton@(alley.se|antonlindstrom.com)|me@antonlindstrom.com)
+set reverse_name
+
+set envelope_from = yes
+
+# Store message headers locally to speed things up.
+# If hcache is a folder, Mutt will create sub cache folders for each account which may speeds things even more up.
+set header_cache = ~/.cache/mutt
+
+# Store messages locally to speed things up, like searching message bodies.
+# Can be the same folder as header_cache.
+# This will cost important disk usage according to your e-mail amount.
+set message_cachedir = "~/.mutt/cache/bodies"
+
+# Specify where to save and/or look for postponed messages.
+#set postponed = +[Gmail]/Drafts
+
+set mail_check = 30
+set wait_key = no        # shut up, mutt
+set mbox_type = Maildir  # mailbox type
+set timeout = 3          # idle time before scanning
+set mail_check = 0       # minimum time between scans
+unset move               # gmail does that
+
+set uncollapse_jump
+
+# Binding
+bind index <esc>1 next-unread-mailbox
+
+# Index Key Bindings ---------------------------------
+bind index gg       first-entry
+bind index G        last-entry
+
+bind index R        group-reply
+bind index <tab>    sync-mailbox
+bind index <space>  collapse-thread
+
+# Ctrl-R to mark all as read
+macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all messages as read"
+
+# Sync email
+macro index O "<shell-escape>offlineimap<enter>"           "run offlineimap to sync all mail"
+macro index o "<shell-escape>offlineimap -qf INBOX<enter>" "run offlineimap to sync inbox"
+
+# Saner copy/move dialogs
+macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
+macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
+
+macro index,pager gi <change-folder>=antonlindstrom.com/INBOX<enter>     "Go to inbox"
+macro index,pager gl <change-folder>=local<enter>     "Go to local inbox"
+
+macro index,pager I  <set-flag>O  "Mark as read"
+macro index,pager U  <set-flag>N  "Mark as new"
+#macro index,pager U  <clear-flag>O  "Mark as unread"
+
+# Sidebar Navigation ---------------------------------
+#bind index,pager <down>   sidebar-next
+#bind index,pager <up>     sidebar-prev
+#bind index,pager <right>  sidebar-open
+
+# Filter out some headers
+ignore *
+unignore from: subject: to: date:
+unhdr_order *                           # some distros order things by default
+hdr_order subject: from: date: to:
+
+# View HTML automatically
+auto_view text/html
+
+# Display download progress every 5K
+set net_inc=5
+
+set pager_index_lines = 15
+set pager_stop
+set markers=no
+set mark_old=no
+# Last, but not least, get mutt to display its version on startup.
+# Sorting
+set sort = 'threads'
+set sort_aux = last-date-received
+
+set date_format = "%m/%d %H:%M"
+set index_format = "[%Z]  %D  %-20.20F  %s"
+
+set status_chars  = " *%A"
+set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?o? (%o old)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
+
+# Sidebar Patch --------------------------------------
+#set sidebar_delim   = '  │'
+# set sidebar_visible = no
+set sidebar_width   = 35
+# set sidebar_shortpath=yes
+# set sidebar_newmail_only=yes # Requires sidebar-new-only patch
+# color sidebar_new color221 color233
+#
+# b toggles sidebar visibility
+macro index B '<enter-command>toggle sidebar_visible<enter>'
+macro pager B '<enter-command>toggle sidebar_visible<enter>'
+
+# ctrl-n, ctrl-p to select next, prev folder
+# # ctrl-o to open selected folder
+bind index,pager \CP sidebar-prev
+bind index,pager \CN sidebar-next
+bind index,pager \CO sidebar-open
+
+# Default inbox.
+set spoolfile = "+antonlindstrom.com/INBOX"
+
+mailboxes +antonlindstrom.com/INBOX \
+          +antonlindstrom.com/flagged \
+          +antonlindstrom.com/sent \
+          +antonlindstrom.com/drafts \
+          +antonlindstrom.com/archive
+
+# Other special folders.
+set mbox      = "+antonlindstrom.com/archive"
+set postponed = "+antonlindstrom.com/drafts"
+set record    = "+antonlindstrom.com/sent"
+
+# Mailcap path
+set mailcap_path  = ~/.mutt/mailcap
+
+# Alias file
+set alias_file = ~/.mutt/aliases
+set sort_alias = alias
+set reverse_alias = yes
+source $alias_file
+
+# Set preference of text/plain
+alternative_order text/plain text/enriched text/html
+
+# Solarized theme
+source $HOME/.mutt/mutt-colors-solarized-dark-256.muttrc
+#source $HOME/.mutt/mutt-colors-solarized-dark-16.muttrc
+source ~/.mutt/mutt-patch-highlighting.muttrc
+
+push <show-version>

@@ -31,11 +31,27 @@ configure_git() {
 EOM
 }
 
+configure_offlineimap() {
+	local target=~/.offlineimap/password
+	[ -d ~/.offlineimap ] || mkdir ~/.offlineimap
+	[ -f "${target}" ] && return 0
+
+	read -r -p "Password: " password
+	echo
+
+	echo "Writing file '${target}' with content:"
+	tee "${target}" <<EOM
+${password}
+EOM
+}
+
 main() {
 	echo '==> Append bash config:'
 	configure_bash
 	echo '==> Create private git config:'
 	configure_git
+	echo '==> Configure offlineimap password:'
+	configure_offlineimap
 }
 
 main "$@"
