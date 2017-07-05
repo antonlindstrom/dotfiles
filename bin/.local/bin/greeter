@@ -1,0 +1,17 @@
+#!/bin/bash
+
+hour=$(date +%H)
+
+if [ $hour -lt 5 ]; then
+  echo "Wee hours, $(whoami)?"
+elif [ $hour -lt 11 ]; then
+  echo "Good morning, $(whoami)!"
+elif [ $hour -lt 13 ]; then
+  echo "Good day, $(whoami)!"
+elif [ $hour -lt 18 ]; then
+  echo "Good afternoon, $(whoami)!"
+elif [ $hour -lt 22 ]; then
+  echo "Good evening, $(whoami)!"
+else
+  echo "Good night, $(whoami)!"
+fi
