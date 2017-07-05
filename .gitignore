@@ -1,4 +1,1 @@
-vim/tmp/*
-vim/backup/*
-vim/.netrwhist
-ghq-completion.bash
+tmux/.tmux/resurrect

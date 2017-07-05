@@ -17,9 +17,14 @@ dryrun: dirs
 	$(info ===> Install files --simulate)
 	stow --simulate -t $(DESTDIR) $(subst $(comma),$(space),$(PKGS))
 
+.PHONY: preinstall
+preinstall: ## Preinstall target for git submodules.
+	$(info ===> Update submodules)
+	git submodule update --init
+
 .PHONY: install
 install: ## Install PKGS (all or use PKGS=package).
-install: dirs
+install: dirs preinstall
 	$(info ===> Install files)
 	stow -t $(DESTDIR) $(subst $(comma),$(space),$(PKGS))
 
