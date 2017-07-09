@@ -2,7 +2,7 @@ setxkbmap se
 
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 
-feh --bg-center /home/anton/.background/deer_nature.jpg
+feh --bg-center /home/anton/.background/deer_nature.jpg &
 
 devilspie -a &
 xcompmgr &
