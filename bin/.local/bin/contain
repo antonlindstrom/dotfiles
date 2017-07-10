@@ -14,5 +14,7 @@ cpu_shares=$(cat /sys/fs/cgroup/cpu/build/cpu.shares)
 memory_limit=$(cat /sys/fs/cgroup/memory/build/memory.limit_in_bytes)
 swappiness=$(cat /sys/fs/cgroup/memory/build/memory.swappiness)
 
-echo -e "\e[33m[${cpu_shares} cpu.shares, ${memory_limit} memory.limit_in_bytes, ${swappiness} memory.swappiness]\e[0m"
+memory_limit_human=$(numfmt --to=iec-i --suffix=B ${memory_limit})
+
+echo -e "\e[33m[${cpu_shares} cpu.shares, ${memory_limit_human} memory.limit_in_bytes, ${swappiness} memory.swappiness]\e[0m"
 time cgexec -g cpu,memory:build "$@"
