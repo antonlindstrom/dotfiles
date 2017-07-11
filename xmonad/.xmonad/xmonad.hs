@@ -28,6 +28,9 @@ main = do
         ("M-c", spawn myTerminal),
         ("M-w", spawn "chromium"),
 
+        -- lock
+        ("M-l", spawn "xlock -mode blank"),
+
         -- window control
         ("M-x", kill)]
 
