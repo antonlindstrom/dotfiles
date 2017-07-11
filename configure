@@ -15,6 +15,26 @@ configure_bash() {
 	fi
 }
 
+configure_env_private() {
+	local target=~/.env.private
+	[ -f "${target}" ] && return 0
+
+	read -r -p "AWS_ACCESS_KEY_ID: " aws_id
+	read -r -p "AWS_SECRET_ACCESS_KEY: " aws_key
+	read -r -p "RESTIC_REPOSITORY: " restic_repo
+	read -r -p "RESTIC_PASSWORD: " restic_password
+	echo
+
+	echo "Writing file '${target}' with content:"
+	tee "${target}" <<EOM
+export AWS_ACCESS_KEY_ID="${aws_id}"
+export AWS_SECRET_ACCESS_KEY="${aws_key}"
+
+export RESTIC_REPOSITORY="${restic_repo}"
+export RESTIC_PASSWORD="${restic_password}"
+EOM
+}
+
 configure_git() {
 	local target=~/.gitconfig.private
 	[ -f "${target}" ] && return 0
@@ -52,6 +72,8 @@ EOM
 main() {
 	echo '==> Append bash config:'
 	configure_bash
+	echo '==> Configure private environment config:'
+	configure_env_private
 	echo '==> Create private git config:'
 	configure_git
 	echo '==> Add mail alias file:'

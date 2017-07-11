@@ -5,6 +5,9 @@ export PATH=/usr/src/go/bin:$PATH:$GOPATH/bin:$HOME/.local/bin
 # Set aliases in separate file
 [[ -f ~/.bash_aliases ]] && . ~/.bash_aliases
 
+# Set private env configuration in separate file
+[[ -f ~/.env.private ]] && . ~/.env.private
+
 COMPLETION_DIR="__nodir__"
 
 if [ -d $COMPLETION_DIR ]; then
