@@ -26,10 +26,13 @@ main = do
     } `additionalKeysP`
       [ -- apps
         ("M-c", spawn myTerminal),
-        ("M-w", spawn "chromium"),
+        ("M-w", spawn "qutebrowser"),
 
         -- lock
         ("M-l", spawn "xlock -mode blank"),
+
+        -- volume
+        ("M-m", spawn "amixer set Master toggle"),
 
         -- window control
         ("M-x", kill)]
