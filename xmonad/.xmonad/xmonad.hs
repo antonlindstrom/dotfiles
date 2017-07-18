@@ -28,8 +28,11 @@ main = do
         ("M-c", spawn myTerminal),
         ("M-w", spawn "qutebrowser"),
 
+        -- rofi
+        ("M-p", spawn "rofi -show run"),
+
         -- lock
-        ("M-l", spawn "xlock -mode blank"),
+        ("M-<Esc>", spawn "xlock -mode blank"),
 
         -- volume
         ("M-m", spawn "amixer set Master toggle"),
