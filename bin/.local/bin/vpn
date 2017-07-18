@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Setup the VPN connection.
+function up {
+  systemctl start openswan
+  sleep 2
+  systemctl start xl2tpd
+  ipsec auto --add L2TP-PSK
+  ipsec auto --up L2TP-PSK
+  echo "c vpn-connection" > /var/run/xl2tpd/l2tp-control
+}
+
+# Tear down the VPN connection.
+function down() {
+  ipsec auto --down L2TP-PSK
+  systemctl stop openswan
+  systemctl stop xl2tpd
+  echo "" > /var/run/xl2tpd/l2tp-control
+}
+
+# Main.
+#
+# --up    Start VPN.
+# --down  Stop VPN.
+#
+case $1 in
+  up)
+    echo "=> Starting VPN..."
+    up
+    ;;
+  down)
+    echo "=> Stopping VPN..."
+    down
+    ;;
+esac
