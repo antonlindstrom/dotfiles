@@ -27,9 +27,23 @@ Config { font = "xft:inconsolata:size=10:antialias=true",
                     , Run Com "uname" ["-s","-r"] "" 36000
                     , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
                     , Run DiskU [("/", "HDD /: <usedp>%")] ["-L", "20", "-H", "75", "-m", "1", "-p", "3", "--normal", "white", "--high", "#a0522d"] 20
+                    , Run Battery [ "--template" , "Power: <acstatus>"
+                             , "--Low"      , "10"        -- units: %
+                             , "--High"     , "80"        -- units: %
+                             , "--low"      , "darkred"
+                             , "--normal"   , "darkorange"
+                             , "--high"     , "darkgreen"
+                             , "--" -- battery specific options
+                                       -- discharging status
+                                       , "-o", "<left>%"
+                                       -- AC "on" status
+                                       , "-O", "<fc=#dAA520>Charging</fc>"
+                                       -- charged status
+                                       , "-i", "<fc=#006000>Charged</fc>"
+                             ] 50
                     ]
        , sepChar = "%"
        , alignSep = "}{"
        , template = " <fc=#8EC9E2>%hostname%</fc> | %uname% | %ESGG% }\
-                    \{ %cpu% | %memory% * %swap% | %disku% | <fc=#8EC9E2>%date%</fc> "
+                    \{ %cpu% | %memory% * %swap% | %disku% | %battery% | <fc=#8EC9E2>%date%</fc> "
        }
