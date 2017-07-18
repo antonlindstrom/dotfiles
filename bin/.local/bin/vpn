@@ -25,11 +25,28 @@ function down() {
 #
 case $1 in
   up)
+    if (( $EUID != 0 )); then
+      echo "This requires superuser abilities (run with sudo)."
+      echo "Try: sudo vpn up"
+      exit 1
+    fi
+
     echo "=> Starting VPN..."
     up
     ;;
   down)
+    if (( $EUID != 0 )); then
+      echo "This requires superuser abilities (run with sudo)."
+      echo "Try: sudo vpn down"
+      exit 1
+    fi
+
     echo "=> Stopping VPN..."
     down
+    ;;
+  *)
+    echo "Usage:"
+    echo "  vpn up    - Start VPN (default configuration)"
+    echo "  vpn down  - Tear down VPN connection."
     ;;
 esac
