@@ -35,7 +35,9 @@ main = do
         ("M-<Esc>", spawn "xlock -mode blank"),
 
         -- volume
-        ("M-m", spawn "amixer set Master toggle"),
+        ("M-<F10>", spawn "amixer set Master toggle"),
+        ("M-<F11>", spawn "amixer set Master 2-"),
+        ("M-<F12>", spawn "amixer set Master 2+"),
 
         -- window control
         ("M-x", kill)]
