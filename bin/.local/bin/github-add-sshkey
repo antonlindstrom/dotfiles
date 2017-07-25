@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+# Script to add a public key to your Github account.
+
+set -eo pipefail
+
+# Check if the number of arguments are correct.
+if (( $# != 1 )); then
+	echo "Usage: $0 /path/to/id_rsa.pub"
+	exit 0
+fi
+
+# Check if the file provided is readable.
+if [ ! -f $1 ]; then
+	echo "Could not read file $1, please check the path."
+	exit 1
+fi
+
+if [ -z $GITHUB_ACCESS_TOKEN ]; then
+	echo '$GITHUB_ACCESS_TOKEN is not set, please provide it with key admin access.'
+	exit 1
+fi
+
+key_content=$(cat $1)
+key_title=${key_content/* } # the '/* ' deletes every character in $key_content up to and including the last space.
+
+json=$(printf '{"title": "%s", "key": "%s"}' "$key_title" "$key_content")
+
+curl -s -d "$json" "https://api.github.com/user/keys?access_token=$GITHUB_ACCESS_TOKEN"
+
+# vim: set ft=sh
