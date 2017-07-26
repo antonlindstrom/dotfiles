@@ -12,7 +12,18 @@ myBorderWidth :: Dimension
 
 myBorderWidth = 2
 
+myWorkspaces = ["1:main","2:www","3:chat","4:media","5:other"] 
+
 baseConfig = desktopConfig
+
+myXPConfig :: XPConfig
+myXPConfig = defaultXPConfig { font = "9x15,xft:inconsolata"
+                      , bgColor  = "#2b2b2b"
+                      , fgColor  = "grey"
+                      , promptBorderWidth = 0
+                      , position = Top
+                      , height   = 15
+                      , historySize = 256 }
 
 main = do
     xmproc <- spawnPipe "xmobar"
@@ -21,6 +32,7 @@ main = do
         focusedBorderColor = "#2b2b2b",
         manageHook  = manageDocks <+> manageHook baseConfig,
         layoutHook  = avoidStruts $ layoutHook baseConfig,
+        workspaces  = myWorkspaces,
         terminal    = myTerminal,
         borderWidth = myBorderWidth
     } `additionalKeysP`
@@ -30,6 +42,9 @@ main = do
 
         -- rofi
         ("M-p", spawn "rofi -show run"),
+
+        -- pass
+        ("M-o", passPrompt myXPConfig),
 
         -- lock
         ("M-<Esc>", spawn "xlock -mode blank"),
