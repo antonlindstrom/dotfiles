@@ -1,6 +1,8 @@
 import XMonad
 import XMonad.Config.Desktop
 import XMonad.Hooks.ManageDocks
+import Xmonad.Prompt
+import Xmonad.Prompt.Pass
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig
 
