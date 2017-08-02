@@ -8,11 +8,12 @@ export PATH=/usr/src/go/bin:$PATH:$GOPATH/bin:$HOME/.local/bin
 # Set private env configuration in separate file
 [[ -f ~/.env.private ]] && . ~/.env.private
 
-COMPLETION_DIR="__nodir__"
+COMPLETION_DIR="$HOME/.bash-completion"
 
 if [ -d $COMPLETION_DIR ]; then
-  . $COMPLETION_DIR/ghq-completion.bash
-  . $COMPLETION_DIR/hub.bash_completion.sh
+  for i in $(ls $COMPLETION_DIR); do
+    . $COMPLETION_DIR/$i
+  done
 fi
 
 # Darwin specifics.
