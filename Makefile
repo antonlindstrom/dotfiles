@@ -46,6 +46,14 @@ showpkgs: ## Show packages about to be installed.
 configure: ## Configure private files.
 	./configure
 
+.PHONY: restore-config-backup
+restore-config-backup: ## Restore secret configuration from backup.
+	restic snapshots --tag config
+	@echo
+	@echo "==> Restoring latest snapshot with tag 'config' to $(DESTDIR), waiting 10s to allow abort."
+	sleep 10
+	restic restore latest --tag config --target $(DESTDIR)
+
 .PHONY: help
 help: ## Describe tasks.
 	$(info Tasks:)

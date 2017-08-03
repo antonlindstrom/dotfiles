@@ -22,7 +22,6 @@ configure_env_private() {
 	read -r -p "AWS_ACCESS_KEY_ID: " aws_id
 	read -r -p "AWS_SECRET_ACCESS_KEY: " aws_key
 	read -r -p "RESTIC_REPOSITORY: " restic_repo
-	read -r -p "RESTIC_PASSWORD: " restic_password
 	echo
 
 	echo "Writing file '${target}' with content:"
@@ -31,7 +30,6 @@ export AWS_ACCESS_KEY_ID="${aws_id}"
 export AWS_SECRET_ACCESS_KEY="${aws_key}"
 
 export RESTIC_REPOSITORY="${restic_repo}"
-export RESTIC_PASSWORD="${restic_password}"
 EOM
 }
 
