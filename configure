@@ -50,7 +50,8 @@ EOM
 }
 
 configure_mutt() {
-	[ -d ~/.mail_aliases ] || mkdir ~/.mail_aliases
+	[ -f ~/.mail_aliases ] || touch ~/.mail_aliases
+	echo -e " \e[1;31m!!\e[0m Empty .mail_aliases created, should be restored from backup."
 }
 
 configure_offlineimap() {
