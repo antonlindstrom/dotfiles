@@ -3,6 +3,9 @@ set from        = anton@alley.se
 set realname    = "Anton Lindstrom"
 set signature   = ~/.mutt/signature
 
+set sendmail = "/usr/bin/msmtp -a default"
+set sendmail_wait = 0
+
 # Alternative emails
 alternates (anton@(alley.se|antonlindstrom.com)|me@antonlindstrom.com)
 set reverse_name
