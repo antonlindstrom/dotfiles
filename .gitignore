@@ -1,1 +1,6 @@
 tmux/.tmux/resurrect
+weechat/.weechat/*
+!weechat/.weechat/aspell.conf
+!weechat/.weechat/irc.conf
+!weechat/.weechat/plugins.conf
+!weechat/.weechat/weechat.conf
