@@ -1,0 +1,41 @@
+#!/bin/bash
+
+function bright() {
+	cat "$HOME/.config/termite/config_bright" > "$HOME/.config/termite/config"
+	killall -USR1 termite
+}
+
+function dark() {
+	cat "$HOME/.config/termite/config_dark" > "$HOME/.config/termite/config"
+	killall -USR1 termite
+}
+
+function toggle()  {
+	diff -q "$HOME/.config/termite/config_bright" "$HOME/.config/termite/config" > /dev/null
+
+	[ $? = 0 ] && dark
+	[ $? = 1 ] && bright
+}
+
+# Main.
+#
+# bright  Bright terminal.
+# dark    Dark terminal.
+#
+case $1 in
+  bright)
+    bright
+    ;;
+  dark)
+    dark
+    ;;
+  toggle)
+    toggle
+    ;;
+  *)
+    echo "Usage:"
+    echo "  termstyle bright  - Bright terminal."
+    echo "  termstyle dark    - Dark terminal."
+    echo "  termstyle toggle  - Toggle between dark or bright."
+    ;;
+esac
