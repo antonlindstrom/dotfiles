@@ -51,6 +51,9 @@ main = do
         -- lock
         ("M-<Esc>", spawn "xlock -mode blank"),
 
+        -- terminal style (toggle colors)
+        ("M-<F5>", spawn "termstyle toggle"),
+
         -- volume
         ("M-<F10>", spawn "amixer set Master toggle"),
         ("M-<F11>", spawn "amixer set Master 2-"),
