@@ -10,6 +10,5 @@ feh --bg-center /home/anton/.background/rocks_nature.jpg &
 
 devilspie -a &
 xcompmgr &
-xmobar &
 
 exec xmonad

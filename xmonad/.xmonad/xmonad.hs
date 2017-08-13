@@ -1,6 +1,8 @@
+import System.IO
 import XMonad
 import XMonad.Config.Desktop
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.DynamicLog
 import XMonad.Prompt
 import XMonad.Prompt.Pass
 import XMonad.Util.Run(spawnPipe)
@@ -14,7 +16,7 @@ myBorderWidth :: Dimension
 
 myBorderWidth = 2
 
-myWorkspaces = ["1:main","2:www","3:chat","4:media","5:other"] 
+myWorkspaces = ["one","two","three","four","five"] ++ map show [6..9]
 
 baseConfig = desktopConfig
 
@@ -28,12 +30,20 @@ myXPConfig = defaultXPConfig { font = "9x15,xft:inconsolata"
                       , historySize = 256 }
 
 main = do
-    xmproc <- spawnPipe "xmobar"
+    xmproc <- spawnPipe "xmobar -d"
     xmonad $ baseConfig {
         normalBorderColor = "#101313",
         focusedBorderColor = "#2b2b2b",
         manageHook  = manageDocks <+> manageHook baseConfig,
         layoutHook  = avoidStruts $ layoutHook baseConfig,
+        logHook = dynamicLogWithPP xmobarPP
+        { ppOutput = hPutStrLn xmproc
+            , ppTitle = xmobarColor "#657b83" "" . shorten 100
+            , ppCurrent = xmobarColor "#657b83" "" . wrap "" ""
+            , ppSep     = xmobarColor "#c0c0c0" "" " | "
+            , ppUrgent  = xmobarColor "#ff69b4" ""
+            , ppLayout = const "" -- to disable the layout info on xmobar
+        },
         workspaces  = myWorkspaces,
         terminal    = myTerminal,
         borderWidth = myBorderWidth

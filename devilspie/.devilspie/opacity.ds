@@ -1,7 +1,7 @@
 ( if
 ( contains ( application_name ) "termite" )
 ( begin
-( spawn_async (str "transset-df -i " (window_xid) " 0.85" ))
+( spawn_async (str "transset-df -i " (window_xid) " 0.95" ))
 )
 )
 ( if
