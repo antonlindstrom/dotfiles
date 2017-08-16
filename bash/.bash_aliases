@@ -7,3 +7,4 @@ alias moonsun="curl -s 'http://api.sunrise-sunset.org/json?lat=57.708870&lng=11.
 alias btc='curl -s "https://api.coinbase.com/v2/prices/BTC-SEK/spot" | jq .data'
 alias battery='acpi -b'
 alias t='timekeeper'
+alias tksync='envdo aws/storage.ssly.se.gpg timekeeper-sync'
