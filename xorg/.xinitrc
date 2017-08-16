@@ -6,7 +6,7 @@ export PATH=$PATH:$HOME/.local/bin
 
 autorandr -c
 
-feh --bg-center /home/anton/.background/rocks_nature.jpg &
+feh --bg-center $(cat ${HOME}/.desktopbg) &
 
 devilspie -a &
 xcompmgr &
