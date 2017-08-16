@@ -28,11 +28,11 @@ Config { font = "xft:inconsolata:size=10:antialias=true",
                              , "--high"     , "darkgreen"
                              , "--" -- battery specific options
                                        -- discharging status
-                                       , "-o", "<left>%"
+                                       , "-o", "-<left>%"
                                        -- AC "on" status
-                                       , "-O", "<fc=#dAA520>Charging</fc>"
+                                       , "-O", "<fc=#dAA520>+<left>%</fc>"
                                        -- charged status
-                                       , "-i", "<fc=#006000>Charged</fc>"
+                                       , "-i", "<fc=#006000>=<left>%</fc>"
                              ] 50
                     , Run StdinReader
                     ]
