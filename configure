@@ -19,8 +19,34 @@ configure_env_private() {
 	local target=~/.env.private
 	[ -f "${target}" ] && return 0
 
-	echo "Creating empty file ${target}"
-	touch ${target}
+	local gpg_default_key
+	gpg_default_key=$(gpg2 --list-keys --with-colons | awk -F: '/pub/ { print $5 }' | head -1)
+
+	read -r -p "GPG-key [${gpg_default_key}]: " signingkey
+	signingkey=${signingkey:-"${gpg_default_key}"}
+	echo
+
+	echo "Writing file '${target}' with content:"
+	tee "${target}" <<EOM
+export ENVDO_GPG_RECIPIENT=${signingkey}
+EOM
+}
+
+configure_desktop_wallpaper() {
+	local target=~/.desktopbg
+	[ -f "${target}" ] && return 0
+
+	local default_bg
+	default_bg="${HOME}/.background/rocks_nature.jpg"
+
+	read -r -p "Desktop wallpaper (${default_bg}): " desktop_bg
+	desktop_bg=${desktop_bg:-"${default_bg}"}
+	echo
+
+	echo "Writing file '${target}' with content:"
+	tee "${target}" <<EOM
+${desktop_bg}
+EOM
 }
 
 configure_git() {
@@ -72,6 +98,8 @@ main() {
 	configure_mutt
 	echo '==> Configure offlineimap password:'
 	configure_offlineimap
+	echo '==> Configure desktop wallpaper:'
+	configure_desktop_wallpaper
 }
 
 main "$@"
