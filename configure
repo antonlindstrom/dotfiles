@@ -19,18 +19,8 @@ configure_env_private() {
 	local target=~/.env.private
 	[ -f "${target}" ] && return 0
 
-	read -r -p "AWS_ACCESS_KEY_ID: " aws_id
-	read -r -p "AWS_SECRET_ACCESS_KEY: " aws_key
-	read -r -p "RESTIC_REPOSITORY: " restic_repo
-	echo
-
-	echo "Writing file '${target}' with content:"
-	tee "${target}" <<EOM
-export AWS_ACCESS_KEY_ID="${aws_id}"
-export AWS_SECRET_ACCESS_KEY="${aws_key}"
-
-export RESTIC_REPOSITORY="${restic_repo}"
-EOM
+	echo "Creating empty file ${target}"
+	touch ${target}
 }
 
 configure_git() {
@@ -50,7 +40,10 @@ EOM
 }
 
 configure_mutt() {
-	[ -f ~/.mail_aliases ] || touch ~/.mail_aliases
+	local target=~/.mail_aliases
+	[ -f "${target}" ] && return 0
+
+	touch ${target}
 	echo -e " \e[1;31m!!\e[0m Empty .mail_aliases created, should be restored from backup."
 }
 
