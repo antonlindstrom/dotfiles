@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -e
+
+default_mfa_device="${AWS_MFA_SERIAL}"
+default_role_arn="${AWS_ROLE_ARN}"
+
+read -r -p "Role ARN: [$default_role_arn]" role_arn
+role_arn=${role_arn:-"${default_role_arn}"}
+
+read -r -p "MFA serial: [$default_mfa_device]" mfa_device
+mfa_device=${mfa_device:-"${default_mfa_device}"}
+
+read -r -p "MFA code: " mfa_code
+
+out=$(aws --output json sts assume-role --role-arn "${role_arn}" --serial-number "${mfa_device}" --token-code "${mfa_code}" --role-session-name "aws-assume-role-cli")
+
+echo "AWS_ACCESS_KEY_ID=$(echo $out | jq .Credentials.AccessKeyId)"
+echo "AWS_SECRET_ACCESS_KEY=$(echo $out | jq .Credentials.SecretAccessKey)"
+echo "AWS_SESSION_TOKEN=$(echo $out | jq .Credentials.SessionToken)"
