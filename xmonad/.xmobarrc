@@ -22,15 +22,13 @@ Config { font = "xft:inconsolata:size=10:antialias=true,FontAwesome:pixelsize=10
                              , "--Low"      , "25"        -- units: %
                              , "--High"     , "70"        -- units: %
                              , "--low"      , "red"
-                             , "--normal"   , "grey"
-                             , "--high"     , "grey"
                              , "--" -- battery specific options
                                        -- discharging status
                                        , "-o", "<left>%"
                                        -- AC "on" status
-                                       , "-O", "<fc=#dAA520><left>%</fc>"
+                                       , "-O", "<fc=#dAA520><left>% </fc>"
                                        -- charged status
-                                       , "-i", "<fc=#006000> <left>%</fc>"
+                                       , "-i", "<fc=#006000><left>% </fc>"
                              ] 50
                     , Run StdinReader
                     ]
