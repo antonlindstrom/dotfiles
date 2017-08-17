@@ -16,7 +16,7 @@ scrollback_lines = -1
 foreground      = #e4dbdc
 foreground_bold = #e4dbdc
 cursor          = #e4dbdc
-background      = #1a1e1e
+background      = rgba(26,30,30,0.98)
 
 # black
 color0  = #1c2220

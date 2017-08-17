@@ -94,11 +94,15 @@ endtry
 try
   " Switch bright/dark theme
   function! ToggleColorScheme()
-    if (g:colors_name == "lightning")
-      colorscheme monokai
-    else
-      colorscheme lightning
-    endif
+    try
+      if (g:colors_name == "lightning")
+        colorscheme monokai
+      else
+        colorscheme lightning
+      endif
+    catch
+        colorscheme monokai
+    endtry
   endfunc
 
   "Set F5 to toggle
