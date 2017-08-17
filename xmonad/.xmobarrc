@@ -34,6 +34,6 @@ Config { font = "xft:inconsolata:size=10:antialias=true,FontAwesome:pixelsize=10
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "  %StdinReader% }\
+       , template = " <fc=red></fc> %StdinReader% }\
                     \{ %cpu%  %memory% %disku%  %battery% | <fc=#657b83>%date%</fc> "
        }
