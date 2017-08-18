@@ -1,3 +1,4 @@
 #!/bin/bash
 
 aws --endpoint-url $AWS_ENDPOINT_URL s3 sync $HOME/.timekeeper s3://timekeeper/
+aws --endpoint-url $AWS_ENDPOINT_URL s3 sync s3://timekeeper $HOME/.timekeeper/
