@@ -11,4 +11,4 @@ read -r -p "MFA code: " mfa_code
 
 out=$(aws --output json sts get-session-token --serial-number "${mfa_device}" --token-code "${mfa_code}")
 
-echo "AWS_SESSION_TOKEN=$(echo $out | jq .Credentials.SessionToken)"
+echo "export AWS_SESSION_TOKEN=$(echo $out | jq .Credentials.SessionToken)"

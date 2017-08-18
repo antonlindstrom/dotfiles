@@ -15,6 +15,6 @@ read -r -p "MFA code: " mfa_code
 
 out=$(aws --output json sts assume-role --role-arn "${role_arn}" --serial-number "${mfa_device}" --token-code "${mfa_code}" --role-session-name "aws-assume-role-cli")
 
-echo "AWS_ACCESS_KEY_ID=$(echo $out | jq .Credentials.AccessKeyId)"
-echo "AWS_SECRET_ACCESS_KEY=$(echo $out | jq .Credentials.SecretAccessKey)"
-echo "AWS_SESSION_TOKEN=$(echo $out | jq .Credentials.SessionToken)"
+echo "export AWS_ACCESS_KEY_ID=$(echo $out | jq .Credentials.AccessKeyId)"
+echo "export AWS_SECRET_ACCESS_KEY=$(echo $out | jq .Credentials.SecretAccessKey)"
+echo "export AWS_SESSION_TOKEN=$(echo $out | jq .Credentials.SessionToken)"
