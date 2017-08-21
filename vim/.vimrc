@@ -6,12 +6,12 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
 Plug 'axiom/vim-memcolo'
-Plug 'bling/vim-airline'
 Plug 'cespare/vim-toml'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go'
 Plug 'gilgigilgil/anderson.vim'
+Plug 'itchyny/calendar.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'keith/swift.vim'
 Plug 'kien/ctrlp.vim'
@@ -27,6 +27,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-sleuth'
+Plug 'vim-airline/vim-airline'
 Plug 'vimwiki/vimwiki'
 Plug 'wimstefan/Lightning'
 
@@ -87,6 +88,13 @@ try
 catch
 endtry
 
+" Calendar
+try
+  let g:calendar_google_calendar = 1
+  let g:calendar_google_task = 1
+catch
+endtry
+
 "
 " " Theme
 "
@@ -116,8 +124,7 @@ try
   " Remove <> arrows in Airline
   let g:airline_left_sep=''
   let g:airline_right_sep=''
-
-  "let g:airline_theme = 'solarized'
+  let g:airline_powerline_fonts = 1
 catch
 endtry
 
