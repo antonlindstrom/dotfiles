@@ -83,12 +83,12 @@ main = do
 
         -- volume
         ("M-<F10>", spawn "amixer set Master toggle && notify-send 'xmonad' 'Volume muted.'"),
-        ("M-<F11>", spawn "amixer set Master 2- && notify-send 'xmonad' 'Volume down.'"),
-        ("M-<F12>", spawn "amixer set Master 2+ && notify-send 'xmonad' 'Volume up.'"),
+        ("M-<F11>", spawn "amixer set Master 2-"),
+        ("M-<F12>", spawn "amixer set Master 2+"),
 
         -- brightness
-        ("M-<F1>", spawn "brightnessctl set 10%- && notify-send 'xmonad' 'Brightness decrease.'"),
-        ("M-<F2>", spawn "brightnessctl set +10% && notify-send 'xmonad' 'Brightness increase.'"),
+        ("M-<F1>", spawn "brightnessctl set 15%-"),
+        ("M-<F2>", spawn "brightnessctl set +15%"),
 
         -- layouts
         ("M-n", refresh),
