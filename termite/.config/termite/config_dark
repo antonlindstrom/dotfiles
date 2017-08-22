@@ -2,6 +2,7 @@
 font = Inconsolata
 mouse_autohide = true
 dynamic_title = true
+urgent_on_bell = true
 
 allow_bold = true
 dynamic_title = true
