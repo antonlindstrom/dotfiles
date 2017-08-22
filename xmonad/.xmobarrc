@@ -1,4 +1,4 @@
-Config { font = "xft:Inconsolata:size=10:antialias=true,FontAwesome:size=10",
+Config { font = "xft:Inconsolata:size=10:antialias=true,FontAwesome:pixelsize=10",
        , additionalFonts = []
        , bgColor = "black"
        , fgColor = "grey"
@@ -24,6 +24,6 @@ Config { font = "xft:Inconsolata:size=10:antialias=true,FontAwesome:size=10",
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " <fc=red></fc> %StdinReader% }\
-                    \{  %multicpu%  %memory%  Battery: %battery% | <fc=#657b83> %date%</fc> "
+       , template = "  %StdinReader% }\
+                    \{ <fc=#657b83> %multicpu%  %memory%  Battery: %battery% |</fc>  %date% "
        }
