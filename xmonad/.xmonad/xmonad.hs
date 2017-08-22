@@ -3,9 +3,11 @@ import XMonad
 import XMonad.Config.Desktop
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.UrgencyHook
 import XMonad.Prompt
 import XMonad.Prompt.Pass
-import XMonad.Util.Run(spawnPipe)
+import XMonad.Util.NamedWindows
+import XMonad.Util.Run
 import XMonad.Util.EZConfig
 
 import qualified XMonad.StackSet as W
@@ -17,6 +19,17 @@ myTerminal = "termite"
 myBorderWidth :: Dimension
 
 myBorderWidth = 2
+
+data LibNotifyUrgencyHook = LibNotifyUrgencyHook deriving (Read, Show)
+
+instance UrgencyHook LibNotifyUrgencyHook where
+    urgencyHook LibNotifyUrgencyHook w = do
+        name     <- getName w
+        Just idx <- fmap (W.findTag w) $ gets windowset
+
+        safeSpawn "notify-send" [show name, "workspace " ++ idx]
+
+myUrgencyHook = LibNotifyUrgencyHook
 
 myWorkspaces = ["one","two","three","four","five"] ++ map show [6..9]
 
@@ -33,7 +46,8 @@ myXPConfig = defaultXPConfig { font = "9x15,xft:inconsolata"
 
 main = do
     xmproc <- spawnPipe "xmobar -d"
-    xmonad $ baseConfig {
+    xmonad $ withUrgencyHook myUrgencyHook
+           $ baseConfig {
         normalBorderColor = "#101313",
         focusedBorderColor = "#657b83",
         manageHook  = manageDocks <+> manageHook baseConfig,
@@ -61,7 +75,7 @@ main = do
         ("M-o", passPrompt myXPConfig),
 
         -- lock
-        ("M-<Esc>", spawn "xlock -mode blank"),
+        ("M-<Esc>", spawn "slock"),
 
         -- terminal style (toggle colors)
         ("M-<F5>", spawn "termstyle toggle"),
@@ -91,6 +105,10 @@ main = do
         ("M-g", sendMessage Shrink),
         ("M-l", sendMessage Expand),
         ("M-r", withFocused $ windows . W.sink),
+
+        -- Urgent
+        ("M-u", focusUrgent),
+        ("M-S-u", clearUrgents),
 
         -- window control
         ("M-x", kill)]
