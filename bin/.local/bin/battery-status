@@ -22,11 +22,11 @@ print_battery_percentage() {
     perc=$(( now * 100 / full ))
 
     if any_is_charging; then
-        echo "Charging - ${sum}%"
+        echo "Charging - ${perc}%"
         exit 0
     fi
 
-    echo "${sum}%"
+    echo "${perc}%"
 }
 
 check_battery
