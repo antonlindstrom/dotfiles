@@ -1,0 +1,10 @@
+[Unit]
+Description=Battery monitor
+IgnoreOnIsolate=true
+
+[Service]
+ExecStart=/bin/sh -c "exec %h/.local/bin/battery-monitor"
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

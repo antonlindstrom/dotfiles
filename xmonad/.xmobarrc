@@ -13,27 +13,17 @@ Config { font = "xft:inconsolata:size=10:antialias=true,FontAwesome:pixelsize=10
        , iconRoot = "."
        , allDesktops = True
        , overrideRedirect = True
-       , commands = [ Run Cpu ["-L","3","-H","50", "--normal","green","--high","red","-t", "<total>%"] 10
-                    , Run Memory ["-t","<usedratio>%"] 10
-                    , Run Com "uname" ["-s","-r"] "" 36000
-                    , Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
-                    , Run DiskU [("/", "<usedp>%")] ["-L", "20", "-H", "75", "-m", "1", "-p", "3", "--normal", "grey", "--high", "#a0522d"] 20
-                    , Run Battery [ "--template" , "<acstatus>"
-                             , "--Low"      , "25"        -- units: %
-                             , "--High"     , "70"        -- units: %
-                             , "--low"      , "red"
-                             , "--" -- battery specific options
-                                       -- discharging status
-                                       , "-o", "<left>%"
-                                       -- AC "on" status
-                                       , "-O", "<fc=#dAA520><left>% </fc>"
-                                       -- charged status
-                                       , "-i", "<fc=#006000><left>% </fc>"
-                             ] 50
+       , commands = [ Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+                    -- cpu activity monitor
+                    , Run MultiCpu [ "--template", "CPU: <total>%" ] 20
+                    -- memory usage monitor
+                    , Run Memory [ "--template", "Mem: <usedratio>%" ] 20
+                    -- battery status
+                    , Run Com "battery-status" [] "battery" 60
                     , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
        , template = " <fc=red></fc> %StdinReader% }\
-                    \{ %cpu%  %memory% %disku%  %battery% | <fc=#657b83>%date%</fc> "
+                    \{  %multicpu%  %memory%  Battery: %battery% <fc=#657b83> %date%</fc> "
        }

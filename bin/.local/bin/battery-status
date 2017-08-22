@@ -1,0 +1,33 @@
+#!/bin/bash
+
+shopt -s nullglob
+
+sum() { cat "$@" | awk '{ sum += $0 } END { print sum }'; }
+
+any_is_charging() {
+    cat /sys/class/power_supply/BAT*/status | grep -q Charging
+}
+
+check_battery() {
+    ls /sys/class/power_supply | grep -q BAT
+    if [ $? != 0 ]; then
+        echo "N/A"
+        exit 0
+    fi
+}
+
+print_battery_percentage() {
+    full=$(sum /sys/class/power_supply/BAT*/{charge,energy}_full)
+    now=$(sum /sys/class/power_supply/BAT*/{charge,energy}_now)
+    perc=$(( now * 100 / full ))
+
+    if any_is_charging; then
+        echo "Charging - ${sum}%"
+        exit 0
+    fi
+
+    echo "${sum}%"
+}
+
+check_battery
+print_battery_percentage

@@ -1,8 +1,9 @@
 import System.IO
 import XMonad
 import XMonad.Config.Desktop
-import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.UrgencyHook
 import XMonad.Prompt
 import XMonad.Prompt.Pass
@@ -31,7 +32,7 @@ instance UrgencyHook LibNotifyUrgencyHook where
 
 myUrgencyHook = LibNotifyUrgencyHook
 
-myWorkspaces = ["one","two","three","four","five"] ++ map show [6..9]
+myWorkspaces = ["one","two","three","four","five", "six", "seven", "eight", "nine"]
 
 baseConfig = desktopConfig
 
@@ -47,6 +48,7 @@ myXPConfig = defaultXPConfig { font = "9x15,xft:inconsolata"
 main = do
     xmproc <- spawnPipe "xmobar -d"
     xmonad $ withUrgencyHook myUrgencyHook
+           $ ewmh
            $ baseConfig {
         normalBorderColor = "#101313",
         focusedBorderColor = "#657b83",
@@ -66,7 +68,6 @@ main = do
     } `additionalKeysP`
       [ -- apps
         ("M-c", spawn myTerminal),
-        ("M-w", spawn "qutebrowser"),
 
         -- rofi
         ("M-p", spawn "rofi -show run"),
@@ -81,17 +82,13 @@ main = do
         ("M-<F5>", spawn "termstyle toggle"),
 
         -- volume
-        ("M-<F10>", spawn "amixer set Master toggle"),
-        ("M-<F11>", spawn "amixer set Master 2-"),
-        ("M-<F12>", spawn "amixer set Master 2+"),
-
-        ("<XF86AudioMute>", spawn "amixer set Master toggle"),
-        ("<XF86AudioLowerVolume>", spawn "amixer set Master 2-"),
-        ("<XF86AudioRaiseVolume>", spawn "amixer set Master 2+"),
+        ("M-<F10>", spawn "amixer set Master toggle && notify-send 'xmonad' 'Volume muted.'"),
+        ("M-<F11>", spawn "amixer set Master 2- && notify-send 'xmonad' 'Volume down.'"),
+        ("M-<F12>", spawn "amixer set Master 2+ && notify-send 'xmonad' 'Volume up.'"),
 
         -- brightness
-        ("<XF86MonBrightnessUp>", spawn "brightnessctl set +10%"),
-        ("<XF86MonBrightnessDown>", spawn "brightnessctl set -10%"),
+        ("M-<F1>", spawn "brightnessctl set -10% && notify-send 'xmonad' 'Brightness decrease.'"),
+        ("M-<F2>", spawn "brightnessctl set +10% && notify-send 'xmonad' 'Brightness increase.'"),
 
         -- layouts
         ("M-n", refresh),
