@@ -36,15 +36,6 @@ myWorkspaces = ["one","two","three","four","five", "six", "seven", "eight", "nin
 
 baseConfig = desktopConfig
 
-myXPConfig :: XPConfig
-myXPConfig = defaultXPConfig { font = "9x15,xft:inconsolata"
-                      , bgColor  = "#2b2b2b"
-                      , fgColor  = "grey"
-                      , promptBorderWidth = 0
-                      , position = Top
-                      , height   = 15
-                      , historySize = 256 }
-
 main = do
     xmproc <- spawnPipe "xmobar -d"
     xmonad $ withUrgencyHook myUrgencyHook
@@ -71,9 +62,7 @@ main = do
 
         -- rofi
         ("M-p", spawn "rofi -show run"),
-
-        -- pass
-        ("M-o", passPrompt myXPConfig),
+        ("M-o", spawn "passdmenu"),
 
         -- lock
         ("M-<Esc>", spawn "slock"),
