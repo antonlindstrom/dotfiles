@@ -78,6 +78,14 @@ main = do
         -- lock
         ("M-<Esc>", spawn "slock"),
 
+        -- brightness
+        ("M-<F1>", spawn "brightnessctl set 15%-"),
+        ("M-<F2>", spawn "brightnessctl set +15%"),
+
+        -- screenshots
+        ("M-<F4>", spawn "scrot --focused -e 'mv $f ~/'"),
+        ("M-S-<F4>", spawn "sleep 0.3; scrot --select -e 'mv $f ~/'"),
+
         -- terminal style (toggle colors)
         ("M-<F5>", spawn "termstyle toggle"),
 
@@ -85,10 +93,6 @@ main = do
         ("M-<F10>", spawn "amixer set Master toggle && notify-send 'xmonad' 'Volume muted.'"),
         ("M-<F11>", spawn "amixer set Master 2-"),
         ("M-<F12>", spawn "amixer set Master 2+"),
-
-        -- brightness
-        ("M-<F1>", spawn "brightnessctl set 15%-"),
-        ("M-<F2>", spawn "brightnessctl set +15%"),
 
         -- layouts
         ("M-n", refresh),
