@@ -62,7 +62,7 @@ main = do
 
         -- rofi
         ("M-p", spawn "rofi -show run"),
-        ("M-o", spawn "passdmenu"),
+        ("M-o", spawn "passdmenu -x c"),
 
         -- lock
         ("M-<Esc>", spawn "slock"),
