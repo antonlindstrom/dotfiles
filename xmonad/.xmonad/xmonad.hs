@@ -1,5 +1,6 @@
 import System.IO
 import XMonad
+import XMonad.Actions.CopyWindow (copyToAll, killAllOtherCopies, wsContainingCopies)
 import XMonad.Actions.FloatKeys
 import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
@@ -34,6 +35,14 @@ instance UrgencyHook LibNotifyUrgencyHook where
 myUrgencyHook = LibNotifyUrgencyHook
 
 myWorkspaces = ["one","two","three","four","five", "six", "seven", "eight", "nine"]
+
+-- Toggle global window
+toggleGlobal :: X ()
+toggleGlobal = do
+    ws <- wsContainingCopies
+    if null ws
+    then windows copyToAll
+    else killAllOtherCopies
 
 baseConfig = desktopConfig
 
@@ -94,6 +103,9 @@ main = do
         ("M-S-j", windows W.swapDown),
         ("M-S-k", windows W.swapUp),
         ("M-r", withFocused $ windows . W.sink),
+
+        -- make a window stick to all workspaces.
+        ("M-z", toggleGlobal),
 
         ("M-s", withFocused (keysResizeWindow (-10,-10) (1,1))),
         ("M-S-s", withFocused (keysResizeWindow (10,10) (1,1))),
