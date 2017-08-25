@@ -189,6 +189,8 @@ endif
 set encoding=utf-8
 set textwidth=78
 
+let mapleader =  ","
+
 " Folds, this is damn nice
 set foldenable
 set foldlevelstart=10
@@ -218,3 +220,6 @@ map <F9> <Esc>:setlocal nospell<CR>
 
 " Remap ESC to jj
 inoremap jj <ESC>
+
+" Twitter
+map <leader>tw :FriendsTwitter<CR>
