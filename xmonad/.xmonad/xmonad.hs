@@ -1,5 +1,6 @@
 import System.IO
 import XMonad
+import XMonad.Actions.FloatKeys
 import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
@@ -92,11 +93,17 @@ main = do
         ("M-<Return>", windows W.focusMaster),
         ("M-S-j", windows W.swapDown),
         ("M-S-k", windows W.swapUp),
-        ("M-g", sendMessage Shrink),
-        ("M-l", sendMessage Expand),
         ("M-r", withFocused $ windows . W.sink),
 
-        -- Urgent
+        ("M-s", withFocused (keysResizeWindow (-10,-10) (1,1))),
+        ("M-S-s", withFocused (keysResizeWindow (10,10) (1,1))),
+
+        ("M-g", withFocused (keysResizeWindow (-10,0) (0,0))),
+        ("M-l", withFocused (keysResizeWindow (10,0) (0,0))),
+        ("M-S-g", withFocused (keysResizeWindow (0,-10) (0,0))),
+        ("M-S-l", withFocused (keysResizeWindow (0,10) (0,0))),
+
+        -- urgent
         ("M-u", focusUrgent),
         ("M-S-u", clearUrgents),
 
