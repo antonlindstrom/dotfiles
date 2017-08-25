@@ -71,8 +71,8 @@ main = do
         ("M-c", spawn myTerminal),
 
         -- rofi
-        ("M-p", spawn "rofi -show run"),
-        ("M-o", spawn "passdmenu -x c"),
+        ("M-o", spawn "rofi -show run"),
+        ("M-p", spawn "passdmenu -x c"),
 
         -- lock
         ("M-<Esc>", spawn "slock"),
