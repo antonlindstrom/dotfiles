@@ -55,6 +55,11 @@ indent_size = 4
 indent_style = space
 indent_size = 2
 
+# Puppet
+[*.pp]
+indent_style = space
+indent_size = 2
+
 # YAML
 [*.{yaml,yml}]
 indent_style = space
