@@ -111,9 +111,9 @@ main = do
         ("M-S-s", withFocused (keysResizeWindow (10,10) (1,1))),
 
         ("M-g", withFocused (keysResizeWindow (-10,0) (0,0))),
-        ("M-l", withFocused (keysResizeWindow (10,0) (0,0))),
+        ("M-f", withFocused (keysResizeWindow (10,0) (0,0))),
         ("M-S-g", withFocused (keysResizeWindow (0,-10) (0,0))),
-        ("M-S-l", withFocused (keysResizeWindow (0,10) (0,0))),
+        ("M-S-f", withFocused (keysResizeWindow (0,10) (0,0))),
 
         -- urgent
         ("M-u", focusUrgent),
