@@ -2,7 +2,7 @@
 
 yesterday=$(date --date="yesterday" +%Y-%m-%d)
 
-amount_current=$(curl -s 'https://api.coinbase.com/v2/prices/BTC-USD/spot' | jq -r .data.amount)
+amount_current=$(curl -s 'https://api.coinbase.com/v2/prices/BTC-SEK/spot' | jq -r .data.amount)
 amount_yesterday=$(curl -s "https://api.coinbase.com/v2/prices/BTC-SEK/spot?date=${yesterday}" | jq -r .data.amount)
 
 going_up=$(echo "${amount_current}>${amount_yesterday}" | bc)
