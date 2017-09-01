@@ -1,0 +1,7 @@
+#!/bin/bash
+
+data=$(curl -s 'https://api.coinbase.com/v2/prices/BTC-SEK/spot')
+amount=$(echo ${data} | jq -r .data.amount)
+currency=$(echo ${data} | jq -r .data.currency)
+
+echo "${amount} ${currency}"
