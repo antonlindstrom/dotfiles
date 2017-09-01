@@ -1,4 +1,4 @@
-Config { font = "xft:Inconsolata:size=10:antialias=true,FontAwesome:pixelsize=10",
+Config { font = "xft:Inconsolata:size=10:antialias=true,FontAwesome:pixelsize=10,Pomodoro:pixelsize=10",
        , additionalFonts = []
        , bgColor = "black"
        , fgColor = "grey"
@@ -22,10 +22,16 @@ Config { font = "xft:Inconsolata:size=10:antialias=true,FontAwesome:pixelsize=10
                     , Run Com "battery-status" [] "battery" 60
                     -- bitcoint amount
                     , Run Com "btc-amount" [] "btc" 600
+                    -- bitcoint trend since yesterday
+                    , Run Com "btc-trend" [] "btctrend" 600
+                    -- timekeeper status
+                    , Run Com "timekeeper-current" [] "timekeeper" 20
+                    -- pomodoro status
+                    , Run Com "pomodoro" [ "ui-simple" ] "pomodoro" 60
                     , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
        , template = "  %StdinReader% }\
-                    \{ <fc=#657b83> %btc%  %multicpu%  %memory%  Battery: %battery% |</fc>  %date% "
+                    \{ <fc=#657b83>%pomodoro% %timekeeper%  %btctrend% %btc%  %multicpu%  %memory%  Battery: %battery% |</fc>  %date% "
        }
