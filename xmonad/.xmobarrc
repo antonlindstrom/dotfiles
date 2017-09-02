@@ -26,12 +26,10 @@ Config { font = "xft:Inconsolata:size=10:antialias=true,FontAwesome:pixelsize=10
                     , Run Com "btc-trend" [] "btctrend" 600
                     -- timekeeper status
                     , Run Com "timekeeper-current" [] "timekeeper" 20
-                    -- pomodoro status
-                    , Run Com "pomodoro" [ "ui-simple" ] "pomodoro" 60
                     , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
        , template = "  %StdinReader% }\
-                    \{ <fc=#657b83>%pomodoro% %timekeeper%  %btctrend% %btc%  %multicpu%  %memory%  Battery: %battery% |</fc>  %date% "
+                    \{ <fc=#657b83>%timekeeper%  %btctrend% %btc%  %multicpu%  %memory%  Battery: %battery% |</fc>  %date% "
        }
