@@ -29,5 +29,50 @@ print_battery_percentage() {
     echo "${perc}%"
 }
 
+print_battery_icon() {
+    full=$(sum /sys/class/power_supply/BAT*/{charge,energy}_full)
+    now=$(sum /sys/class/power_supply/BAT*/{charge,energy}_now)
+    perc=$(( now * 100 / full ))
+
+    if any_is_charging; then
+        echo ""
+        exit 0
+    fi
+
+    if [ $(echo "${perc} > 85" | bc) = 1 ]; then
+        echo ""
+        exit 0
+    fi
+
+    if [ $(echo "${perc} > 60" | bc) = 1 ]; then
+        echo ""
+        exit 0
+    fi
+
+    if [ $(echo "${perc} > 40" | bc) = 1 ]; then
+        echo ""
+        exit 0
+    fi
+
+    if [ $(echo "${perc} > 20" | bc) = 1 ]; then
+        echo ""
+        exit 0
+    fi
+
+    if [ $(echo "${perc} > 7" | bc) = 1 ]; then
+        echo ""
+        exit 0
+    fi
+
+    echo ""
+}
+
 check_battery
+
+if [ "$1" = "--icon" ]; then
+    print_battery_icon
+    exit 1
+fi
+
+
 print_battery_percentage
