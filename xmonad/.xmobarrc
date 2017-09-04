@@ -19,6 +19,7 @@ Config { font = "xft:Inconsolata:size=10:antialias=true,FontAwesome:pixelsize=10
                     -- memory usage monitor
                     , Run Memory [ "--template", "Mem: <usedratio>%" ] 20
                     -- battery status
+                    , Run Com "battery-status" [ "--icon" ] "battery-icon" 120
                     , Run Com "battery-status" [] "battery" 60
                     -- bitcoint amount
                     , Run Com "btc-amount" [] "btc" 600
@@ -31,5 +32,5 @@ Config { font = "xft:Inconsolata:size=10:antialias=true,FontAwesome:pixelsize=10
        , sepChar = "%"
        , alignSep = "}{"
        , template = "  %StdinReader% }\
-                    \{ <fc=#657b83>%timekeeper%  %btctrend% %btc%  %multicpu%  %memory%  Battery: %battery% |</fc>  %date% "
+                    \{ <fc=#657b83>%timekeeper%  %btctrend% %btc%  %multicpu%  %memory% %battery-icon% Battery: %battery% |</fc>  %date% "
        }
