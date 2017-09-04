@@ -16,6 +16,14 @@ check_battery() {
     fi
 }
 
+check_battery_icon() {
+    ls /sys/class/power_supply | grep -q BAT
+    if [ $? != 0 ]; then
+        echo ""
+        exit 0
+    fi
+}
+
 print_battery_percentage() {
     full=$(sum /sys/class/power_supply/BAT*/{charge,energy}_full)
     now=$(sum /sys/class/power_supply/BAT*/{charge,energy}_now)
@@ -67,12 +75,12 @@ print_battery_icon() {
     echo ""
 }
 
-check_battery
-
 if [ "$1" = "--icon" ]; then
+    check_battery_icon
     print_battery_icon
     exit 1
 fi
 
 
+check_battery
 print_battery_percentage
