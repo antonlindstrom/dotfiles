@@ -6,6 +6,7 @@ import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.UrgencyHook
 import XMonad.Prompt
 import XMonad.Prompt.Pass
@@ -46,6 +47,14 @@ toggleGlobal = do
 
 baseConfig = desktopConfig
 
+myManageHookFloat = composeAll
+    [ className =? "Gimp"              --> doFloat
+    , className =? "mpv"               --> doCenterFloat
+    , className =? "Pinentry"          --> doCenterFloat
+    , className =? "Slack"             --> (doRectFloat $ W.RationalRect (1/6) (1/6) (4/6) (4/6))
+    , className =? "plexmediaplayer"   --> (doRectFloat $ W.RationalRect (1/6) (1/6) (4/6) (4/6))
+    ]
+
 main = do
     xmproc <- spawnPipe "xmobar -d"
     xmonad $ withUrgencyHook myUrgencyHook
@@ -53,7 +62,7 @@ main = do
            $ baseConfig {
         normalBorderColor = "#101313",
         focusedBorderColor = "#657b83",
-        manageHook  = manageDocks <+> manageHook baseConfig,
+        manageHook  = manageDocks <+> myManageHookFloat <+> manageHook baseConfig,
         layoutHook  = avoidStruts $ layoutHook baseConfig,
         logHook = dynamicLogWithPP xmobarPP
         { ppOutput = hPutStrLn xmproc
@@ -120,5 +129,5 @@ main = do
         ("M-S-u", clearUrgents),
 
         -- window control
-        ("M-x", kill)]
+        ("M-S-x", kill)]
 
