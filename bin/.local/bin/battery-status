@@ -29,11 +29,6 @@ print_battery_percentage() {
     now=$(sum /sys/class/power_supply/BAT*/{charge,energy}_now)
     perc=$(( now * 100 / full ))
 
-    if any_is_charging; then
-        echo "Charging - ${perc}%"
-        exit 0
-    fi
-
     echo "${perc}%"
 }
 
