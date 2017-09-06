@@ -116,9 +116,6 @@ main = do
         -- make a window stick to all workspaces.
         ("M-z", toggleGlobal),
 
-        ("M-s", withFocused (keysResizeWindow (-10,-10) (1,1))),
-        ("M-S-s", withFocused (keysResizeWindow (10,10) (1,1))),
-
         ("M-g", withFocused (keysResizeWindow (-10,0) (0,0))),
         ("M-f", withFocused (keysResizeWindow (10,0) (0,0))),
         ("M-S-g", withFocused (keysResizeWindow (0,-10) (0,0))),
