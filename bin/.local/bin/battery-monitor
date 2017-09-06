@@ -33,7 +33,7 @@ while (( first_run == 1 )) || sleep 60; do
     perc=$(( now * 100 / full ))
 
     if (( perc <= WARN_PERC )); then
-        notify-send 'Reaching critical battery threshold'
+        notify-send -u critical 'Battery critical' 'Reaching critical battery threshold'
     fi
 
     if (( perc <= SLEEP_PERC )); then
