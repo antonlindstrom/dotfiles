@@ -49,8 +49,10 @@ baseConfig = desktopConfig
 
 myManageHookFloat = composeAll
     [ className =? "Gimp"              --> doFloat
+    , className =? "Steam"             --> doFloat
     , className =? "mpv"               --> doCenterFloat
     , className =? "Pinentry"          --> doCenterFloat
+    , className =? "Zenity"            --> doCenterFloat
     , className =? "Slack"             --> (doRectFloat $ W.RationalRect (1/6) (1/6) (4/6) (4/6))
     , className =? "plexmediaplayer"   --> (doRectFloat $ W.RationalRect (1/6) (1/6) (4/6) (4/6))
     ]
