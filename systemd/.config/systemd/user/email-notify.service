@@ -1,0 +1,10 @@
+[Unit]
+Description=Email notifier
+IgnoreOnIsolate=true
+
+[Service]
+ExecStart=/usr/bin/python %h/.local/bin/email_notifier.py
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
