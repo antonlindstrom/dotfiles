@@ -8,6 +8,7 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.UrgencyHook
+import XMonad.Layout.NoBorders
 import XMonad.Prompt
 import XMonad.Prompt.Pass
 import XMonad.Util.NamedWindows
@@ -48,24 +49,28 @@ toggleGlobal = do
 baseConfig = desktopConfig
 
 myManageHookFloat = composeAll
-    [ className =? "Gimp"              --> doFloat
+    [ isFullscreen --> doFullFloat
+    , className =? "Gimp"              --> doFloat
     , className =? "Steam"             --> doFloat
     , className =? "mpv"               --> doCenterFloat
     , className =? "Pinentry"          --> doCenterFloat
     , className =? "Zenity"            --> doCenterFloat
+    , className =? "Pavucontrol"       --> (doRectFloat $ W.RationalRect (1/6) (1/6) (4/6) (4/6))
     , className =? "Slack"             --> (doRectFloat $ W.RationalRect (1/6) (1/6) (4/6) (4/6))
     , className =? "plexmediaplayer"   --> (doRectFloat $ W.RationalRect (1/6) (1/6) (4/6) (4/6))
     ]
 
 main = do
     xmproc <- spawnPipe "xmobar -d"
+    spawn "feh --bg-center $(cat ${HOME}/.desktopbg) &"
+    spawn "xcompmgr"
     xmonad $ withUrgencyHook myUrgencyHook
            $ ewmh
            $ baseConfig {
         normalBorderColor = "#101313",
         focusedBorderColor = "#657b83",
         manageHook  = manageDocks <+> myManageHookFloat <+> manageHook baseConfig,
-        layoutHook  = avoidStruts $ layoutHook baseConfig,
+        layoutHook  = smartBorders . avoidStruts $ layoutHook baseConfig,
         logHook = dynamicLogWithPP xmobarPP
         { ppOutput = hPutStrLn xmproc
             , ppTitle = xmobarColor "#657b83" "" . shorten 100
@@ -78,9 +83,7 @@ main = do
         terminal    = myTerminal,
         borderWidth = myBorderWidth
     } `additionalKeysP`
-      [ -- apps
-        ("M-c", spawn myTerminal),
-
+      [
         -- rofi
         ("M-o", spawn "rofi -combi-modi window,drun -show combi -modi combi"),
         ("M-p", spawn "passdmenu -x c"),
@@ -93,26 +96,25 @@ main = do
         ("M-<F2>", spawn "brightnessctl set +15%"),
 
         -- screenshots
-        ("M-<F4>", spawn "scrot --focused -e 'mv $f ~/'"),
-        ("M-S-<F4>", spawn "sleep 0.3; scrot --select -e 'mv $f ~/'"),
+        ("<Print>", spawn "scrot --focused -e 'notify-send -u normal \"Screenshot saved\" \"$f\"'"),
+        ("S-<Print>", spawn "sleep 0.3; scrot --select -e 'notify-send -u normal \"Screenshot saved\" \"$f\"'"),
 
         -- terminal style (toggle colors)
         ("M-<F5>", spawn "termstyle toggle"),
 
         -- volume
-        ("M-<F10>", spawn "amixer set Master toggle && notify-send 'xmonad' 'Volume muted.'"),
         ("M-<F11>", spawn "amixer set Master 2-"),
         ("M-<F12>", spawn "amixer set Master 2+"),
+
+        ("M-v", spawn "pavucontrol"),
 
         -- layouts
         ("M-n", refresh),
         ("M-<Space>", sendMessage NextLayout),
         ("M-<Tab>", windows W.focusDown),
-        ("M-j", windows W.focusDown),
-        ("M-k", windows W.focusUp),
+        ("M-j", windows W.swapDown),
+        ("M-k", windows W.swapUp),
         ("M-<Return>", windows W.focusMaster),
-        ("M-S-j", windows W.swapDown),
-        ("M-S-k", windows W.swapUp),
         ("M-r", withFocused $ windows . W.sink),
 
         -- make a window stick to all workspaces.
