@@ -19,8 +19,8 @@ Plug 'lifepillar/pgsql.vim'
 Plug 'majutsushi/tagbar'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'rodjek/vim-puppet'
-Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/syntastic'
 Plug 'sickill/vim-monokai'
 Plug 'tclh123/vim-thrift'
 Plug 'tpope/vim-commentary'
@@ -28,14 +28,17 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-sleuth'
 Plug 'twitvim/twitvim'
+Plug 'udalov/kotlin-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vimwiki/vimwiki'
 Plug 'wimstefan/Lightning'
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-session'
 
 Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
 Plug 'garbas/vim-snipmate'
 Plug 'honza/vim-snippets'
+Plug 'tomtom/tlib_vim'
 
 Plug 'ervandew/supertab'
 
@@ -47,6 +50,13 @@ call plug#end()
 
 " Easy align interactive
 vnoremap <silent> <Enter> :EasyAlign<cr>
+
+" vim-session
+try
+  let g:session_autoload = 'no'
+catch
+  echo "Failed to set session_autoload='no', vim-session might not be installed."
+endtry
 
 " ctrlp.vim
 try
