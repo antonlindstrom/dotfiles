@@ -25,8 +25,12 @@ preinstall: ## Preinstall target for git submodules.
 	git submodule update --init
 
 .PHONY: install
-install: ## Install PKGS (all or use PKGS=package).
-install: dirs preinstall
+install: ## Install packages and run preconfiguration
+install: configure dirs preinstall pkgs vimplugs
+
+.PHONY: pkgs
+pkgs: ## Install PKGS (all or use PKGS=package).
+pkgs:
 	$(info ===> Install files)
 	stow -t $(DESTDIR) $(subst $(comma),$(space),$(PKGS))
 
@@ -47,6 +51,10 @@ showpkgs: ## Show packages about to be installed.
 .PHONY: configure
 configure: ## Configure private files.
 	./configure
+
+.PHONY: vimplugs
+vimplugs: ## Install Vundle plugins in VIm.
+	vim -c 'PlugInstall | qa'
 
 .PHONY: restore-config-backup
 restore-config-backup: ## Restore secret configuration from backup.
