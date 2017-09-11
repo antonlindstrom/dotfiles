@@ -139,8 +139,8 @@ source $alias_file
 alternative_order text/plain text/enriched text/html
 
 # Solarized theme
-source $HOME/.mutt/mutt-colors-solarized-dark-256.muttrc
-#source $HOME/.mutt/mutt-colors-solarized-dark-16.muttrc
+# source $HOME/.mutt/mutt-colors-solarized-dark-256.muttrc
+# source $HOME/.mutt/mutt-colors-solarized-dark-16.muttrc
 source ~/.mutt/mutt-patch-highlighting.muttrc
 
 push <show-version>

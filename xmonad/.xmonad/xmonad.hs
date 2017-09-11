@@ -49,7 +49,8 @@ toggleGlobal = do
 baseConfig = desktopConfig
 
 myManageHookFloat = composeAll
-    [ isFullscreen --> doFullFloat
+    [ isFullscreen                     --> doFullFloat
+    , isDialog                         --> doCenterFloat
     , className =? "Gimp"              --> doFloat
     , className =? "Steam"             --> doFloat
     , className =? "mpv"               --> doCenterFloat
