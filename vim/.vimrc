@@ -12,6 +12,8 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'elzr/vim-json'
 Plug 'fatih/vim-go'
 Plug 'gilgigilgil/anderson.vim'
+Plug 'hashivim/vim-packer'
+Plug 'hashivim/vim-terraform'
 Plug 'itchyny/calendar.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'keith/swift.vim'
@@ -233,11 +235,6 @@ nnoremap / :set hlsearch<cr>/
 
 " Set tagbar toggle
 nmap <F6> :TagbarToggle<CR>
-
-" Set the keys to turn spell checking on/off
-map <F7> <Esc>:setlocal spell spelllang=sv<CR>
-map <F8> <Esc>:setlocal spell spelllang=en_us<CR>
-map <F9> <Esc>:setlocal nospell<CR>
 
 " Remap ESC to jj
 inoremap jj <ESC>
