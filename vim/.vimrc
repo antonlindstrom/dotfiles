@@ -6,6 +6,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
 Plug 'axiom/vim-memcolo'
+Plug 'brookhong/cscope.vim'
 Plug 'cespare/vim-toml'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'elzr/vim-json'
@@ -30,6 +31,7 @@ Plug 'tpope/vim-sleuth'
 Plug 'twitvim/twitvim'
 Plug 'udalov/kotlin-vim'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-scripts/DoxygenToolkit.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'wimstefan/Lightning'
 Plug 'xolox/vim-misc'
@@ -54,7 +56,6 @@ vnoremap <silent> <Enter> :EasyAlign<cr>
 " vim-session
 try
   let g:session_autoload = 'no'
-  let g:session_autosave = 'yes'
 catch
   echo "Failed to set session_autoload='no', vim-session might not be installed."
 endtry
@@ -104,6 +105,19 @@ endtry
 try
   let g:calendar_google_calendar = 1
   let g:calendar_google_task = 1
+catch
+endtry
+
+" cscope
+try
+  let g:cscope_silent = 1
+catch
+endtry
+
+" editorconfig
+try
+  let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+  let g:EditorConfig_exec_path = '/usr/bin/editorconfig'
 catch
 endtry
 
@@ -211,10 +225,6 @@ set foldmethod=indent
 
 set list listchars=tab:»·,trail:·
 
-" Filetypes
-au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=ruby
-au BufRead,BufNewFile {*.html,*.css,*.js,*.rb} set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-
 " Turn on and off search highlighting
 " switch higlight no matter the previous state
 nmap <F1> :set hls! <cr>
@@ -234,3 +244,20 @@ inoremap jj <ESC>
 
 " Twitter
 map <leader>tw :FriendsTwitter<CR>
+
+" s: Find this C symbol
+nnoremap  <leader>fs :call CscopeFind('s', expand('<cword>'))<CR>
+" g: Find this definition
+nnoremap  <leader>fg :call CscopeFind('g', expand('<cword>'))<CR>
+" d: Find functions called by this function
+nnoremap  <leader>fd :call CscopeFind('d', expand('<cword>'))<CR>
+" c: Find functions calling this function
+nnoremap  <leader>fc :call CscopeFind('c', expand('<cword>'))<CR>
+" t: Find this text string
+nnoremap  <leader>ft :call CscopeFind('t', expand('<cword>'))<CR>
+" e: Find this egrep pattern
+nnoremap  <leader>fe :call CscopeFind('e', expand('<cword>'))<CR>
+" f: Find this file
+nnoremap  <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
+" i: Find files #including this file
+nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
