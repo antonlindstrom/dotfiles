@@ -25,6 +25,8 @@ Config { font = "xft:Inconsolata:size=10:antialias=true,FontAwesome:pixelsize=10
                     , Run Com "btc-amount" [] "btc" 600
                     -- bitcoint trend since yesterday
                     , Run Com "btc-trend" [] "btctrend" 600
+                    -- stock status
+                    , Run Com "stock-indicator" [] "stocks" 600
                     -- timekeeper status
                     , Run Com "timekeeper-current" [] "timekeeper" 20
                     , Run StdinReader
@@ -32,5 +34,5 @@ Config { font = "xft:Inconsolata:size=10:antialias=true,FontAwesome:pixelsize=10
        , sepChar = "%"
        , alignSep = "}{"
        , template = "  %StdinReader% }\
-                    \{ <fc=#657b83>%timekeeper%  %btctrend% %btc%  %multicpu%  %memory% %battery-icon% Battery: %battery% |</fc>  %date% "
+                    \{ <fc=#657b83>%timekeeper% %stocks%  %btctrend% %btc%  %multicpu%  %memory% %battery-icon% Battery: %battery% |</fc>  %date% "
        }
