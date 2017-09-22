@@ -58,8 +58,9 @@ vnoremap <silent> <Enter> :EasyAlign<cr>
 " vim-session
 try
   let g:session_autoload = 'no'
+  let g:session_autosave = 'yes'
 catch
-  echo "Failed to set session_autoload='no', vim-session might not be installed."
+  echo "Failed to set vim-session configuration, vim-session might not be installed."
 endtry
 
 " ctrlp.vim
