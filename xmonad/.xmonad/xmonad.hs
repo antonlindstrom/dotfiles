@@ -2,6 +2,7 @@ import System.IO
 import XMonad
 import XMonad.Actions.CopyWindow (copyToAll, killAllOtherCopies, wsContainingCopies)
 import XMonad.Actions.FloatKeys
+import XMonad.Actions.WindowGo (title, raiseMaybe, runOrRaise)
 import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
@@ -59,6 +60,8 @@ myManageHookFloat = composeAll
     , className =? "Pavucontrol"       --> (doRectFloat $ W.RationalRect (1/6) (1/6) (4/6) (4/6))
     , className =? "Slack"             --> (doRectFloat $ W.RationalRect (1/6) (1/6) (4/6) (4/6))
     , className =? "plexmediaplayer"   --> (doRectFloat $ W.RationalRect (1/6) (1/6) (4/6) (4/6))
+    , title     =? "gtop-win"          --> (doRectFloat $ W.RationalRect (1/6) (1/6) (4/6) (4/6))
+    , title     =? "htop-win"          --> (doRectFloat $ W.RationalRect (1/6) (1/6) (4/6) (4/6))
     ]
 
 main = do
@@ -85,6 +88,12 @@ main = do
         borderWidth = myBorderWidth
     } `additionalKeysP`
       [
+        -- apps
+        ("M-a s", raiseMaybe (spawn "slack") (className =? "Slack")),
+        ("M-a v", raiseMaybe (spawn "pavucontrol") (className =? "Pavucontrol")),
+        ("M-a g", runInTerm "-t gtop-win" "gtop"),
+        ("M-a t", runInTerm "-t htop-win" "htop"),
+
         -- rofi
         ("M-o", spawn "rofi -combi-modi window,drun -show combi -modi combi"),
         ("M-p", spawn "passdmenu -x c"),
@@ -106,8 +115,6 @@ main = do
         -- volume
         ("M-<F11>", spawn "amixer set Master 2-"),
         ("M-<F12>", spawn "amixer set Master 2+"),
-
-        ("M-v", spawn "pavucontrol"),
 
         -- layouts
         ("M-n", refresh),
