@@ -1,0 +1,46 @@
+#!/bin/bash
+#
+# Create a project directory in the way ghq wants it, that way we can enter it
+# by executing ghq look project.
+#
+
+function help_and_exit() {
+	echo "usage: newproject [repository_name]"
+	echo
+	echo "examples:"
+	echo "  newproject github.com/user/project"
+	echo "  newproject git.company.com/user/project"
+	exit 1
+}
+
+# Validate GOPATH.
+if [ -z $GOPATH ]; then
+	echo "GOPATH not set, can not determine where to create the new project."
+	exit 1
+fi
+
+# Check if we have an argument.
+if [ -z $1 ]; then
+	help_and_exit
+fi
+
+# Check if we have a directory name.
+if [ "$(dirname $1)" == "." ]; then
+	help_and_exit
+fi
+
+project_path="${GOPATH}/src/${1}"
+
+# Check so that the project doesn't already exist.
+if [ -d "${project_path}" ]; then
+	echo "${1} already exists at location"
+	exit 1
+fi
+
+# Create repository
+mkdir $project_path
+
+# Initialize git.
+git init $project_path > /dev/null
+
+echo "created ${1}"
