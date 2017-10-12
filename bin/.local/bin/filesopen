@@ -1,0 +1,7 @@
+#!/bin/bash
+#
+# Script for printing the top processes with open files. The output includes
+# the number of open files, PID and the process name.
+#
+
+lsof -u $(whoami) | awk '{print $2}' | sort | uniq -c | sort -n | awk '{ printf $0 "\t"; system("ps -p " $2 " -o comm= 2>/dev/null || echo ''") }'
