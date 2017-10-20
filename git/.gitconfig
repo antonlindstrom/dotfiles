@@ -12,7 +12,8 @@
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	co = checkout -b
 	com = checkout master
-	rbr = "!for branch in `git branch -r | grep -v HEAD`;do echo `git show --format='%ai %Cred%h%Creset %C(green)(%cr)%Creset %C(bold blue)<%an>%Creset' $branch | head -n 1` $branch; done | sort -r"
+	rbr = "!for branch in `git branch -r | grep -v HEAD`;do echo `git log --format='%ai %Cred%h%Creset %C(green)(%cr)%Creset %C(bold blue)<%an>%Creset' -1 $branch` $branch; done | sort -r"
+	brde = for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(align:12,left)%(committerdate:relative)%(end) %(align:30,left)%(color:bold blue)%(authorname)%(end) %(color:bold red)%(objectname:short)%(color:reset) %(color:bold yellow)%(refname:short) %(upstream:track)'
 	delete-merged-branches = "!git branch --merged | grep -v master | xargs git branch --delete"
 	prune-branches = fetch -p
 	track-remote-branches = "!for remote in `git branch -r | grep -v 'origin/HEAD'`; do git branch --track ${remote#origin/} $remote; done"
@@ -21,7 +22,8 @@
 	sprint-stats = shortlog -sn --since='2 weeks'
 	all-mine = log --all --no-merges --author=lindztr@gmail.com --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	today = log --since=00:00:00 --all --no-merges --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	graph = log --graph --all --decorate --stat --date=iso  
+	graph = log --graph --all --decorate --stat --date=iso
+	lfm = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit ..master
 [push]
 	default = current
 [pull]
