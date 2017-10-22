@@ -116,6 +116,11 @@ main = do
         ("M-<F11>", spawn "amixer set Master 2-"),
         ("M-<F12>", spawn "amixer set Master 2+"),
 
+        -- spotify
+        ("M-s p", spawn "playerctl --player=spotify play-pause"),
+        ("M-s n", spawn "playerctl --player=spotify next"),
+        ("M-s b", spawn "playerctl --player=spotify previous"),
+
         -- layouts
         ("M-n", refresh),
         ("M-<Space>", sendMessage NextLayout),
