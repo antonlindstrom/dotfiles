@@ -43,4 +43,4 @@ mkdir $project_path
 # Initialize git.
 git init $project_path > /dev/null
 
-echo "created ${1}"
+echo "${1}"
