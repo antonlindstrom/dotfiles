@@ -166,13 +166,13 @@ frame_color = "#8EC07C"
 # Xev might be helpful to find names for keys.
 
 # Close notification.
-close = ctrl+space
+close = ctrl+q
 
 # Close all notifications.
 # close_all = mod4+a
 
 # Redisplay last message(s).
-history = ctrl+shift+space
+history = ctrl+shift+q
 
 # Context menu.
 # context = mod4+space
