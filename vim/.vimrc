@@ -4,16 +4,20 @@
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'airblade/vim-gitgutter'
 Plug 'axiom/vim-memcolo'
 Plug 'brookhong/cscope.vim'
 Plug 'cespare/vim-toml'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'elzr/vim-json'
+Plug 'ervandew/supertab'
 Plug 'fatih/vim-go'
+Plug 'garbas/vim-snipmate'
 Plug 'gilgigilgil/anderson.vim'
 Plug 'hashivim/vim-packer'
 Plug 'hashivim/vim-terraform'
+Plug 'honza/vim-snippets'
 Plug 'itchyny/calendar.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'keith/swift.vim'
@@ -21,11 +25,13 @@ Plug 'kien/ctrlp.vim'
 Plug 'lifepillar/pgsql.vim'
 Plug 'majutsushi/tagbar'
 Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'peterhoeg/vim-qml'
 Plug 'rodjek/vim-puppet'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/syntastic'
 Plug 'sickill/vim-monokai'
 Plug 'tclh123/vim-thrift'
+Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-markdown'
@@ -38,13 +44,6 @@ Plug 'vimwiki/vimwiki'
 Plug 'wimstefan/Lightning'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
-
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'garbas/vim-snipmate'
-Plug 'honza/vim-snippets'
-Plug 'tomtom/tlib_vim'
-
-Plug 'ervandew/supertab'
 
 call plug#end()
 
