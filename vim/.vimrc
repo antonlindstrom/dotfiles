@@ -94,6 +94,11 @@ try
 catch
 endtry
 
+try
+  let g:syntastic_go_checkers = ['gometalinter']
+catch
+endtry
+
 " Syntastic CPP
 try
   " CPP linter
