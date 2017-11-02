@@ -26,6 +26,7 @@
 	today = log --since=00:00:00 --all --no-merges --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	graph = log --graph --all --decorate --stat --date=iso
 	lfm = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit ..master
+	branches = branch -a --color -v
 [push]
 	default = current
 [pull]
