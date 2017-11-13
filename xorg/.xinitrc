@@ -14,4 +14,4 @@ fi
 autorandr -c
 xautolock -time 10 -locker slock -secure &
 
-exec xmonad
+exec i3

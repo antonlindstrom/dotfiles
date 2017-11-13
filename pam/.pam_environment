@@ -3,3 +3,4 @@ SSH_AUTH_SOCK	DEFAULT="${XDG_RUNTIME_DIR}/ssh-agent.socket"
 
 EDITOR		DEFAULT=vim
 BROWSER		DEFAULT=qutebrowser
+TERMINAL	DEFAULT=termite

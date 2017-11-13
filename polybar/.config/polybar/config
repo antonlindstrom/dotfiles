@@ -1,0 +1,339 @@
+;-------------------------------------------------
+;                                                ;
+;           Polybar config for Cranium           ;
+;                                                ;
+;-------------------------------------------------
+
+
+[colors]
+;background = ${xrdb:color0:#222}
+background = #000000
+background-alt = #3C5A46
+background-unf = #2E463E
+background-cur = #547980
+background-mod0 = #3C5A46
+background-mod1 = #546E53
+background-mod2 = #708963
+background-alrt = #A1BB76
+background-warn = #FD6A63
+
+;foreground = ${xrdb:color7:#222}
+foreground = #E5FCC2
+foreground-alt = #E5FCC2
+foreground-cur = #E5FCC2
+primary = #E5FCC2
+secondary = #E5FCC2
+
+
+[bar/example]
+;monitor = ${env:MONITOR:HDMI-1}
+width = 100%
+height = 25
+offset-x = 5%
+offset-y = 5%
+radius = 0.0
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 0
+line-color = #f00
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 1
+module-margin-right = 0
+
+font-0 = Inconsolata:antialias=true:size=10;1
+font-1 = FontAwesome:fontformat=truetype:size=10;1
+# font-2 = sm4tik:pixelsize=10;1
+
+modules-left = preicon i3
+modules-center = date
+modules-right = vpn btc battery volume powermenu
+
+tray-position = hidden
+tray-padding = 11
+tray-transparent = true
+tray-offset-y = 22
+tray-offset-x = -0
+tray-maxsize = 18
+tray-detached = true
+;tray-background = #0063ff
+
+wm-restack = i3
+
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+
+[module/i3]
+type = internal/i3
+format = "<label-state> <label-mode>"
+index-sort = true
+wrapping-scroll = true
+strip-wsnumbers = true
+
+label-mode-padding = 5
+label-mode-background = ${colors.background-alrt}
+
+label-unfocused = "%index%"
+label-unfocused-foreground = ${colors.foreground}
+label-unfocused-background = ${colors.background}
+label-unfocused-padding = 1
+label-visible = "%index%"
+label-visible-foreground = ${colors.background-alt}
+label-visible-background = ${colors.foreground}
+label-visible-padding = 1
+label-focused = "%index%"
+label-focused-background = ${colors.background-cur}
+label-focused-foreground = ${colors.foreground-cur}
+label-focused-padding = 1
+label-urgent = " %index%"
+label-urgent-background = ${colors.background-warn}
+label-urgent-foreground = ${colors.foreground}
+label-urgent-padding = 1
+
+[module/preicon]
+type = custom/text
+content = " "
+
+[module/title]
+type = internal/xwindow
+label-maxlen = 100
+format-padding = 5
+label = " %title% "
+
+[module/workspaces]
+type = internal/xworkspaces
+
+icon-default = 
+
+label-active = " %name% "
+label-active-foreground = #ffffff
+label-active-background = #3f3f3f
+label-active-underline = #fba922
+
+label-occupied = " %name% "
+label-occupied-underline = #555555
+
+label-urgent = " %name%! "
+label-urgent-foreground = #000000
+label-urgent-background = #bd2c40
+label-urgent-underline = #9b0a20
+
+label-empty = " %name% "
+label-empty-foreground = #ccc
+
+[module/wlan]
+type = internal/network
+interface = wlp3s0
+interval = 3.0
+
+format-connected-background = ${colors.background-mod}
+format-connected = "<ramp-signal><label-connected>"
+format-connected-underline = #9f78e1
+label-connected =
+
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+ramp-signal-foreground = ${colors.foreground-alt}
+
+
+[module/date]
+type = internal/date
+interval = 1
+
+date = " %a %b %d %Y"
+date-alt = " %Y-%m-%d "
+
+time = "%H:%M:%S "
+time-alt = %H:%M
+
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = #0a6cf5
+
+label = "%date% %time% "
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 97
+
+format-charging = " <animation-charging> <label-charging> "
+format-charging-underline = #ffb52a
+
+format-discharging = " <ramp-capacity> <label-discharging> "
+format-discharging-underline = ${self.format-charging-underline}
+
+format-full =
+format-full-prefix-foreground = ${colors.foreground-alt}
+format-full-underline = ${self.format-charging-underline}
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-foreground = ${colors.foreground-alt}
+animation-charging-framerate = 750
+
+
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+
+;[module/xbacklight]
+;type = internal/xbacklight
+;
+;format = <label> <bar>
+;label = BL
+;
+;bar-width = 10
+;bar-indicator = |
+;bar-indicator-foreground = #ff
+;bar-indicator-font = 2
+;bar-fill = -
+;bar-fill-font = 2
+;bar-fill-foreground = #9f78e1
+;bar-empty = -
+;bar-empty-font = 2
+;bar-empty-foreground = ${colors.foreground-alt}
+;bar-empty-background = ${colors.foreground-mod}
+;
+;[module/backlight-acpi]
+;inherit = module/xbacklight
+;type = internal/backlight
+;card = intel_backlight
+;
+
+
+[module/cpu]
+type = internal/cpu
+interval = 1
+
+format = "  <label> "
+label = CPU %percentage%%
+;label-font = 3
+;label-foreground = #0088CC
+
+ramp-coreload-0 = ▁
+ramp-coreload-0-font = 4
+ramp-coreload-0-foreground = #0088CC
+ramp-coreload-1 = ▂
+ramp-coreload-1-font = 4
+ramp-coreload-1-foreground = #0088CC
+ramp-coreload-2 = ▃
+ramp-coreload-2-font = 4
+ramp-coreload-2-foreground = #0088CC
+ramp-coreload-3 = ▄
+ramp-coreload-3-font = 4
+ramp-coreload-3-foreground = #0088CC
+
+[module/memory]
+type = internal/memory
+interval = 1
+
+format = "  <label> "
+label = Mem %percentage_used%%
+;label-foreground = #0088CC
+
+bar-used-width = 10
+bar-used-gradient = true
+bar-used-foreground-0 = #0088CC
+bar-used-foreground-1 = #2f8419
+bar-used-foreground-2 = #f5a70a
+bar-used-foreground-3 = #ed5456
+bar-used-indicator = █
+bar-used-indicator-font = 3
+bar-used-indicator-foreground = #fff
+bar-used-fill = █
+bar-used-fill-font = 3
+bar-used-empty = █
+bar-used-empty-font = 3
+bar-used-empty-foreground = #44
+
+[module/btc]
+type = custom/script
+exec = /home/anton/.local/bin/btc-amount
+interval = 300
+format-underline = #268bd2
+format = "  <label> "
+format-prefix = " "
+
+format-background = ${colors.background-unf}
+format-foreground = ${colors.foreground}
+
+[module/vpn]
+type = custom/script
+exec = echo ""
+exec-if = pgrep -x pluto
+interval = 5
+format-underline = #268bd2
+
+[module/volume]
+type = internal/volume
+
+master-soundcard = default
+speaker-soundcard = default
+headphone-soundcard = default
+
+format-volume = " <ramp-volume> "
+
+label-muted = 🔇 muted
+label-muted-foreground = #66
+
+; Only applies if <ramp-volume> is used
+ramp-volume-0 = 🔈
+ramp-volume-1 = 🔉
+ramp-volume-2 = 🔊
+
+[module/powermenu]
+type = custom/menu
+
+format-spacing = 1
+
+label-open = "  "
+label-open-foreground = ${colors.secondary}
+label-close =  Cancel
+label-close-foreground = ${colors.secondary}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = Logout
+menu-0-0-exec = exit
+menu-0-1 = Reboot
+menu-0-1-exec = systemctl reboot
+menu-0-2 = Shutdown
+menu-0-2-exec = systemctl poweroff
+
+; vim:ft=dosini
