@@ -27,10 +27,11 @@ secondary = #E5FCC2
 
 [bar/example]
 ;monitor = ${env:MONITOR:HDMI-1}
-width = 100%
+width = 60%
 height = 25
-offset-x = 5%
-offset-y = 5%
+offset-x = 20%
+offset-y = 10
+override-redirect = true
 radius = 0.0
 fixed-center = true
 
@@ -55,7 +56,7 @@ font-1 = FontAwesome:fontformat=truetype:size=10;1
 
 modules-left = preicon i3
 modules-center = date
-modules-right = vpn btc battery volume powermenu
+modules-right = vpn btc battery posticon
 
 tray-position = hidden
 tray-padding = 11
@@ -92,6 +93,7 @@ label-visible-padding = 1
 label-focused = "%index%"
 label-focused-background = ${colors.background-cur}
 label-focused-foreground = ${colors.foreground-cur}
+label-focused-underline = ${colors.background}
 label-focused-padding = 1
 label-urgent = " %index%"
 label-urgent-background = ${colors.background-warn}
@@ -101,6 +103,10 @@ label-urgent-padding = 1
 [module/preicon]
 type = custom/text
 content = " "
+
+[module/posticon]
+type = custom/text
+content = " "
 
 [module/title]
 type = internal/xwindow

@@ -40,7 +40,7 @@ bindsym $mod+Return exec termite
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec "rofi -combi-modi window,drun -show combi -modi combi"
+bindsym $mod+o exec "rofi -combi-modi window,drun -show combi -modi combi"
 bindsym $mod+p exec "passdmenu -x c"
 
 # move to urgent window
@@ -94,7 +94,10 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+d focus child
+
+# show a window on all workspaces.
+bindsym $mod+z sticky toggle
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -125,48 +128,47 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+	# These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+	# Pressing left will shrink the window’s width.
+	# Pressing right will grow the window’s width.
+	# Pressing up will shrink the window’s height.
+	# Pressing down will grow the window’s height.
+	bindsym j resize shrink width 10 px or 10 ppt
+	bindsym k resize grow height 10 px or 10 ppt
+	bindsym l resize shrink height 10 px or 10 ppt
+	bindsym semicolon resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+	# same bindings, but for the arrow keys
+	bindsym Left resize shrink width 10 px or 10 ppt
+	bindsym Down resize grow height 10 px or 10 ppt
+	bindsym Up resize shrink height 10 px or 10 ppt
+	bindsym Right resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+	# back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
 }
 
 bindsym $mod+r mode "resize"
 
 # music control (volume, spotify etc).
 mode "music" {
-        bindsym j exec --no-startup-id "amixer set Master 2-"
-        bindsym k exec --no-startup-id "amixer set Master 2+"
+	bindsym k exec --no-startup-id pactl set-sink-volume 0 +5%
+	bindsym j exec --no-startup-id pactl set-sink-volume 0 -5%
+	bindsym m exec --no-startup-id pactl set-sink-mute 0 toggle
 
-        bindsym p exec --no-startup-id "playerctl --player=spotify play-pause", mode "default"
-        bindsym n exec --no-startup-id "playerctl --player=spotify next", mode "default"
-        bindsym b exec --no-startup-id "playerctl --player=spotify previous", mode "default"
+	bindsym p exec --no-startup-id "playerctl --player=spotify play-pause", mode "default"
+	bindsym n exec --no-startup-id "playerctl --player=spotify next", mode "default"
+	bindsym b exec --no-startup-id "playerctl --player=spotify previous", mode "default"
 
-        bindsym v exec --no-startup-id "Pavucontrol", mode "default"
-
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+	# back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
 }
 
 bindsym $mod+m mode "music"
@@ -177,24 +179,24 @@ set $Locker i3lock -c 01696C
 # power management, requires polkit.
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id $Locker, mode "default"
-    bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
-    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
-    bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+	bindsym l exec --no-startup-id $Locker, mode "default"
+	bindsym e exec --no-startup-id i3-msg exit, mode "default"
+	bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+	bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+	bindsym r exec --no-startup-id systemctl reboot, mode "default"
+	bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
 
-    # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
+# back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
 }
 
 #bindsym $mod+Pause mode "$mode_system"
 bindsym $mod+Shift+x mode "$mode_system"
 
 # scrots
-bindsym $mod+Print exec --no-startup-id "scrot --focused -e 'notify-send -u normal \"Screenshot saved\" \"$f\"'"
-bindsym $mod+Shift+Print exec --no-startup-id "sleep 0.3; scrot --select -e 'notify-send -u normal \"Screenshot saved\" \"$f\"'"
+bindsym Print exec --no-startup-id scrot --focused -e 'notify-send -u normal \"Screenshot saved\" \"$f\"'
+bindsym Shift+Print exec --no-startup-id sleep 0.3; scrot --select -e 'notify-send -u normal \"Screenshot saved\" \"$f\"'
 
 # floating rules
 for_window [window_role="pop-up"] floating enable
@@ -205,13 +207,15 @@ for_window [class="(?i)mpv"] floating enable
 for_window [class="(?i)pinentry"] floating enable
 for_window [class="(?i)zenity"] floating enable
 
-#gaps set up
-gaps inner 20
-gaps outer 5
+# gaps set up
+gaps inner 35
+gaps outer 10
 
-exec --no-startup-id "compton --backend glx --paint-on-overlay --vsync opengl-swc -o 0 &"
+exec --no-startup-id "xautolock -time 10 -locker $Locker &"
+exec --no-startup-id "compton --config ${HOME}/.config/compton/compton.conf &"
 exec --no-startup-id "feh --bg-fill $(cat ${HOME}/.desktopbg) &"
 exec --no-startup-id "setxkbmap se"
+exec --no-startup-id "setxkbmap -option caps:escape"
 
 # run polybar instead of i3bar.
 exec_always --no-startup-id $HOME/.config/polybar/launch_polybar.sh
