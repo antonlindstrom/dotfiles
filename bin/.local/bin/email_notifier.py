@@ -21,7 +21,8 @@ Notify.init(r'email_notifier.py')
 def newfile(event):
     fd = open(event.pathname, 'r')
     mail = MaildirMessage(message=fd)
-    msg = "There is a new message waiting in your inbox from " + str(mail['From']) + "."
+    from_header, encoding = email.header.decode_header(mail['From'])[0]
+    msg = "There is a new message waiting in your inbox from " + from_header + "."
     n = Notify.Notification.new("You've got mail!", msg, "mail-unread-new")
     fd.close()
     n.set_timeout(notification_timeout)
