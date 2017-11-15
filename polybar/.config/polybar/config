@@ -56,7 +56,7 @@ font-1 = FontAwesome:fontformat=truetype:size=10;1
 
 modules-left = preicon i3
 modules-center = date
-modules-right = vpn btc battery posticon
+modules-right = vpn dockerd btc battery posticon
 
 tray-position = hidden
 tray-padding = 11
@@ -301,8 +301,15 @@ format-foreground = ${colors.foreground}
 
 [module/vpn]
 type = custom/script
-exec = echo ""
+exec = echo ""
 exec-if = pgrep -x pluto
+interval = 5
+format-underline = #268bd2
+
+[module/dockerd]
+type = custom/script
+exec = echo " "
+exec-if = pgrep -x dockerd
 interval = 5
 format-underline = #268bd2
 
