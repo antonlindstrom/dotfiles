@@ -18,11 +18,24 @@ notification_timeout = 12000
 
 Notify.init(r'email_notifier.py')
 
+dec_header = lambda h : ' '.join(str(s, e if bool(e) else 'ascii') for s, e in decode_header(h))
+
+def dec_header(header):
+    for s, e in decode_header(header):
+        if isinstance(s, str):
+            return s
+        else:
+            try:
+                return s.decode(e)
+            except:
+                print("failed to decode message %s" % s)
+
 def newfile(event):
     fd = open(event.pathname, 'r')
     mail = MaildirMessage(message=fd)
-    from_header, encoding = email.header.decode_header(mail['From'])[0]
-    msg = "There is a new message waiting in your inbox from " + from_header + "."
+    from_header = dec_header(mail['From'])
+    print("event: new message from '%s', sending notification" % from_header)
+    msg = "There is a new message waiting in your inbox from " + from_header
     n = Notify.Notification.new("You've got mail!", msg, "mail-unread-new")
     fd.close()
     n.set_timeout(notification_timeout)
