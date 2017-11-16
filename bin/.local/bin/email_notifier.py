@@ -33,10 +33,10 @@ def dec_header(header):
 def newfile(event):
     fd = open(event.pathname, 'r')
     mail = MaildirMessage(message=fd)
+    subject_header = dec_header(mail['Subject'])
     from_header = dec_header(mail['From'])
     print("event: new message from '%s', sending notification" % from_header)
-    msg = "There is a new message waiting in your inbox from " + from_header
-    n = Notify.Notification.new("You've got mail!", msg, "mail-unread-new")
+    n = Notify.Notification.new("New mail: " + from_header, subject_header, "mail-unread-new")
     fd.close()
     n.set_timeout(notification_timeout)
     n.show()
