@@ -23,6 +23,10 @@ font pango:Inconsolata 10
 client.focused #000000 #2b2b2b #fdf6e3 #000000
 hide_edge_borders none
 
+# gaps set up
+gaps inner 35
+gaps outer 10
+
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
@@ -206,6 +210,9 @@ mode "$mode_brightness" {
 
 bindsym $mod+F1 mode "$mode_brightness"
 
+# Locking
+bindsym $mod+Escape exec --no-startup-id $Locker
+
 # scrots
 bindsym Print exec --no-startup-id scrot --focused -e 'notify-send -u normal \"Screenshot saved\" \"$f\"'
 bindsym Shift+Print exec --no-startup-id sleep 0.3; scrot --select -e 'notify-send -u normal \"Screenshot saved\" \"$f\"'
@@ -219,9 +226,10 @@ for_window [class="(?i)mpv"] floating enable
 for_window [class="(?i)pinentry"] floating enable
 for_window [class="(?i)zenity"] floating enable
 
-# gaps set up
-gaps inner 35
-gaps outer 10
+# placement rules
+for_window [class="(?i)qutebrowser"] move window to workspace 2
+for_window [class="(?i)slack"] move window to workspace 3
+for_window [class="(?i)spotify"] move window to workspace 8
 
 exec --no-startup-id "xautolock -time 10 -locker $Locker &"
 exec --no-startup-id "compton --config ${HOME}/.config/compton/compton.conf &"
