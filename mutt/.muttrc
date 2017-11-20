@@ -24,6 +24,9 @@ set message_cachedir = "~/.mutt/cache/bodies"
 # Specify where to save and/or look for postponed messages.
 #set postponed = +[Gmail]/Drafts
 
+# Beeping will enable urgency hints.
+set beep_new
+
 set mail_check = 30
 set wait_key = no        # shut up, mutt
 set mbox_type = Maildir  # mailbox type
