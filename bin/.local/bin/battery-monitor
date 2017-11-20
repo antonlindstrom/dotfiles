@@ -16,6 +16,7 @@ check_battery() {
     if [ $? != 0 ]; then
         echo "No battery detected, continuing anyway. Will block."
         echo "Press CTRL-c to exit."
+        while [[ 1 ]]; do sleep 600; done
     fi
 }
 
