@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Setup the VPN connection.
+function up() {
+  pritunl-client start 4c307b60f2c54fbfa864cb8e61808b4a
+}
+
+# Tear down the VPN connection.
+function down() {
+  pritunl-client stop 4c307b60f2c54fbfa864cb8e61808b4a
+}
+
+# Main.
+#
+# --up    Start VPN.
+# --down  Stop VPN.
+#
+case $1 in
+  up)
+    echo "=> Starting VPN..."
+    up
+    ;;
+  down)
+    echo "=> Stopping VPN..."
+    down
+    ;;
+  *)
+    echo "Usage:"
+    echo "  vpn up    - Start VPN (default configuration)"
+    echo "  vpn down  - Tear down VPN connection."
+    ;;
+esac
