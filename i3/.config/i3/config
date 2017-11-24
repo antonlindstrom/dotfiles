@@ -210,6 +210,29 @@ mode "$mode_brightness" {
 
 bindsym $mod+F1 mode "$mode_brightness"
 
+# Screen management
+set $mode_screenmgmt Screen management
+mode "$mode_screenmgmt" {
+	set $internal DP-2-1
+	set $external eDP-1
+
+	bindsym 1 exec --no-startup-id xrandr --output "DP-2-1" --off --output "eDP-1" --auto, mode "default"
+	bindsym 2 exec --no-startup-id xrandr --output "eDP-1" --off --output "DP-2-1" --auto, mode "default"
+	bindsym 3 exec --no-startup-id xrandr --output "eDP-1" --auto --output "DP-2-1" --auto, mode "default"
+
+	bindsym 4 exec --no-startup-id autorandr -l only-desktop
+	bindsym 5 exec --no-startup-id autorandr -l laptop-only
+
+	# back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+bindsym $mod+F2 mode "$mode_screenmgmt"
+
+# Rebind keyboard.
+bindsym Pause exec --no-startup-id setxkbmap se && notify-send -u normal \"setxkbmap\" \"now set to se\"
+
 # Locking
 bindsym $mod+Escape exec --no-startup-id $Locker
 
