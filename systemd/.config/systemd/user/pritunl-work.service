@@ -1,0 +1,11 @@
+[Unit]
+Description=Work VPN unit
+Requires=pritunl-client.service
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/pritunl-client start 4c307b60f2c54fbfa864cb8e61808b4a
+ExecStop=/usr/bin/pritunl-client stop 4c307b60f2c54fbfa864cb8e61808b4a
+
+[Install]
+WantedBy=default.target
