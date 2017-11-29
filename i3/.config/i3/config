@@ -47,6 +47,9 @@ bindsym $mod+Shift+q kill
 bindsym $mod+o exec "rofi -combi-modi window,drun -show combi -modi combi"
 bindsym $mod+p exec "passdmenu -x c"
 
+bindsym $mod+shift+o exec "~/.local/bin/finder.sh"
+bindsym $mod+shift+d exec "~/.local/bin/monitor_layout.sh"
+
 # move to urgent window
 bindsym $mod+u [urgent=latest] focus
 
