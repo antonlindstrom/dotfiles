@@ -8,7 +8,7 @@ HUB_COMPLETION_URL = "https://raw.githubusercontent.com/github/hub/master/etc/hu
 DESTDIR  ?= $$HOME
 PKGS ?= $(sort $(filter-out _resources/, $(dir $(wildcard */))))
 
-REAL_DIRS := $(addprefix $(DESTDIR)/, .mutt .offlineimap .xmonad .vim .config/termite .config/dunst .config/qutebrowser .config/i3 .config/polybar .config/compton .local/bin .weechat)
+REAL_DIRS := $(addprefix $(DESTDIR)/, .mutt .offlineimap .xmonad .vim .config/termite .config/dunst .config/conky .config/qutebrowser .config/i3 .config/polybar .config/compton .local/bin .weechat)
 
 $(REAL_DIRS):
 	@mkdir -p $@
