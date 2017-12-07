@@ -1,0 +1,20 @@
+#!/bin/bash
+#
+# Rofi menu for selecting networks.
+#
+
+selected=$(find /etc/netctl -maxdepth 1 -type f -printf '%f\n' | rofi -dmenu -p "Networks:" -a 0 -no-custom)
+
+# Abort if none is chosen.
+if [ -z "${chosen}" ]; then
+	echo "Abort, none is selected."
+	exit 0
+fi
+
+is_active=$(netctl is-active ${selected})
+if [ "${is_active}" == "inactive" ]; then
+	echo "${selected} attempting to start."
+	netctl start ${selected}
+else
+	echo "${selected} is already active."
+fi
