@@ -1,5 +1,4 @@
-setxkbmap se
-setxkbmap -option caps:escape
+setxkbmap -option caps:escape se
 
 export PATH=$PATH:$HOME/.local/bin
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources

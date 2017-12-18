@@ -49,6 +49,7 @@ bindsym $mod+p exec "passdmenu -x c"
 
 bindsym $mod+shift+o exec "~/.local/bin/finder.sh"
 bindsym $mod+shift+d exec "~/.local/bin/monitor_layout.sh"
+bindsym $mod+shift+w exec "~/.local/bin/netmenu"
 
 # move to urgent window
 bindsym $mod+u [urgent=latest] focus
@@ -132,10 +133,9 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
+
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -157,11 +157,11 @@ mode "resize" {
 	bindsym Right resize grow width 10 px or 10 ppt
 
 	# back to normal: Enter or Escape
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
+	bindsym Return mode "default"; exec killall i3-nagbar
+	bindsym Escape mode "default"; exec killall i3-nagbar
 }
 
-bindsym $mod+r mode "resize"
+bindsym $mod+r mode "resize"; exec "i3-nagbar -t warning -f Inconsolata -m 'Mode: resize'"
 
 # music control (volume, spotify etc).
 mode "music" {
@@ -174,14 +174,14 @@ mode "music" {
 	bindsym b exec --no-startup-id "playerctl --player=spotify previous", mode "default"
 
 	# back to normal: Enter or Escape
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
+	bindsym Return mode "default"; exec killall i3-nagbar
+	bindsym Escape mode "default"; exec killall i3-nagbar
 }
 
-bindsym $mod+m mode "music"
+bindsym $mod+m mode "music"; exec "i3-nagbar -t warning -f Inconsolata -m 'Music (j) vol down, (k) vol up , (m) mute, (p) pause, (n) next, (b) back'"
 
 # Locker is i3lock.
-set $Locker i3lock -c 01696C
+set $Locker i3lock -c 2b2b2b -u -f
 
 # power management, requires polkit.
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
@@ -194,12 +194,11 @@ mode "$mode_system" {
 	bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
 
 	# back to normal: Enter or Escape
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
+	bindsym Return mode "default"; exec killall i3-nagbar
+	bindsym Escape mode "default"; exec killall i3-nagbar
 }
 
-#bindsym $mod+Pause mode "$mode_system"
-bindsym $mod+Shift+x mode "$mode_system"
+bindsym $mod+shift+e mode "$mode_system"; exec "i3-nagbar -f Inconsolata -m 'System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown'"
 
 set $mode_brightness Brightness (j) , (k) 
 mode "$mode_brightness" {
@@ -207,41 +206,24 @@ mode "$mode_brightness" {
 	bindsym k exec --no-startup-id brightnessctl set +15%
 
 	# back to normal: Enter or Escape
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
+	bindsym Return mode "default"; exec killall i3-nagbar
+	bindsym Escape mode "default"; exec killall i3-nagbar
 }
 
-bindsym $mod+F1 mode "$mode_brightness"
-
-# Screen management
-set $mode_screenmgmt Screen management
-mode "$mode_screenmgmt" {
-	set $internal DP-2-1
-	set $external eDP-1
-
-	bindsym 1 exec --no-startup-id xrandr --output "DP-2-1" --off --output "eDP-1" --auto, mode "default"
-	bindsym 2 exec --no-startup-id xrandr --output "eDP-1" --off --output "DP-2-1" --auto, mode "default"
-	bindsym 3 exec --no-startup-id xrandr --output "eDP-1" --auto --output "DP-2-1" --auto, mode "default"
-
-	bindsym 4 exec --no-startup-id autorandr -l only-desktop
-	bindsym 5 exec --no-startup-id autorandr -l laptop-only
-
-	# back to normal: Enter or Escape
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-}
-
-bindsym $mod+F2 mode "$mode_screenmgmt"
+bindsym $mod+F1 mode "$mode_brightness"; exec "i3-nagbar -m 'Brightness (j) down, (k) up '"
 
 # Rebind keyboard.
-bindsym Pause exec --no-startup-id setxkbmap se && notify-send -u normal \"setxkbmap\" \"now set to se\"
+bindsym Pause exec --no-startup-id setxkbmap se && notify-send -u normal \"setxkbmap -option caps:escape se\" \"now set to se\"
 
 # Locking
-bindsym $mod+Escape exec --no-startup-id $Locker
+bindsym $mod+Escape exec $Locker
 
 # scrots
 bindsym Print exec --no-startup-id scrot --focused -e 'notify-send -u normal \"Screenshot saved\" \"$f\"'
-bindsym Shift+Print exec --no-startup-id sleep 0.3; scrot --select -e 'notify-send -u normal \"Screenshot saved\" \"$f\"'
+bindsym Shift+Print exec --no-startup-id scrot --select -e 'notify-send -u normal \"Screenshot saved\" \"$f\"'
+
+# Calendar
+bindsym $mod+c exec --no-startup-id xdg-open https://calendar.google.com/ && notify-send -u normal "Google Calendar" "Opening calendar in default browser."
 
 # floating rules
 for_window [window_role="pop-up"] floating enable
@@ -251,17 +233,14 @@ for_window [class="(?i)steam"] floating enable
 for_window [class="(?i)mpv"] floating enable
 for_window [class="(?i)pinentry"] floating enable
 for_window [class="(?i)zenity"] floating enable
+for_window [class="(?i)xclock"] floating enable
 
 # placement rules
 for_window [class="(?i)qutebrowser"] move window to workspace 2
 for_window [class="(?i)slack"] move window to workspace 3
 for_window [class="(?i)spotify"] move window to workspace 8
 
-exec --no-startup-id "xautolock -time 10 -locker $Locker &"
-exec --no-startup-id "compton --config ${HOME}/.config/compton/compton.conf &"
+exec --no-startup-id "xss-lock -- i3lock -c 2b2b2b -u -f -n &"
 exec --no-startup-id "feh --bg-fill $(cat ${HOME}/.desktopbg) &"
-exec --no-startup-id "setxkbmap se"
-exec --no-startup-id "setxkbmap -option caps:escape"
-
-# run polybar instead of i3bar.
-exec_always --no-startup-id $HOME/.config/polybar/launch_polybar.sh
+exec --no-startup-id "setxkbmap -option caps:escape se"
+exec --no-startup-id "conky -c ${HOME}/.config/conky/conky.conf"
