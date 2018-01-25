@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -z $1 ]; then
-        ls ~/Documents
+	find ~/Documents
 else
-        xdg-open ~/Documents/$1
+	xdg-open ~/Documents/$1
 fi

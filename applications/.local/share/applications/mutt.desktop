@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Mutt
-GenericName=Mail Client
-NoDisplay=false
-Exec=termite --geometry=1024x640 --name mutt --class mutt -e "mutt"
-MimeType=x-scheme-handler/mailto
