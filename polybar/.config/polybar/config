@@ -7,9 +7,9 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #000000
-background-alt = #3C5A46
-background-unf = #2E463E
+background = #FFFFFF
+background-alt = #CCCCCC
+background-unf = #CCCCCC
 background-cur = #2E463E
 background-mod0 = #3C5A46
 background-mod1 = #546E53
@@ -18,7 +18,7 @@ background-alrt = #A1BB76
 background-warn = #FD6A63
 
 ;foreground = ${xrdb:color7:#222}
-foreground = #E5FCC2
+foreground = #2b2b2b
 foreground-alt = #E5FCC2
 foreground-cur = #E5FCC2
 primary = #E5FCC2
@@ -56,7 +56,7 @@ font-1 = FontAwesome:fontformat=truetype:size=10;1
 
 modules-left = preicon i3
 modules-center = date
-modules-right = vpn dockerd btc battery posticon
+modules-right = vpn dockerd btc battery wlan posticon
 
 tray-position = hidden
 tray-padding = 11
@@ -137,13 +137,13 @@ label-empty-foreground = #ccc
 
 [module/wlan]
 type = internal/network
-interface = wlp3s0
+interface = wlp58s0
 interval = 3.0
 
 format-connected-background = ${colors.background-mod}
 format-connected = "<ramp-signal><label-connected>"
 format-connected-underline = #9f78e1
-label-connected =
+label-connected = "%ifname%"
 
 ;format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
@@ -175,7 +175,7 @@ label = "%date% %time% "
 
 [module/battery]
 type = internal/battery
-battery = BAT0
+battery = BAT1
 adapter = AC
 full-at = 97
 

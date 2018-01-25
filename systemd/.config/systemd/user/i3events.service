@@ -1,0 +1,14 @@
+[Unit]
+Description=i3 event notifier
+IgnoreOnIsolate=true
+
+[Service]
+ExecStart=/usr/bin/i3events
+Restart=on-failure
+CPUShares=32
+MemoryMax=32M
+CPUAccounting=true
+CPUQuota=20%
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,9 @@
+[Unit]
+Description=change background on given interval
+
+[Timer]
+OnCalendar=*:0/3
+Unit=screenchange.service
+
+[Install]
+WantedBy=default.target

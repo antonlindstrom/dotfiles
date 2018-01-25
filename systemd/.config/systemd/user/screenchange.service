@@ -1,0 +1,9 @@
+[Unit]
+Description=change background from webcamera
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/wget -qO /tmp/background.jpg "http://www.platzer.se/pages/webKamera.aspx?nr=Kamera2&noresize=1"
+ExecStartPost=/usr/bin/feh --bg-scale /tmp/background.jpg
+TimeoutStartSec=1min30s

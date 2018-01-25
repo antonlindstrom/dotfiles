@@ -2,11 +2,13 @@
 
 function bright() {
 	cat "$HOME/.config/termite/config_bright" > "$HOME/.config/termite/config"
+	vim -c 'call ToggleColorScheme() | qa'
 	killall -USR1 termite
 }
 
 function dark() {
 	cat "$HOME/.config/termite/config_dark" > "$HOME/.config/termite/config"
+	vim -c 'call ToggleColorScheme() | qa'
 	killall -USR1 termite
 }
 

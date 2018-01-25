@@ -139,7 +139,7 @@ set reverse_alias = yes
 source $alias_file
 
 # Set preference of text/plain
-alternative_order text/plain text/enriched text/html
+alternative_order text/html text/plain text/enriched
 
 # Solarized theme
 # source $HOME/.mutt/mutt-colors-solarized-dark-256.muttrc

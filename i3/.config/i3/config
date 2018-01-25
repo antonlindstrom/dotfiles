@@ -24,8 +24,8 @@ client.focused #000000 #2b2b2b #fdf6e3 #000000
 hide_edge_borders none
 
 # gaps set up
-gaps inner 35
-gaps outer 10
+#gaps inner 35
+#gaps outer 10
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -44,11 +44,9 @@ bindsym $mod+Return exec termite
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+o exec "rofi -combi-modi window,drun -show combi -modi combi"
+bindsym $mod+o exec "rofi -combi-modi 'window#drun#docs:~/.local/bin/finder-rofi.sh#display:~/.local/bin/monitor_layout.sh' -show combi -modi combi"
 bindsym $mod+p exec "passdmenu -x c"
 
-bindsym $mod+shift+o exec "~/.local/bin/finder.sh"
-bindsym $mod+shift+d exec "~/.local/bin/monitor_layout.sh"
 bindsym $mod+shift+w exec "~/.local/bin/netmenu"
 
 # move to urgent window
@@ -181,7 +179,7 @@ mode "music" {
 bindsym $mod+m mode "music"; exec "i3-nagbar -t warning -f Inconsolata -m 'Music (j) vol down, (k) vol up , (m) mute, (p) pause, (n) next, (b) back'"
 
 # Locker is i3lock.
-set $Locker i3lock -c 2b2b2b -u -f
+set $Locker i3lock -c ff0000 -f
 
 # power management, requires polkit.
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
@@ -213,17 +211,24 @@ mode "$mode_brightness" {
 bindsym $mod+F1 mode "$mode_brightness"; exec "i3-nagbar -m 'Brightness (j) down, (k) up '"
 
 # Rebind keyboard.
-bindsym Pause exec --no-startup-id setxkbmap se && notify-send -u normal \"setxkbmap -option caps:escape se\" \"now set to se\"
+bindsym Pause exec --no-startup-id setxkbmap -option caps:escape se && xset r rate 300 80 && notify-send -u normal \"setxkbmap se\" \"now set to se\"
 
 # Locking
 bindsym $mod+Escape exec $Locker
 
 # scrots
-bindsym Print exec --no-startup-id scrot --focused -e 'notify-send -u normal \"Screenshot saved\" \"$f\"'
-bindsym Shift+Print exec --no-startup-id scrot --select -e 'notify-send -u normal \"Screenshot saved\" \"$f\"'
+set $mode_printscr Print screen (p) screen, (s) selection, (f) focused
+mode "$mode_printscr" {
+	bindsym p exec --no-startup-id sleep 0.2 && scrot -e 'notify-send -u normal \"Screenshot saved\" \"$f\"'
+	bindsym f exec --no-startup-id sleep 0.2 && scrot -u -e 'notify-send -u normal \"Screenshot of focused window saved\" \"$f\"'
+	bindsym s exec --no-startup-id sleep 0.2 && scrot -s -e 'notify-send -u normal \"Screenshot of selection saved\" \"$f\"'
 
-# Calendar
-bindsym $mod+c exec --no-startup-id xdg-open https://calendar.google.com/ && notify-send -u normal "Google Calendar" "Opening calendar in default browser."
+	# back to normal: Enter or Escape
+	bindsym Return mode "default"; exec killall i3-nagbar
+	bindsym Escape mode "default"; exec killall i3-nagbar
+}
+
+bindsym Shift+Print mode "$mode_printscr"; exec "i3-nagbar -f Inconsolata -t warning -m 'Print screen (p) screen, (s) selection, (w) window'"
 
 # floating rules
 for_window [window_role="pop-up"] floating enable
@@ -234,13 +239,15 @@ for_window [class="(?i)mpv"] floating enable
 for_window [class="(?i)pinentry"] floating enable
 for_window [class="(?i)zenity"] floating enable
 for_window [class="(?i)xclock"] floating enable
+for_window [class="(?i)mutt"] floating enable
+for_window [class="(?i)kanban"] floating enable
 
 # placement rules
 for_window [class="(?i)qutebrowser"] move window to workspace 2
 for_window [class="(?i)slack"] move window to workspace 3
 for_window [class="(?i)spotify"] move window to workspace 8
 
-exec --no-startup-id "xss-lock -- i3lock -c 2b2b2b -u -f -n &"
-exec --no-startup-id "feh --bg-fill $(cat ${HOME}/.desktopbg) &"
+exec --no-startup-id "xss-lock -- i3lock -c ff0000 -f -n &"
+exec --no-startup-id "xsetroot -solid '#333333'"
 exec --no-startup-id "setxkbmap -option caps:escape se"
 exec --no-startup-id "conky -c ${HOME}/.config/conky/conky.conf"

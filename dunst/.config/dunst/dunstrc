@@ -22,7 +22,7 @@ plain_text = no
 #   %I  iconname (without its path)
 #   %p  progress value if set ([  0%] to [100%]) or nothing
 # Markup is allowed
-format = "<b>%s</b>\n%b"
+format = "<b>%s</b>\n%b %p"
 
 # Sort messages by urgency.
 sort = yes
@@ -70,7 +70,7 @@ hide_duplicates_count = yes
 # The width can be negative.  In this case the actual width is the
 # screen width minus the width defined in within the geometry option.
 #geometry = "250x50-40+40"
-geometry = "400x50-10+10"
+geometry = "400x50-5+5"
 
 # Shrink window if it's smaller than the width.  Will be ignored if
 # width is 0.
@@ -126,7 +126,7 @@ separator_height = 2
 padding = 6
 
 # Horizontal padding.
-horizontal_padding = 6
+horizontal_padding = 10
 
 # Define a color for the separator.
 # possible values are:
@@ -180,16 +180,16 @@ context = mod4+o
 [urgency_low]
 # IMPORTANT: colors have to be defined in quotation marks.
 # Otherwise the "#" and following would be interpreted as a comment.
-frame_color = "#000000"
-foreground = "#657B83"
-background = "#2B2B2B"
+frame_color = "#CCCCCC"
+foreground = "#2b2b2b"
+background = "#F8F8F8"
 #background = "#2B313C"
 timeout = 8
 
 [urgency_normal]
-frame_color = "#000000"
-foreground = "#E5FCC2"
-background = "#2B2B2B"
+frame_color = "#CCCCCC"
+foreground = "#2B2B2B"
+background = "#FFFFFF"
 #background = "#2B313C"
 timeout = 10
 

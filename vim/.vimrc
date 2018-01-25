@@ -5,6 +5,7 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'axiom/vim-memcolo'
 Plug 'brookhong/cscope.vim'
@@ -12,7 +13,7 @@ Plug 'cespare/vim-toml'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'elzr/vim-json'
 Plug 'ervandew/supertab'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'garbas/vim-snipmate'
 Plug 'gilgigilgil/anderson.vim'
 Plug 'hashivim/vim-packer'
@@ -24,6 +25,9 @@ Plug 'keith/swift.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'lifepillar/pgsql.vim'
 Plug 'majutsushi/tagbar'
+Plug 'mbbill/undotree'
+Plug 'mileszs/ack.vim'
+Plug 'neomake/neomake'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'peterhoeg/vim-qml'
 Plug 'rodjek/vim-puppet'
@@ -84,8 +88,53 @@ try
 catch
 endtry
 
+" Ack
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+" Neomake
+try
+  let g:neomake_error_sign   = {'text': '✖', 'texthl': 'NeomakeErrorSign'}
+  let g:neomake_warning_sign = {'text': '∆', 'texthl': 'NeomakeWarningSign'}
+  let g:neomake_message_sign = {'text': '➤', 'texthl': 'NeomakeMessageSign'}
+  let g:neomake_info_sign    = {'text': 'ℹ', 'texthl': 'NeomakeInfoSign'}
+
+  " neomake configuration for Go.
+  let g:neomake_go_enabled_makers = [ 'go', 'gometalinter' ]
+  let g:neomake_go_gometalinter_maker = {
+    \ 'args': [
+    \   '--tests',
+    \   '--enable-gc',
+    \   '--concurrency=3',
+    \   '--fast',
+    \   '-D', 'aligncheck',
+    \   '-D', 'dupl',
+    \   '-D', 'gocyclo',
+    \   '-D', 'gotype',
+    \   '-E', 'errcheck',
+    \   '-E', 'misspell',
+    \   '-E', 'unused',
+    \   '%:p:h',
+    \ ],
+    \ 'append_file': 0,
+    \ 'errorformat':
+    \   '%E%f:%l:%c:%trror: %m,' .
+    \   '%W%f:%l:%c:%tarning: %m,' .
+    \   '%E%f:%l::%trror: %m,' .
+    \   '%W%f:%l::%tarning: %m'
+    \ }
+catch
+endtry
+
 " Go
 try
+  let g:go_fmt_command = "goimports"
+
+  let g:go_addtags_transform = "snakecase"
+
+  let g:go_echo_command_info = 1
+
   let g:go_highlight_functions = 1
   let g:go_highlight_methods = 1
   let g:go_highlight_structs = 1
@@ -263,3 +312,6 @@ nnoremap  <leader>fe :call CscopeFind('e', expand('<cword>'))<CR>
 nnoremap  <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
 " i: Find files #including this file
 nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
+
+" gt: Find files that has this word.
+nnoremap  <leader>gt :Ack '<cword>'<CR>
