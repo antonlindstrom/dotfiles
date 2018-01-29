@@ -8,6 +8,7 @@ XTerm.vt100.translations: #override \n\
 	Ctrl Shift <Key>C: copy-selection(CLIPBOARD) \n\
 	Ctrl Shift <Key>V: insert-selection(CLIPBOARD)
 
+rofi.terminal: termite
 rofi.color-enabled: true
 rofi.color-window: #f2e5bc, #7c6f64, #7c6f64
 !                  bg       fg       bg-alt   hl-bg    hl-fg

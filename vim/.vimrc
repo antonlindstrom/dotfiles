@@ -4,6 +4,9 @@
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'Shougo/vimshell.vim'
+Plug 'Shougo/vimproc.vim'
+
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'airblade/vim-gitgutter'
@@ -30,9 +33,10 @@ Plug 'mileszs/ack.vim'
 Plug 'neomake/neomake'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'peterhoeg/vim-qml'
+Plug 'plan9-for-vimspace/acme-colors'
 Plug 'rodjek/vim-puppet'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'scrooloose/syntastic'
+Plug 'sebdah/vim-delve'
 Plug 'sickill/vim-monokai'
 Plug 'tclh123/vim-thrift'
 Plug 'tomtom/tlib_vim'
@@ -100,8 +104,14 @@ try
   let g:neomake_message_sign = {'text': '➤', 'texthl': 'NeomakeMessageSign'}
   let g:neomake_info_sign    = {'text': 'ℹ', 'texthl': 'NeomakeInfoSign'}
 
+  " neomake configuration for C++
+  let g:neomake_cpp_enable_markers=['clang', 'cpplint']
+  let g:neomake_cpp_lint_maker = { }
+  let g:neomake_cpp_clang_args = ["-std=c++14", "-Wextra", "-Wall", "-fsanitize=undefined","-g"]
+
   " neomake configuration for Go.
-  let g:neomake_go_enabled_makers = [ 'go', 'gometalinter' ]
+  let g:neomake_go_enabled_makers = [ 'go', 'gometalinter', 'endsentence' ]
+  let g:neomake_go_endsentence_maker = { }
   let g:neomake_go_gometalinter_maker = {
     \ 'args': [
     \   '--tests',
@@ -124,6 +134,8 @@ try
     \   '%E%f:%l::%trror: %m,' .
     \   '%W%f:%l::%tarning: %m'
     \ }
+
+  au FileType go autocmd BufWritePost * Neomake
 catch
 endtry
 
@@ -140,20 +152,6 @@ try
   let g:go_highlight_structs = 1
   let g:go_highlight_operators = 1
   let g:go_highlight_build_constraints = 1
-catch
-endtry
-
-try
-  let g:syntastic_go_checkers = ['gometalinter']
-catch
-endtry
-
-" Syntastic CPP
-try
-  " CPP linter
-  let g:syntastic_cpp_cpplint_exec = 'cpplint'
-  let g:syntastic_cpp_checkers = ['gcc', 'cpplint']
-  let g:syntastic_cpp_compiler_options = ' -std=c++11'
 catch
 endtry
 
@@ -315,3 +313,6 @@ nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
 
 " gt: Find files that has this word.
 nnoremap  <leader>gt :Ack '<cword>'<CR>
+
+" br: Toogle delve breakpoint
+nnoremap <leader>br :DlvToggleBreakpoint<CR>

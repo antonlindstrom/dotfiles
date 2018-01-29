@@ -18,6 +18,7 @@ localrepository = AntonLindstrom-Local
 remoterepository = AntonLindstrom-Remote
 
 quick = 10
+maxage = 120
 
 [Repository AntonLindstrom-Local]
 type = Maildir
@@ -36,6 +37,7 @@ sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 remoteuser = me@antonlindstrom.com
 remotepassfile = ~/.offlineimap/password
 realdelete = no
+maxage = 120
 keepalive = 60
 holdconnectionopen = yes
 nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
