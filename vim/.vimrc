@@ -4,12 +4,16 @@
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'Shougo/vimshell.vim'
-Plug 'Shougo/vimproc.vim'
+" Vim only plugins
+if !has('nvim')
+    Plug 'Shougo/vimproc.vim', {'do' : 'make'}  " Needed to make sebdah/vim-delve work on Vim
+    Plug 'Shougo/vimshell.vim'                  " Needed to make sebdah/vim-delve work on Vim
+endif
 
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'arcticicestudio/nord-vim'
 Plug 'axiom/vim-memcolo'
 Plug 'brookhong/cscope.vim'
 Plug 'cespare/vim-toml'
@@ -23,6 +27,8 @@ Plug 'hashivim/vim-packer'
 Plug 'hashivim/vim-terraform'
 Plug 'honza/vim-snippets'
 Plug 'itchyny/calendar.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'keith/swift.vim'
 Plug 'kien/ctrlp.vim'
@@ -31,6 +37,7 @@ Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
 Plug 'mileszs/ack.vim'
 Plug 'neomake/neomake'
+Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'peterhoeg/vim-qml'
 Plug 'plan9-for-vimspace/acme-colors'
@@ -38,6 +45,7 @@ Plug 'rodjek/vim-puppet'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'sebdah/vim-delve'
 Plug 'sickill/vim-monokai'
+Plug 'skreuzer/vim-prometheus'
 Plug 'tclh123/vim-thrift'
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-commentary'
@@ -76,6 +84,7 @@ try
   let g:ctrlp_switch_buffer = 0
   let g:ctrlp_working_path_mode = 0
   let g:ctrlp_custom_ignore = '\vbuild/|dist/|venv/|\.(o|swp|pyc|egg)$'
+  let g:ctrlp_map = '' " Use FZF
 catch
 endtry
 
@@ -89,6 +98,12 @@ endtry
 " JSON
 try
   let g:vim_json_syntax_conceal = 0
+catch
+endtry
+
+" FZF
+try
+  nnoremap <c-p> :FZF<cr>
 catch
 endtry
 
@@ -159,6 +174,7 @@ endtry
 try
   let g:calendar_google_calendar = 1
   let g:calendar_google_task = 1
+  let g:calendar_first_day = "monday"
 catch
 endtry
 
@@ -184,12 +200,12 @@ try
   function! ToggleColorScheme()
     try
       if (g:colors_name == "lightning")
-        colorscheme monokai
+        colorscheme nord
       else
         colorscheme lightning
       endif
     catch
-        colorscheme monokai
+        colorscheme nord
     endtry
   endfunc
 
@@ -313,6 +329,8 @@ nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
 
 " gt: Find files that has this word.
 nnoremap  <leader>gt :Ack '<cword>'<CR>
+nnoremap <leader>ö :Ack!<space>
 
 " br: Toogle delve breakpoint
-nnoremap <leader>br :DlvToggleBreakpoint<CR>
+au FileType go nnoremap <leader>br :DlvToggleBreakpoint<CR>
+au FileType go nnoremap <leader>å :GoCoverageToggle<CR>

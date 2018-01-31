@@ -13,41 +13,35 @@ clickable_url = true
 # Infinite scrollback
 scrollback_lines = -1
 
+# Copyright (c) 2016-present Arctic Ice Studio
+# <development@arcticicestudio.com>
+# Copyright (c) 2016-present Sven Greb <code@svengreb.de>
+
+# Project:    Nord Termite
+# Repository: https://github.com/arcticicestudio/nord-termite
+# License:    MIT
+
 [colors]
-# special
-foreground      = #e4dbdc
-foreground_bold = #e4dbdc
-cursor          = #e4dbdc
-background      = rgba(26,30,30,0.98)
+foreground = #D8DEE9
+background = #2E3440
+foreground_bold = #D8DEE9
+cursor = #D8DEE9
+cursor_foreground = #2E3440
+highlight = #4C566A
 
-# black
-color0  = #1c2220
-color8  = #38433f
-
-# red
-color1  = #c23131
-color9  = #da8080
-
-# green
-color2  = #39be25
-color10 = #a2e598
-
-# yellow
-color3  = #ffa923
-color11 = #ffe7c2
-
-# blue
-color4  = #20b0e9
-color12 = #aae6fd
-
-# magenta
-color5  = #8d27d7
-color13 = #ddaeff
-
-# cyan
-color6  = #11c6ac
-color14 = #97e6db
-
-# white
-color7  = #687c75
-color15 = #b0a9aa
+color0  = #3B4252
+color1  = #BF616A
+color2  = #A3BE8C
+color3  = #EBCB8B
+color4  = #81A1C1
+color5  = #B48EAD
+color6  = #88C0D0
+color7  = #E5E9F0
+color8  = #4C566A
+color9  = #BF616A
+color10 = #A3BE8C
+color11 = #EBCB8B
+color12 = #81A1C1
+color13 = #B48EAD
+color14 = #8FBCBB
+color15 = #ECEFF4

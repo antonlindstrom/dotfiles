@@ -3,5 +3,5 @@
 if [ -z $1 ]; then
 	find ~/Documents
 else
-	xdg-open ~/Documents/$1
+	xdg-open $1 &
 fi

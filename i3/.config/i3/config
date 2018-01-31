@@ -20,7 +20,8 @@ font pango:Inconsolata 10
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
 
-client.focused #000000 #2b2b2b #fdf6e3 #000000
+client.focused #434C5E #3B4252 #D8DEE9 #434C5E
+client.urgent  #BF616A #BF616A #D8DEE9 #BF616A
 hide_edge_borders none
 
 # gaps set up
@@ -179,7 +180,7 @@ mode "music" {
 bindsym $mod+m mode "music"; exec "i3-nagbar -t warning -f Inconsolata -m 'Music (j) vol down, (k) vol up , (m) mute, (p) pause, (n) next, (b) back'"
 
 # Locker is i3lock.
-set $Locker i3lock -c ff0000 -f
+set $Locker i3lock -c BF616A -f
 
 # power management, requires polkit.
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
@@ -247,7 +248,7 @@ for_window [class="(?i)qutebrowser"] move window to workspace 2
 for_window [class="(?i)slack"] move window to workspace 3
 for_window [class="(?i)spotify"] move window to workspace 8
 
-exec --no-startup-id "xss-lock -- i3lock -c ff0000 -f -n &"
-exec --no-startup-id "xsetroot -solid '#333333'"
+exec --no-startup-id "xss-lock -- i3lock -c BF616A -f -n &"
+exec --no-startup-id "xsetroot -solid '#2E3440'"
 exec --no-startup-id "setxkbmap -option caps:escape se"
 exec --no-startup-id "conky -c ${HOME}/.config/conky/conky.conf"

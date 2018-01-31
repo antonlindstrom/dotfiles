@@ -142,7 +142,7 @@ separator_color = "#2E463E"
 startup_notification = true
 
 # dmenu path.
-dmenu = /usr/bin/dmenu -p dunst:
+dmenu = /usr/bin/rofi -dmenu
 
 # Browser for opening urls in context menu.
 browser = /usr/bin/xdg-open
