@@ -103,7 +103,7 @@ endtry
 
 " FZF
 try
-  nnoremap <c-p> :FZF<cr>
+  nnoremap <c-p> :FZF!<cr>
 catch
 endtry
 
@@ -175,6 +175,9 @@ try
   let g:calendar_google_calendar = 1
   let g:calendar_google_task = 1
   let g:calendar_first_day = "monday"
+  let g:calendar_date_endian = "big"
+  let g:calendar_week_number = 1
+  let g:calendar_view = "week"
 catch
 endtry
 
