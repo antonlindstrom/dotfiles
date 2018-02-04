@@ -41,6 +41,8 @@ Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' 
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'peterhoeg/vim-qml'
 Plug 'plan9-for-vimspace/acme-colors'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
 Plug 'rodjek/vim-puppet'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'sebdah/vim-delve'
@@ -112,6 +114,15 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
+" LSP
+if executable('clangd')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'clangd',
+        \ 'cmd': {server_info->['clangd']},
+        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+        \ })
+endif
+
 " Neomake
 try
   let g:neomake_error_sign   = {'text': '✖', 'texthl': 'NeomakeErrorSign'}
@@ -150,7 +161,13 @@ try
     \   '%W%f:%l::%tarning: %m'
     \ }
 
+  if !empty($NEOMAKE_PHPCS_STANDARD)
+    let g:neomake_php_phpcs_args_standard = $NEOMAKE_PHPCS_STANDARD
+  endif
+
   au FileType go autocmd BufWritePost * Neomake
+  au FileType php autocmd BufWritePost * Neomake
+  au FileType h,hpp,cpp autocmd BufWritePost * Neomake
 catch
 endtry
 
@@ -330,8 +347,13 @@ nnoremap  <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
 " i: Find files #including this file
 nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
 
-" gt: Find files that has this word.
-nnoremap  <leader>gt :Ack '<cword>'<CR>
+" LanguageServer
+au FileType c,cpp nnoremap <leader>gt :LspDefinition<CR>
+au FileType c,cpp nnoremap <leader>rn :LspRename<CR>
+
+" fa: Find files that has this word.
+nnoremap <leader>fa :Ack! '<cword>'<CR>
+" ä: Open Ack.
 nnoremap <leader>ö :Ack!<space>
 
 " br: Toogle delve breakpoint
