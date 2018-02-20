@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Weechat
+GenericName=IRC client
+NoDisplay=false
+Exec=termite --geometry=1440x900 --name weechat --class weechat -e "weechat"

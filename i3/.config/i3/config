@@ -130,6 +130,12 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
+# make the currently focused window a scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# show the first scratchpad window
+bindsym $mod+minus scratchpad show
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 
@@ -242,6 +248,7 @@ for_window [class="(?i)zenity"] floating enable
 for_window [class="(?i)xclock"] floating enable
 for_window [class="(?i)mutt"] floating enable
 for_window [class="(?i)kanban"] floating enable
+for_window [class="(?i)weechat"] floating enable
 
 # placement rules
 for_window [class="(?i)qutebrowser"] move window to workspace 2
@@ -251,4 +258,7 @@ for_window [class="(?i)spotify"] move window to workspace 8
 exec --no-startup-id "xss-lock -- i3lock -c BF616A -f -n &"
 exec --no-startup-id "xsetroot -solid '#2E3440'"
 exec --no-startup-id "setxkbmap -option caps:escape se"
-exec --no-startup-id "conky -c ${HOME}/.config/conky/conky.conf"
+exec --no-startup-id "conky -c ${HOME}/.config/conky/conky.conf &"
+
+# get i3 events and publish them with notifyd, make sure to kill it also.
+exec_always --no-startup-id "killall i3events; /usr/bin/i3events"

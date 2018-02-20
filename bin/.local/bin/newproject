@@ -38,7 +38,7 @@ if [ -d "${project_path}" ]; then
 fi
 
 # Create repository
-mkdir $project_path
+mkdir -p $project_path
 
 # Initialize git.
 git init $project_path > /dev/null

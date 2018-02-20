@@ -150,6 +150,8 @@ try
     \   '-D', 'gotype',
     \   '-E', 'errcheck',
     \   '-E', 'misspell',
+    \   '-E', 'staticcheck',
+    \   '-E', 'safesql',
     \   '-E', 'unused',
     \   '%:p:h',
     \ ],
@@ -348,7 +350,7 @@ nnoremap  <leader>ff :call CscopeFind('f', expand('<cword>'))<CR>
 nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
 
 " LanguageServer
-au FileType c,cpp nnoremap <leader>gt :LspDefinition<CR>
+au FileType c,cpp nnoremap <leader>gd :LspDefinition<CR>
 au FileType c,cpp nnoremap <leader>rn :LspRename<CR>
 
 " fa: Find files that has this word.
@@ -358,4 +360,5 @@ nnoremap <leader>ö :Ack!<space>
 
 " br: Toogle delve breakpoint
 au FileType go nnoremap <leader>br :DlvToggleBreakpoint<CR>
-au FileType go nnoremap <leader>å :GoCoverageToggle<CR>
+au FileType go nnoremap <leader>c :GoCoverageToggle<CR>
+au FileType go nnoremap <leader>t :GoTest<CR>
