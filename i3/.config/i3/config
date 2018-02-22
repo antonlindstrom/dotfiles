@@ -249,6 +249,7 @@ for_window [class="(?i)xclock"] floating enable
 for_window [class="(?i)mutt"] floating enable
 for_window [class="(?i)kanban"] floating enable
 for_window [class="(?i)weechat"] floating enable
+for_window [class="(?i)corebird"] floating enable
 
 # placement rules
 for_window [class="(?i)qutebrowser"] move window to workspace 2
