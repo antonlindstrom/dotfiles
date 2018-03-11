@@ -174,9 +174,9 @@ mode "music" {
 	bindsym j exec --no-startup-id pactl set-sink-volume 0 -5%
 	bindsym m exec --no-startup-id pactl set-sink-mute 0 toggle
 
-	bindsym p exec --no-startup-id "playerctl --player=spotify play-pause", mode "default"
-	bindsym n exec --no-startup-id "playerctl --player=spotify next", mode "default"
-	bindsym b exec --no-startup-id "playerctl --player=spotify previous", mode "default"
+	bindsym p exec --no-startup-id "playerctl --player=spotify play-pause"
+	bindsym n exec --no-startup-id "playerctl --player=spotify next"
+	bindsym b exec --no-startup-id "playerctl --player=spotify previous"
 
 	# back to normal: Enter or Escape
 	bindsym Return mode "default"; exec killall i3-nagbar
@@ -205,7 +205,7 @@ mode "$mode_system" {
 
 bindsym $mod+shift+e mode "$mode_system"; exec "i3-nagbar -f Inconsolata -m 'System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown'"
 
-set $mode_brightness Brightness (j) , (k) 
+set $mode_brightness Brightness (j) down, (k) up
 mode "$mode_brightness" {
 	bindsym j exec --no-startup-id brightnessctl set 15%-
 	bindsym k exec --no-startup-id brightnessctl set +15%
@@ -237,6 +237,23 @@ mode "$mode_printscr" {
 
 bindsym Shift+Print mode "$mode_printscr"; exec "i3-nagbar -f Inconsolata -t warning -m 'Print screen (p) screen, (s) selection, (w) window'"
 
+#  A bar, you mod4 for showing.
+bar {
+	status_command i3status -c $HOME/.config/i3/i3bar.conf
+	hidden_state hide
+	mode hide
+	position bottom
+
+	tray_padding 4
+
+	font pango:Inconsolata 10
+	separator_symbol "|"
+
+	colors {
+		background #2E3440
+	}
+}
+
 # floating rules
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
@@ -257,9 +274,9 @@ for_window [class="(?i)slack"] move window to workspace 3
 for_window [class="(?i)spotify"] move window to workspace 8
 
 exec --no-startup-id "xss-lock -- i3lock -c BF616A -f -n &"
-exec --no-startup-id "xsetroot -solid '#2E3440'"
+exec --no-startup-id "feh --bg-fill ${HOME}/.background/lamp-window.jpg "
 exec --no-startup-id "setxkbmap -option caps:escape se"
-exec --no-startup-id "conky -c ${HOME}/.config/conky/conky.conf &"
+# exec --no-startup-id "conky -c ${HOME}/.config/conky/conky.conf &"
 
 # get i3 events and publish them with notifyd, make sure to kill it also.
 exec_always --no-startup-id "killall i3events; /usr/bin/i3events"
