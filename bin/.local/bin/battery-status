@@ -5,7 +5,7 @@ shopt -s nullglob
 sum() { cat "$@" 2>/dev/null | awk '{ sum += $0 } END { print sum }'; }
 
 any_is_charging() {
-    cat /sys/class/power_supply/BAT1/status | grep -q Charging
+    cat /sys/class/power_supply/BAT*/status | grep -q Charging
 }
 
 check_battery() {
@@ -25,16 +25,16 @@ check_battery_icon() {
 }
 
 print_battery_percentage() {
-    full=$(sum /sys/class/power_supply/BAT1/{charge,energy}_full)
-    now=$(sum /sys/class/power_supply/BAT1/{charge,energy}_now)
+    full=$(sum /sys/class/power_supply/BAT*/{charge,energy}_full)
+    now=$(sum /sys/class/power_supply/BAT*/{charge,energy}_now)
     perc=$(( now * 100 / full ))
 
     echo "${perc}%"
 }
 
 print_battery_icon() {
-    full=$(sum /sys/class/power_supply/BAT1/{charge,energy}_full)
-    now=$(sum /sys/class/power_supply/BAT1/{charge,energy}_now)
+    full=$(sum /sys/class/power_supply/BAT*/{charge,energy}_full)
+    now=$(sum /sys/class/power_supply/BAT*/{charge,energy}_now)
     perc=$(( now * 100 / full ))
 
     if any_is_charging; then
