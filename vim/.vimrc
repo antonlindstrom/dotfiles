@@ -29,6 +29,7 @@ Plug 'honza/vim-snippets'
 Plug 'itchyny/calendar.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/goyo.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'keith/swift.vim'
 Plug 'kien/ctrlp.vim'
@@ -133,7 +134,7 @@ try
   " neomake configuration for C++
   let g:neomake_cpp_enable_markers=['clang', 'cpplint']
   let g:neomake_cpp_lint_maker = { }
-  let g:neomake_cpp_clang_args = ["-std=c++14", "-Wextra", "-Wall", "-fsanitize=undefined","-g"]
+  let g:neomake_cpp_clang_args = ["-std=c++14", "-Wextra", "-Wall", "-fsanitize=undefined", "-g"]
 
   " neomake configuration for Go.
   let g:neomake_go_enabled_makers = [ 'go', 'gometalinter', 'endsentence' ]
@@ -153,6 +154,8 @@ try
     \   '-E', 'staticcheck',
     \   '-E', 'safesql',
     \   '-E', 'unused',
+    \   '-E', 'unconvert',
+    \   '-E', 'interfacer',
     \   '%:p:h',
     \ ],
     \ 'append_file': 0,
@@ -167,6 +170,7 @@ try
     let g:neomake_php_phpcs_args_standard = $NEOMAKE_PHPCS_STANDARD
   endif
 
+  au FileType sh autocmd BufWritePost * Neomake
   au FileType go autocmd BufWritePost * Neomake
   au FileType php autocmd BufWritePost * Neomake
   au FileType h,hpp,cpp autocmd BufWritePost * Neomake
@@ -328,6 +332,9 @@ nmap <F6> :TagbarToggle<CR>
 
 " Remap ESC to jj
 inoremap jj <ESC>
+
+" Reload vimrc
+map <leader>vr :so $MYVIMRC<CR>
 
 " Twitter
 map <leader>tw :FriendsTwitter<CR>
