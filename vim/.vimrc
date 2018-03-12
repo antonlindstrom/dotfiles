@@ -86,7 +86,7 @@ try
   let g:ctrlp_match_window = 'bottom,order:ttb'
   let g:ctrlp_switch_buffer = 0
   let g:ctrlp_working_path_mode = 0
-  let g:ctrlp_custom_ignore = '\vbuild/|dist/|venv/|\.(o|swp|pyc|egg)$'
+  let g:ctrlp_custom_ignore = '\vbuild/|vendor/|dist/|venv/|\.(o|swp|pyc|egg)$'
   let g:ctrlp_map = '' " Use FZF
 catch
 endtry

@@ -166,7 +166,7 @@ mode "resize" {
 	bindsym Escape mode "default"; exec killall i3-nagbar
 }
 
-bindsym $mod+r mode "resize"; exec "i3-nagbar -t warning -f Inconsolata -m 'Mode: resize'"
+bindsym $mod+r mode "resize"
 
 # music control (volume, spotify etc).
 mode "music" {
@@ -203,7 +203,7 @@ mode "$mode_system" {
 	bindsym Escape mode "default"; exec killall i3-nagbar
 }
 
-bindsym $mod+shift+e mode "$mode_system"; exec "i3-nagbar -f Inconsolata -m 'System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown'"
+bindsym $mod+shift+e mode "$mode_system"
 
 set $mode_brightness Brightness (j) down, (k) up
 mode "$mode_brightness" {
@@ -215,7 +215,7 @@ mode "$mode_brightness" {
 	bindsym Escape mode "default"; exec killall i3-nagbar
 }
 
-bindsym $mod+F1 mode "$mode_brightness"; exec "i3-nagbar -m 'Brightness (j) down, (k) up '"
+bindsym $mod+F1 mode "$mode_brightness"
 
 # Rebind keyboard.
 bindsym Pause exec --no-startup-id setxkbmap -option caps:escape se && xset r rate 300 80 && notify-send -u normal \"setxkbmap se\" \"now set to se\"
@@ -235,13 +235,11 @@ mode "$mode_printscr" {
 	bindsym Escape mode "default"; exec killall i3-nagbar
 }
 
-bindsym Shift+Print mode "$mode_printscr"; exec "i3-nagbar -f Inconsolata -t warning -m 'Print screen (p) screen, (s) selection, (w) window'"
+bindsym Shift+Print mode "$mode_printscr"
 
 #  A bar, you mod4 for showing.
 bar {
 	status_command i3status -c $HOME/.config/i3/i3bar.conf
-	hidden_state hide
-	mode hide
 	position bottom
 
 	tray_padding 4
