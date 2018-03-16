@@ -160,12 +160,14 @@ bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%-
 bindsym XF86Display exec --no-startup-id mons -o # only primary
 
 # monitor modes
-set $mode_monitor Monitor modes (1) primary, (2) secondary, (3) mirror, (4) duplicate
+set $mode_monitor Monitor modes (1) primary, (2) secondary, (3) mirror, (4) duplicate, (w) reset wallpaper
 mode "$mode_monitor" {
 	bindsym 1 exec --no-startup-id mons -o
 	bindsym 2 exec --no-startup-id mons -s
 	bindsym 3 exec --no-startup-id mons -m
 	bindsym 4 exec --no-startup-id mons -d
+
+	bindsym w exec --no-startup-id betterlockscreen -w
 
 	# back to normal: Enter or Escape
 	bindsym Return mode "default"
@@ -219,7 +221,7 @@ mode "music" {
 bindsym $mod+m mode "music"; exec "i3-nagbar -t warning -f Inconsolata -m 'Music (j) vol down, (k) vol up , (m) mute, (i) mic toggle, (p) pause, (n) next, (b) back'"
 
 # Locker is i3lock.
-set $Locker i3lock -c BF616A -f
+set $Locker betterlockscreen --lock
 
 # power management, requires polkit.
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
@@ -301,10 +303,9 @@ for_window [class="(?i)qutebrowser"] move window to workspace 2
 for_window [class="(?i)slack"] move window to workspace 3
 for_window [class="(?i)spotify"] move window to workspace 8
 
-exec --no-startup-id "xss-lock -- i3lock -c BF616A -f -n &"
-exec --no-startup-id "feh --bg-fill ${HOME}/.background/lamp-window.jpg "
+exec --no-startup-id "xss-lock -- betterlockscreen --lock &"
+exec --no-startup-id "betterlockscreen -w"
 exec --no-startup-id "setxkbmap -option caps:escape se"
-# exec --no-startup-id "conky -c ${HOME}/.config/conky/conky.conf &"
 
 # get i3 events and publish them with notifyd, make sure to kill it also.
 exec_always --no-startup-id "killall i3events; /usr/bin/i3events"
