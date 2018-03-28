@@ -123,7 +123,7 @@ line_height = 3
 separator_height = 2
 
 # Padding between text and separator.
-padding = 6
+padding = 10
 
 # Horizontal padding.
 horizontal_padding = 10
@@ -134,7 +134,7 @@ horizontal_padding = 10
 #  * foreground: use the same color as the foreground;
 #  * frame: use the same color as the frame;
 #  * anything else will be interpreted as a X color.
-separator_color = "#2E463E"
+separator_color = "auto"
 
 # Print a notification on startup.
 # This is mainly for error detection, since dbus (re-)starts dunst
@@ -180,24 +180,21 @@ context = mod4+o
 [urgency_low]
 # IMPORTANT: colors have to be defined in quotation marks.
 # Otherwise the "#" and following would be interpreted as a comment.
-frame_color = "#CCCCCC"
-foreground = "#2b2b2b"
-background = "#F8F8F8"
-#background = "#2B313C"
+frame_color = "#4C566A"
+foreground = "#D8DEE9"
+background = "#4C566A"
 timeout = 8
 
 [urgency_normal]
-frame_color = "#CCCCCC"
-foreground = "#2B2B2B"
-background = "#FFFFFF"
-#background = "#2B313C"
+frame_color = "#4C566A"
+foreground = "#D8DEE9"
+background = "#4C566A"
 timeout = 10
 
 [urgency_critical]
-frame_color = "#000000"
-foreground = "#CCCCCC"
-background = "#B7472A"
-#background = "#2B313C"
+frame_color = "#D08770"
+foreground = "#EBCB8B"
+background = "#BF616A"
 timeout = 12
 
 
