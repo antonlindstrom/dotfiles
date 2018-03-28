@@ -279,7 +279,7 @@ bar {
 
 	tray_padding 4
 
-	font pango:Inconsolata 10
+	font pango:Inconsolata, FontAwesome 10
 	separator_symbol "|"
 
 	colors {
