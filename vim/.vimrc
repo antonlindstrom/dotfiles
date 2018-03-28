@@ -11,6 +11,7 @@ if !has('nvim')
 endif
 
 Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'aklt/plantuml-syntax'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'arcticicestudio/nord-vim'
@@ -42,10 +43,12 @@ Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' 
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'peterhoeg/vim-qml'
 Plug 'plan9-for-vimspace/acme-colors'
+Plug 'posva/vim-vue'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'rodjek/vim-puppet'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/vim-slumlord'
 Plug 'sebdah/vim-delve'
 Plug 'sickill/vim-monokai'
 Plug 'skreuzer/vim-prometheus'
@@ -365,7 +368,14 @@ nnoremap <leader>fa :Ack! '<cword>'<CR>
 " ä: Open Ack.
 nnoremap <leader>ö :Ack!<space>
 
+" buffers
+nnoremap <leader>gn :bn<CR>
+nnoremap <leader>gp :bp<CR>
+nnoremap <leader>gd :bd<CR>
+
 " br: Toogle delve breakpoint
-au FileType go nnoremap <leader>br :DlvToggleBreakpoint<CR>
 au FileType go nnoremap <leader>c :GoCoverageToggle<CR>
+au FileType go nnoremap <leader>br :GoDebugBreakpoint<CR>
+au FileType go nnoremap <leader>bn :GoDebugNext<CR>
+au FileType go nnoremap <leader>bc :GoDebugContinue<CR>
 au FileType go nnoremap <leader>t :GoTest<CR>
