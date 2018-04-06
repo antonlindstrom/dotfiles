@@ -1,0 +1,6 @@
+#!/bin/bash
+
+xset -display ":0" r rate 300 80
+betterlockscreen -w
+
+notify-send -u normal "autorandr" "postswitch executed"

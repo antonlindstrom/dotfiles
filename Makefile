@@ -1,14 +1,9 @@
-COMPLETION_DIR ?= "$(HOME)/.dotfiles-completions"
-
-GHQ_COMPLETION_URL = "https://raw.githubusercontent.com/tokubass/ghq-bash-completion/master/.ghq-completion.bash"
-HUB_COMPLETION_URL = "https://raw.githubusercontent.com/github/hub/master/etc/hub.bash_completion.sh"
-
 .DEFAULT_GOAL := help
 
 DESTDIR  ?= $$HOME
 PKGS ?= $(sort $(filter-out _resources/, $(dir $(wildcard */))))
 
-REAL_DIRS := $(addprefix $(DESTDIR)/, .mutt .offlineimap .xmonad .vim .config/termite .config/dunst .config/conky .config/qutebrowser .config/i3 .config/polybar .config/compton .local/bin .weechat)
+REAL_DIRS := $(addprefix $(DESTDIR)/, .mutt .offlineimap .xmonad .vim .config/termite .config/dunst .config/autorandr .config/conky .config/qutebrowser .config/i3 .config/polybar .config/compton .local/bin .weechat)
 
 $(REAL_DIRS):
 	@mkdir -p $@
