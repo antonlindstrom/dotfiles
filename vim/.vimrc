@@ -21,7 +21,7 @@ Plug 'cespare/vim-toml'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'elzr/vim-json'
 Plug 'ervandew/supertab'
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries', 'tag': '*' }
 Plug 'garbas/vim-snipmate'
 Plug 'gilgigilgil/anderson.vim'
 Plug 'hashivim/vim-packer'
