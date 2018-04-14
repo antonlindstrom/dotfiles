@@ -28,7 +28,9 @@ if [ $? == 0 ]; then
   fi
 else
   alias ls='ls --color=auto'
-  source /usr/share/git/completion/git-prompt.sh
+  if [ -f /usr/share/git/completion/git-prompt.sh ]; then
+    source /usr/share/git/completion/git-prompt.sh
+  fi
 fi
 
 # If not running interactively, don't do anything
