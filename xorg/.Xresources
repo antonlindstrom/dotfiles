@@ -48,6 +48,7 @@ XTerm.vt100.translations: #override \n\
 *.color14: nord7
 *.color15: nord6
 
+rofi.font: Inconsolata 10, FontAwesome 10
 rofi.terminal: termite
 rofi.color-enabled: true
 rofi.color-window: nord4, nord5, nord0
