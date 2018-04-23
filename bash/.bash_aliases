@@ -8,3 +8,4 @@ alias psqlc='docker run -it --rm postgres psql'
 alias azure="docker run -v ${HOME}/.ssh:/root/.ssh -v ${HOME}/.azure:/root/.azure -it --rm microsoft/azure-cli azure"
 alias az="docker run -v ${HOME}/.ssh:/root/.ssh -v ${HOME}/.azure:/root/.azure -v ${HOME}/.kube:/root/.kube -it --rm antonlindstrom/azure-cli"
 alias gofindme="ngp -t go -I vendor"
+alias e="$EDITOR -p"

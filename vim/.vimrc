@@ -4,12 +4,6 @@
 
 call plug#begin('~/.vim/plugged')
 
-" Vim only plugins
-if !has('nvim')
-    Plug 'Shougo/vimproc.vim', {'do' : 'make'}  " Needed to make sebdah/vim-delve work on Vim
-    Plug 'Shougo/vimshell.vim'                  " Needed to make sebdah/vim-delve work on Vim
-endif
-
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'aklt/plantuml-syntax'
 Plug 'AndrewRadev/splitjoin.vim'
@@ -42,14 +36,12 @@ Plug 'neomake/neomake'
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'peterhoeg/vim-qml'
-Plug 'plan9-for-vimspace/acme-colors'
 Plug 'posva/vim-vue'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'rodjek/vim-puppet'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/vim-slumlord'
-Plug 'sebdah/vim-delve'
 Plug 'sickill/vim-monokai'
 Plug 'skreuzer/vim-prometheus'
 Plug 'tclh123/vim-thrift'
@@ -67,11 +59,23 @@ Plug 'wimstefan/Lightning'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 
+if has('nvim')
+	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+	Plug 'zchee/deoplete-go', { 'do': 'make'}
+endif
+
 call plug#end()
 
 "
 " " Plugin settings
 "
+
+" Use deoplete.
+try
+  let g:deoplete#enable_at_startup = 1
+catch
+  echo "Failed to enable deoplete."
+endtry
 
 " Easy align interactive
 vnoremap <silent> <Enter> :EasyAlign<cr>
