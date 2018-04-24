@@ -3,7 +3,7 @@ export PATH=$PATH:/sbin:/usr/sbin
 export PATH=/usr/src/go/bin:$PATH:$GOPATH/bin:$HOME/.local/bin
 
 # Set FZF command to ag.
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore vendor/ -g ""'
 
 # Set aliases in separate file
 [[ -f ~/.bash_aliases ]] && . ~/.bash_aliases

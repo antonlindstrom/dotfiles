@@ -62,6 +62,7 @@ Plug 'xolox/vim-session'
 if has('nvim')
 	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 	Plug 'zchee/deoplete-go', { 'do': 'make'}
+	Plug 'zchee/deoplete-clang'
 endif
 
 call plug#end()
@@ -73,6 +74,7 @@ call plug#end()
 " Use deoplete.
 try
   let g:deoplete#enable_at_startup = 1
+  set completeopt=menu
 catch
   echo "Failed to enable deoplete."
 endtry
@@ -376,6 +378,9 @@ nnoremap <leader>ö :Ack!<space>
 nnoremap <leader>gn :bn<CR>
 nnoremap <leader>gp :bp<CR>
 nnoremap <leader>gd :bd<CR>
+
+" ,d -> git diff
+nnoremap <leader>d :Gdiff<CR>
 
 " br: Toogle delve breakpoint
 au FileType go nnoremap <leader>c :GoCoverageToggle<CR>
