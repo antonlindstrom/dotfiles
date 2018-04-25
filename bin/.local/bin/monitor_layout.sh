@@ -44,6 +44,19 @@ do
 done
 
 ##
+# Rotate
+##
+current_monitor=$(xrandr | grep primary | awk '{ print $1 }')
+TILES[$index]="Normal rotation (${current_monitor})"
+COMMANDS[$index]="xrandr --output ${current_monitor} --rotate normal"
+index+=1
+
+current_monitor=$(xrandr | grep primary | awk '{ print $1 }')
+TILES[$index]="Rotate left (${current_monitor})"
+COMMANDS[$index]="xrandr --output ${current_monitor} --rotate left"
+index+=1
+
+##
 # Pair programming mode
 ##
 if [[ ${NUM_MONITORS} = 3 ]]
@@ -96,7 +109,7 @@ function gen_entries()
 {
     for a in $(seq 0 $(( ${#TILES[@]} -1 )))
     do
-        echo $a ${TILES[a]}
+        echo $a "Monitor: ${TILES[a]}"
     done
 }
 
