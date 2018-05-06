@@ -238,10 +238,14 @@ mode "$mode_system" {
 
 bindsym $mod+shift+e mode "$mode_system"
 
-set $mode_brightness Brightness (j) down, (k) up
+set $mode_brightness Brightness (j) down, (k) up, (n) HDMI-2 night mode, (d) HDMI-2 dimmed, (b) HDMI-2 bright
 mode "$mode_brightness" {
 	bindsym j exec --no-startup-id brightnessctl set 10%-
 	bindsym k exec --no-startup-id brightnessctl set +10%
+
+	bindsym n exec --no-startup-id xrandr --output HDMI-2 --brightness 0.4
+	bindsym d exec --no-startup-id xrandr --output HDMI-2 --brightness 0.7
+	bindsym b exec --no-startup-id xrandr --output HDMI-2 --brightness 1.0
 
 	# back to normal: Enter or Escape
 	bindsym Return mode "default"
