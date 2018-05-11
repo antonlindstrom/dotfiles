@@ -1,0 +1,14 @@
+[Unit]
+Description=caffeine
+IgnoreOnIsolate=true
+
+[Service]
+ExecStart=/usr/bin/caffeine
+Restart=on-failure
+CPUShares=32
+MemoryMax=32M
+CPUAccounting=true
+CPUQuota=20%
+
+[Install]
+WantedBy=default.target
