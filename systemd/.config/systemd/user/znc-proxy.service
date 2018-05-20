@@ -1,0 +1,14 @@
+[Unit]
+Description=Proxy for k8s ZNC bouncer
+IgnoreOnIsolate=true
+
+[Service]
+ExecStart=/usr/bin/kubectl port-forward deployment/aml-bouncer-znc 6697:6697
+Restart=on-failure
+CPUShares=32
+MemoryMax=32M
+CPUAccounting=true
+CPUQuota=20%
+
+[Install]
+WantedBy=default.target
