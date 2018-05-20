@@ -4,6 +4,7 @@
 
 import pyinotify
 import gi
+import glob
 
 gi.require_version('Notify', '0.7')
 
@@ -13,7 +14,7 @@ from mailbox import MaildirMessage
 from email.header import decode_header
 
 maildir_folder = expanduser(r"~/.mail/")
-new_mail_folder = maildir_folder+"antonlindstrom.com/INBOX/new"
+new_mail_folders = glob.glob(maildir_folder+"*/INBOX/new")
 notification_timeout = 12000
 
 Notify.init(r'email_notifier.py')
@@ -34,9 +35,21 @@ def newfile(event):
     fd = open(event.pathname, 'r')
     mail = MaildirMessage(message=fd)
     subject_header = dec_header(mail['Subject'])
-    from_header = dec_header(mail['From'])
+    from_header = dec_header(mail['From']).replace("<", "&lt;").replace(">", "&gt;")
+    to_header = dec_header(mail['To'])
+
+    message = "%s\n<i>%s</i>" % (from_header, subject_header)
+
     print("event: new message from '%s', sending notification" % from_header)
-    n = Notify.Notification.new("New mail: " + from_header, subject_header, "mail-unread-new")
+
+    subject = to_header
+    if to_header == "":
+        subject = dec_header(mail['Delivered-To'])
+
+    subject = subject.replace("<", "").replace(">", "")
+
+    n = Notify.Notification.new(subject, message, "mail-unread-new")
+
     fd.close()
     n.set_timeout(notification_timeout)
     n.show()
@@ -44,6 +57,8 @@ def newfile(event):
 wm = pyinotify.WatchManager()
 notifier = pyinotify.Notifier(wm, newfile)
 
-wm.add_watch(new_mail_folder, pyinotify.IN_CREATE | pyinotify.IN_MOVED_TO)
+for new_mail_folder in new_mail_folders:
+    print("adding watch on %s" % new_mail_folder)
+    wm.add_watch(new_mail_folder, pyinotify.IN_CREATE | pyinotify.IN_MOVED_TO)
 
 notifier.loop()
