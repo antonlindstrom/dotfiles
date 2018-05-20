@@ -1,6 +1,6 @@
 [general]
 ui = ttyui
-accounts = AntonLindstrom
+accounts = AntonLindstrom, outlook
 fsync = False
 
 [mbnames]
@@ -13,22 +13,20 @@ footer = "\n"
 
 #maxsyncaccounts = 2
 
+#
+## antonlindstrom.com account
+#
+
 [Account AntonLindstrom]
 localrepository = AntonLindstrom-Local
 remoterepository = AntonLindstrom-Remote
-
 quick = 10
 maxage = 120
 
 [Repository AntonLindstrom-Local]
 type = Maildir
 localfolders = ~/.mail/antonlindstrom.com
-nametrans = lambda folder: {'drafts':  '[Gmail]/Drafts',
-                            'sent':    '[Gmail]/Sent Mail',
-                            'flagged': '[Gmail]/Starred',
-                            'trash':   '[Gmail]/Trash',
-                            'archive': '[Gmail]/All Mail',
-                            }.get(folder, folder)
+nametrans = lambda folder: {'drafts':  '[Gmail]/Drafts', 'sent': '[Gmail]/Sent Mail', 'flagged': '[Gmail]/Starred', 'trash': '[Gmail]/Trash', 'archive': '[Gmail]/All Mail'}.get(folder, folder)
 
 [Repository AntonLindstrom-Remote]
 maxconnections = 2
@@ -40,15 +38,64 @@ realdelete = no
 maxage = 120
 keepalive = 60
 holdconnectionopen = yes
-nametrans = lambda folder: {'[Gmail]/Drafts':    'drafts',
-                            '[Gmail]/Sent Mail': 'sent',
-                            '[Gmail]/Starred':   'flagged',
-                            '[Gmail]/Trash':     'trash',
-                            }.get(folder, folder)
+nametrans = lambda folder: {'[Gmail]/Drafts': 'drafts', '[Gmail]/Sent Mail': 'sent', '[Gmail]/Starred': 'flagged', '[Gmail]/Trash': 'trash'}.get(folder, folder)
+folderfilter = lambda folder: folder in ['INBOX', '[Gmail]/Drafts', '[Gmail]/Sent Mail', '[Gmail]/Starred', '[Gmail]/Trash', ]
 
-folderfilter = lambda folder: folder in ['INBOX',
-                                         '[Gmail]/Drafts',
-                                         '[Gmail]/Sent Mail',
-                                         '[Gmail]/Starred',
-                                         '[Gmail]/Trash',
-                                        ]
+
+#
+## Outlook account
+#
+
+[Account outlook]
+localrepository = outlook-Local
+remoterepository = outlook-Remote
+quick = 10
+maxage = 120
+
+[Repository outlook-Local]
+type = Maildir
+localfolders = ~/.mail/lindstrom.anton@outlook.com
+nametrans = lambda folder: {'INBOX':  'Inbox'}.get(folder, folder)
+
+[Repository outlook-Remote]
+maxconnections = 2
+type = IMAP
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+auth_mechanisms = PLAIN
+remotehost = outlook.office365.com
+remoteuser = lindstrom.anton@outlook.com
+remotepassfile = ~/.offlineimap/lindstrom.anton@outlook.com
+realdelete = no
+maxage = 120
+keepalive = 60
+holdconnectionopen = yes
+nametrans = lambda folder: {'Inbox':  'INBOX'}.get(folder, folder)
+folderfilter = lambda folder: folder in [ 'Sent', 'Inbox', 'Archive' ]
+
+#
+## work account
+#
+
+[Account work]
+localrepository = work-Local
+remoterepository = work-Remote
+quick = 10
+maxage = 120
+
+[Repository work-Local]
+type = Maildir
+localfolders = ~/.mail/anton.lindstrom@smspark.se
+nametrans = lambda folder: {'drafts':  '[Gmail]/Drafts', 'sent': '[Gmail]/Sent Mail', 'flagged': '[Gmail]/Starred', 'trash': '[Gmail]/Trash', 'archive': '[Gmail]/All Mail'}.get(folder, folder)
+
+[Repository work-Remote]
+maxconnections = 2
+type = Gmail
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+remoteuser = lindstrom.anton@smspark.se
+remotepassfile = ~/.offlineimap/lindstrom.anton@smspark.se
+realdelete = no
+maxage = 120
+keepalive = 60
+holdconnectionopen = yes
+nametrans = lambda folder: {'[Gmail]/Drafts': 'drafts', '[Gmail]/Sent Mail': 'sent', '[Gmail]/Starred': 'flagged', '[Gmail]/Trash': 'trash'}.get(folder, folder)
+folderfilter = lambda folder: folder in ['INBOX', '[Gmail]/Drafts', '[Gmail]/Sent Mail', '[Gmail]/Starred', '[Gmail]/Trash', ]
