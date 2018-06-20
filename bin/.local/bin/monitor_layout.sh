@@ -46,12 +46,12 @@ done
 ##
 # Rotate
 ##
-current_monitor=$(xrandr | grep primary | awk '{ print $1 }')
+current_monitor=$(xrandr --listactivemonitors | grep "^ 0:" | awk '{ print $4 }')
 TILES[$index]="Normal rotation (${current_monitor})"
 COMMANDS[$index]="xrandr --output ${current_monitor} --rotate normal"
 index+=1
 
-current_monitor=$(xrandr | grep primary | awk '{ print $1 }')
+current_monitor=$(xrandr --listactivemonitors | grep "^ 0:" | awk '{ print $4 }')
 TILES[$index]="Rotate left (${current_monitor})"
 COMMANDS[$index]="xrandr --output ${current_monitor} --rotate left"
 index+=1
