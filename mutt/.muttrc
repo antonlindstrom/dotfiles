@@ -79,6 +79,9 @@ hdr_order subject: from: date: to:
 # View HTML automatically
 auto_view text/html
 
+# Set enter to view with mailcap.
+bind attach <return>    view-mailcap
+
 # Display download progress every 5K
 set net_inc=5
 
@@ -139,7 +142,7 @@ set reverse_alias = yes
 source $alias_file
 
 # Set preference of text/plain
-alternative_order text/html text/plain text/enriched
+alternative_order text/plain text/enriched text/html
 
 # Solarized theme
 # source $HOME/.mutt/mutt-colors-solarized-dark-256.muttrc
