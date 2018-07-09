@@ -74,7 +74,7 @@ macro index,pager U  <set-flag>N  "Mark as new"
 ignore *
 unignore from: subject: to: date:
 unhdr_order *                           # some distros order things by default
-hdr_order subject: from: date: to:
+hdr_order to: from: date: subject:
 
 # View HTML automatically
 auto_view text/html
@@ -85,27 +85,25 @@ bind attach <return>    view-mailcap
 # Display download progress every 5K
 set net_inc=5
 
-set pager_index_lines = 15
+set pager_index_lines = 20
 set pager_stop
 set markers=no
 set mark_old=no
-# Last, but not least, get mutt to display its version on startup.
+
 # Sorting
 set sort = 'threads'
 set sort_aux = last-date-received
 
-set date_format = "%m/%d %H:%M"
-set index_format = "[%Z]  %D  %-20.20F  %s"
+set date_format = "%b %d"
+set index_format = "[%Z]  %D %-20.20F  %s"
 
 set status_chars  = " *%A"
 set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?o? (%o old)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
 
 # Sidebar Patch --------------------------------------
-#set sidebar_delim   = '  │'
-# set sidebar_visible = no
-set sidebar_width   = 35
-# set sidebar_shortpath=yes
-# set sidebar_newmail_only=yes # Requires sidebar-new-only patch
+set sidebar_visible = no
+set sidebar_width   = 35 # set sidebar_shortpath=yes
+# set sidebar_newmail_only = yes # Requires sidebar-new-only patch
 # color sidebar_new color221 color233
 #
 # b toggles sidebar visibility
@@ -149,4 +147,16 @@ alternative_order text/plain text/enriched text/html
 # source $HOME/.mutt/mutt-colors-solarized-dark-16.muttrc
 source ~/.mutt/mutt-patch-highlighting.muttrc
 
+color status        blue            black
+color indicator     brightcyan      black
+
+color index         yellow          default         "~N"                        # new messages
+color index         default         red             "~D"                        # deleted messages
+color index         red             default         "~F"                        # flagged messages
+
+color hdrdefault    green           default
+color header        brightgreen     default         "^(From)"
+color header        blue            default         "^(Subject)"
+
+# Last, but not least, get mutt to display its version on startup.
 push <show-version>
