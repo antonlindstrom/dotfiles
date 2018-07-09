@@ -379,6 +379,14 @@ nnoremap <leader>gn :bn<CR>
 nnoremap <leader>gp :bp<CR>
 nnoremap <leader>gd :bd<CR>
 
+" left/right to step through buffers
+nmap <left> :bp<cr>
+nmap <right> :bn<cr>
+
+" down/up to step through quickfix list
+nmap <down> :cn<cr>zz
+nmap <up> :cp<cr>zz
+
 " ,d -> git diff
 nnoremap <leader>d :Gdiff<CR>
 
