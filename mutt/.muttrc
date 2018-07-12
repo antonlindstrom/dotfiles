@@ -158,5 +158,11 @@ color hdrdefault    green           default
 color header        brightgreen     default         "^(From)"
 color header        blue            default         "^(Subject)"
 
+color quoted        blue            default
+color quoted1       cyan            default
+color quoted2       yellow          default
+color quoted3       red             default
+color quoted4       brightred       default
+
 # Last, but not least, get mutt to display its version on startup.
 push <show-version>
