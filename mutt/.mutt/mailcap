@@ -1,7 +1,7 @@
 text/html;                      mv %s %s.html && qutebrowser %s.html >/dev/null 2>/dev/null; test=test -n "$DISPLAY"; needsterminal;
 text/html;                      links -dump %s; nametemplate=%s.html; copiousoutput
 
-application/pdf;                zathura '%s' &; test=test -n "$DISPLAY"; needsterminal;
+application/pdf;                mv '%s' '%s.1' && zathura --fork '%s.1'; test=test -n "$DISPLAY"; needsterminal; description=PDF Document;
 application/pdf;                pdftotext -q -layout %s -; nametemplate=%s.pdf; copiousoutput
 
 application/msword;             word2text %s; copiousoutput
