@@ -3,7 +3,7 @@
 DESTDIR  ?= $$HOME
 PKGS ?= $(sort $(filter-out _resources/, $(dir $(wildcard */))))
 
-REAL_DIRS := $(addprefix $(DESTDIR)/, .mutt .offlineimap .xmonad .vim .config/termite .config/dunst .config/autorandr .config/conky .config/qutebrowser .config/i3 .config/polybar .config/compton .local/bin .weechat)
+REAL_DIRS := $(addprefix $(DESTDIR)/, .i3 .mutt .offlineimap .xmonad .vim .config/termite .config/dunst .config/autorandr .config/conky .config/qutebrowser .config/i3 .config/polybar .config/compton .local/bin .weechat)
 
 $(REAL_DIRS):
 	@mkdir -p $@
