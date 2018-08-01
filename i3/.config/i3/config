@@ -202,10 +202,10 @@ bindsym $mod+r mode "resize"
 # music control (volume, spotify etc).
 set $mode_music Music (j) vol down, (k) vol up , (m) mute, (i) mic toggle, (p) pause, (n) next track, (b) previous track
 mode "$mode_music" {
-	bindsym k exec --no-startup-id "pactl set-sink-volume 0 +5%; pactl set-sink-volume 1 +5%"
-	bindsym j exec --no-startup-id "pactl set-sink-volume 0 -5%; pactl set-sink-volume 1 -5%"
-	bindsym m exec --no-startup-id "pactl set-sink-mute 0 toggle; pactl set-sink-mute 1 toggle"
-	bindsym i exec --no-startup-id "pactl set-source-mute 0 toggle; pactl set-source-mute 1 toggle"
+	bindsym k exec --no-startup-id "volume up"
+	bindsym j exec --no-startup-id "volume down"
+	bindsym m exec --no-startup-id "volume mute"
+	bindsym i exec --no-startup-id "volume mute-microphone"
 
 	bindsym p exec --no-startup-id "playerctl --player=spotify play-pause"
 	bindsym n exec --no-startup-id "playerctl --player=spotify next"

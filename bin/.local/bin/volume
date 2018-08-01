@@ -1,0 +1,87 @@
+#!/bin/bash
+
+set -eou pipefail
+
+# List sinks (outputs).
+function list_sink_ids() {
+	sinks=$(pactl list short sinks | awk '{ print $1 }' )
+}
+
+# List sources (inputs).
+function list_source_ids() {
+	sources=$(pactl list short sources | awk '{ print $1 }' )
+}
+
+# Toggle output for speakers.
+function toggle_mute() {
+	list_sink_ids
+	for sink in $sinks
+	do
+ 		pactl set-sink-mute "${sink}" toggle
+	done
+}
+
+# Toggle microphones.
+function toggle_mute_microphone() {
+	list_source_ids
+	for source in $sources
+	do
+ 		pactl set-source-mute "${source}" toggle
+	done
+}
+
+# Turn the volume up!
+function up() {
+	list_sink_ids
+	for sink in $sinks
+	do
+ 		pactl set-sink-volume "${sink}" +5%
+	done
+}
+
+# Turn the volume down.
+function down() {
+	list_sink_ids
+	for sink in $sinks
+	do
+ 		pactl set-sink-volume "${sink}" -5%
+	done
+}
+
+# Help, outputs help.
+function help() {
+	echo "volume version 0.1"
+	echo
+	echo "usage:"
+	echo "  up                turn the volume up"
+	echo "  down              turn the volume down"
+	echo "  mute              toggle output"
+	echo "  mute-microphone   toggle input"
+	echo
+}
+
+#
+# main
+#
+# Parse parameters and offload to functions.
+function main() {
+	case "$1" in
+		"up")
+			up
+			;;
+		"down")
+			down
+			;;
+		"mute")
+			toggle_mute
+			;;
+		"toggle_mute_microphone")
+			toggle_mute_microphone
+			;;
+		*)
+			help
+			;;
+	esac
+}
+
+main "$1"
