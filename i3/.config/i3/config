@@ -9,7 +9,7 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod1
+set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -43,8 +43,6 @@ bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
 bindsym $mod+o exec "rofi -combi-modi 'window#drun#display:~/.local/bin/monitor_layout.sh' -show combi -modi combi"
 bindsym $mod+p exec "passdmenu -x c"
-
-bindsym $mod+shift+w exec "~/.local/bin/netmenu"
 
 # move to urgent window
 bindsym $mod+u [urgent=latest] focus
@@ -274,8 +272,7 @@ bindsym Pause exec --no-startup-id setxkbmap -option caps:escape se && xset r ra
 # Locking
 bindsym $mod+Escape exec $Locker
 
-
-#  A bar, you mod4 for showing.
+#  A bar.
 bar {
 	status_command i3status -c $HOME/.config/i3/i3bar.conf
 	position bottom
