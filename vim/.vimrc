@@ -143,7 +143,7 @@ try
   " neomake configuration for C++
   let g:neomake_cpp_enable_markers=['clang', 'cpplint']
   let g:neomake_cpp_lint_maker = { }
-  let g:neomake_cpp_clang_args = ["-std=c++14", "-Wextra", "-Wall", "-fsanitize=undefined", "-g"]
+  let g:neomake_cpp_clang_args = ["-std=c++14", "-Wextra", "-Wall", "-fsanitize=undefined", "-g", "-I", "."]
 
   " neomake configuration for Go.
   let g:neomake_go_enabled_makers = [ 'go', 'gometalinter', 'endsentence' ]
