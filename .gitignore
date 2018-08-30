@@ -1,4 +1,5 @@
 tmux/.tmux/resurrect
+tmux/.tmux/plugins
 vim/.vim/plugged
 vim/.vim/tmp
 weechat/.weechat/*
@@ -6,3 +7,5 @@ weechat/.weechat/*
 !weechat/.weechat/irc.conf
 !weechat/.weechat/plugins.conf
 !weechat/.weechat/weechat.conf
+vim/.vim/autoload/*
+!vim/.vim/autoload/plug.vim
