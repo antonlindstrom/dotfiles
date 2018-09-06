@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -euo pipefail
+
+if !  playerctl status > /dev/null 2>&1; then
+	echo "no status for player"
+	exit 0
+fi
+
+echo "$(playerctl status) $(playerctl metadata xesam:artist) - $(playerctl metadata xesam:title)"
