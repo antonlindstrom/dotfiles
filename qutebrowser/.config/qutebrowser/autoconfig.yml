@@ -7,6 +7,7 @@ settings:
     global:
       normal:
         ',p': spawn mpv {url}
+        ;f: hint all tab-bg
         v: hint links spawn mpv {hint-url}
         zl: spawn --userscript ~/.config/qutebrowser/qute-pass
         zpl: spawn --userscript ~/.config/qutebrowser/qute-pass --password-only
@@ -16,4 +17,4 @@ settings:
   content.autoplay:
     global: false
   new_instance_open_target:
-    global: tab-bg
+    global: tab
