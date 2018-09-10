@@ -2,6 +2,13 @@ export GOPATH=~/code
 export PATH=$PATH:/sbin:/usr/sbin
 export PATH=/usr/src/go/bin:$PATH:$GOPATH/bin:$HOME/.local/bin
 
+# History hacks.
+export HISTSIZE=100000
+export HISTFILESIZE=100000
+export HISTCONTROL=ignoredups:erasedups
+shopt -s histappend
+shopt -s histverify
+
 # Set FZF command to ag.
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore vendor/ -g ""'
 
