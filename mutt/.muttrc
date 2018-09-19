@@ -7,7 +7,7 @@ set sendmail = "/usr/bin/msmtp -a default"
 set sendmail_wait = 0
 
 # Alternative emails
-alternates (anton@(alley.se|antonlindstrom.com)|me@antonlindstrom.com)
+alternates (anton@(alley.se|antonlindstrom.com|lindstrom.sh|codezoic.com)|me@antonlindstrom.com|lindstrom.anton@outlook.com)
 set reverse_name
 
 set envelope_from = yes
@@ -58,7 +58,8 @@ macro index o "<shell-escape>offlineimap -qf INBOX<enter>" "run offlineimap to s
 macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
 macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
 
-macro index,pager gi <change-folder>=antonlindstrom.com/INBOX<enter>     "Go to inbox"
+macro index,pager gi <change-folder>=anton@lindstrom.sh/INBOX<enter>     "Go to inbox"
+macro index,pager gw <change-folder>=antonlindstrom.com/INBOX<enter>     "Go to inbox"
 macro index,pager gl <change-folder>=local<enter>     "Go to local inbox"
 
 macro index,pager I  <set-flag>O  "Mark as read"
