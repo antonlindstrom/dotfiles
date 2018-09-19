@@ -33,7 +33,6 @@ Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
 Plug 'mileszs/ack.vim'
 Plug 'neomake/neomake'
-Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'peterhoeg/vim-qml'
 Plug 'posva/vim-vue'
@@ -73,7 +72,7 @@ call plug#end()
 
 " Use deoplete.
 try
-  let g:deoplete#enable_at_startup = 1
+  let g:deoplete#enable_at_startup = 0
   set completeopt=menu
 catch
   echo "Failed to enable deoplete."
@@ -382,6 +381,8 @@ nnoremap <leader>gd :bd<CR>
 " left/right to step through buffers
 nmap <left> :bp<cr>
 nmap <right> :bn<cr>
+
+nmap <leader>b :Buffers<cr>
 
 " down/up to step through quickfix list
 nmap <down> :cn<cr>zz
