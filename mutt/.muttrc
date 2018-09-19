@@ -85,7 +85,7 @@ bind attach <return>    view-mailcap
 # Display download progress every 5K
 set net_inc=5
 
-set pager_index_lines = 20
+set pager_index_lines = 1
 set pager_stop
 set markers=no
 set mark_old=no

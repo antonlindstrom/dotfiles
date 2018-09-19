@@ -9,6 +9,9 @@ export HISTCONTROL=ignoredups:erasedups
 shopt -s histappend
 shopt -s histverify
 
+# Disable the freeze command (ctrl+s).
+stty -ixon
+
 # Set FZF command to ag.
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore vendor/ -g ""'
 
