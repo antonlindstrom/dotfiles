@@ -8,7 +8,7 @@ settings:
       normal:
         ',p': spawn mpv {url}
         ;f: hint all tab-bg
-        sp: open -t https://getpocket.com/edit?url={url}
+        sp: open -rb https://getpocket.com/edit?url={url}
         v: hint links spawn mpv {hint-url}
         zl: spawn --userscript ~/.config/qutebrowser/qute-pass
         zpl: spawn --userscript ~/.config/qutebrowser/qute-pass --password-only
