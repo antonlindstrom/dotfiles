@@ -1,10 +1,6 @@
 set folder      = ~/.mail
-set from        = anton@alley.se
 set realname    = "Anton Lindstrom"
 set signature   = ~/.mutt/signature
-
-set sendmail = "/usr/bin/msmtp -a default"
-set sendmail_wait = 0
 
 # Alternative emails
 alternates (anton@(alley.se|antonlindstrom.com|lindstrom.sh|codezoic.com)|me@antonlindstrom.com|lindstrom.anton@outlook.com)
@@ -20,9 +16,6 @@ set header_cache = ~/.cache/mutt
 # Can be the same folder as header_cache.
 # This will cost important disk usage according to your e-mail amount.
 set message_cachedir = "~/.mutt/cache/bodies"
-
-# Specify where to save and/or look for postponed messages.
-#set postponed = +[Gmail]/Drafts
 
 # Beeping will enable urgency hints.
 set beep_new
@@ -58,18 +51,9 @@ macro index o "<shell-escape>offlineimap -qf INBOX<enter>" "run offlineimap to s
 macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
 macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
 
-macro index,pager gi <change-folder>=anton@lindstrom.sh/INBOX<enter>     "Go to inbox"
-macro index,pager gw <change-folder>=antonlindstrom.com/INBOX<enter>     "Go to inbox"
-macro index,pager gl <change-folder>=local<enter>     "Go to local inbox"
-
 macro index,pager I  <set-flag>O  "Mark as read"
 macro index,pager U  <set-flag>N  "Mark as new"
 #macro index,pager U  <clear-flag>O  "Mark as unread"
-
-# Sidebar Navigation ---------------------------------
-#bind index,pager <down>   sidebar-next
-#bind index,pager <up>     sidebar-prev
-#bind index,pager <right>  sidebar-open
 
 # Filter out some headers
 ignore *
@@ -86,7 +70,6 @@ bind attach <return>    view-mailcap
 # Display download progress every 5K
 set net_inc=5
 
-set pager_index_lines = 1
 set pager_stop
 set markers=no
 set mark_old=no
@@ -102,14 +85,14 @@ set status_chars  = " *%A"
 set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?o? (%o old)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
 
 # Sidebar Patch --------------------------------------
-set sidebar_visible = no
-set sidebar_width   = 35 # set sidebar_shortpath=yes
-# set sidebar_newmail_only = yes # Requires sidebar-new-only patch
+set sidebar_visible    = no
+set sidebar_width      = 50
+set sidebar_short_path = no
 # color sidebar_new color221 color233
+
 #
 # b toggles sidebar visibility
-macro index B '<enter-command>toggle sidebar_visible<enter>'
-macro pager B '<enter-command>toggle sidebar_visible<enter>'
+bind index,pager B sidebar-toggle-visible
 
 # ctrl-n, ctrl-p to select next, prev folder
 # # ctrl-o to open selected folder
@@ -118,18 +101,16 @@ bind index,pager \CN sidebar-next
 bind index,pager \CO sidebar-open
 
 # Default inbox.
-set spoolfile = "+antonlindstrom.com/INBOX"
+set spoolfile = "+anton@lindstrom.sh/INBOX"
 
-mailboxes +antonlindstrom.com/INBOX \
-          +antonlindstrom.com/flagged \
-          +antonlindstrom.com/sent \
-          +antonlindstrom.com/drafts \
-          +antonlindstrom.com/archive
+source ~/.mutt/accounts/anton@lindstrom.sh
 
-# Other special folders.
-set mbox      = "+antonlindstrom.com/archive"
-set postponed = "+antonlindstrom.com/drafts"
-set record    = "+antonlindstrom.com/sent"
+folder-hook anton@lindstrom.sh/*           source ~/.mutt/accounts/anton@lindstrom.sh
+folder-hook lindstrom.anton@outlook.com/*  source ~/.mutt/accounts/lindstrom.anton@outlook.com
+folder-hook antonlindstrom.com/*           source ~/.mutt/accounts/antonlindstrom.com
+
+# Get mailboxes
+source ~/.mutt/mailboxes
 
 # Mailcap path
 set mailcap_path  = ~/.mutt/mailcap

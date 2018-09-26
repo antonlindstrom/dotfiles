@@ -1,6 +1,6 @@
 [general]
 ui = ttyui
-accounts = outlook, private
+accounts = lindstrom.anton@outlook.com, anton@lindstrom.sh
 fsync = False
 
 [mbnames]
@@ -17,7 +17,7 @@ footer = "\n"
 ## antonlindstrom.com account
 #
 
-[Account AntonLindstrom]
+[Account antonlindstrom.com]
 localrepository = AntonLindstrom-Local
 remoterepository = AntonLindstrom-Remote
 quick = 10
@@ -46,7 +46,7 @@ folderfilter = lambda folder: folder in ['INBOX', '[Gmail]/Drafts', '[Gmail]/Sen
 ## Outlook account
 #
 
-[Account outlook]
+[Account lindstrom.anton@outlook.com]
 localrepository = outlook-Local
 remoterepository = outlook-Remote
 quick = 10
@@ -77,7 +77,7 @@ folderfilter = lambda folder: folder in [ 'Sent', 'Inbox', 'Archive' ]
 ## private account
 #
 
-[Account private]
+[Account anton@lindstrom.sh]
 localrepository = private-Local
 remoterepository = private-Remote
 quick = 10
