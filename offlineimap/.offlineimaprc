@@ -1,6 +1,6 @@
 [general]
 ui = ttyui
-accounts = lindstrom.anton@outlook.com, anton@lindstrom.sh
+accounts = lindstrom.anton@outlook.com, anton@lindstrom.sh, antonlindstrom.com
 fsync = False
 
 [mbnames]
@@ -32,6 +32,7 @@ nametrans = lambda folder: {'drafts':  '[Gmail]/Drafts', 'sent': '[Gmail]/Sent M
 maxconnections = 2
 type = Gmail
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+ssl_version = tls1_2
 remoteuser = me@antonlindstrom.com
 remotepassfile = ~/.offlineimap/password
 realdelete = no
