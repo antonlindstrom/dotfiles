@@ -1,0 +1,22 @@
+# .notmuch-config - Configuration file for the notmuch mail system
+#
+[database]
+path=/home/anton/.mail
+
+[user]
+name=Anton Lindström
+primary_email=anton@lindstrom.sh
+other_email=anton@alley.se;anton@antonlindstrom.com;me@antonlindstrom.com;lindstrom.anton@outlook.com;
+
+[new]
+tags=unread;inbox;
+ignore=
+
+[search]
+exclude_tags=deleted;spam;
+
+[maildir]
+synchronize_flags=true
+
+[crypto]
+gpg_path=gpg

@@ -20,6 +20,7 @@ footer = "\n"
 [Account antonlindstrom.com]
 localrepository = AntonLindstrom-Local
 remoterepository = AntonLindstrom-Remote
+postsynchook = notmuch new
 quick = 10
 maxage = 120
 
@@ -50,6 +51,7 @@ folderfilter = lambda folder: folder in ['INBOX', '[Gmail]/Drafts', '[Gmail]/Sen
 [Account lindstrom.anton@outlook.com]
 localrepository = outlook-Local
 remoterepository = outlook-Remote
+postsynchook = notmuch new
 quick = 10
 maxage = 120
 
@@ -81,6 +83,7 @@ folderfilter = lambda folder: folder in [ 'Sent', 'Inbox', 'Archive' ]
 [Account anton@lindstrom.sh]
 localrepository = private-Local
 remoterepository = private-Remote
+postsynchook = notmuch new
 quick = 10
 maxage = 120
 
