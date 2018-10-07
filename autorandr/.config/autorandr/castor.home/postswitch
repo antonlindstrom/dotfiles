@@ -3,4 +3,4 @@
 xset -display ":0" r rate 300 80
 betterlockscreen -w
 
-notify-send -u normal "autorandr" "pollux.dock detected"
+notify-send -u normal "autorandr" "castor.home detected"
