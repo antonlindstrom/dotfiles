@@ -4,4 +4,9 @@ Name=Mutt
 GenericName=Mail Client
 NoDisplay=false
 Exec=termite --geometry=1440x900 --name mutt --class mutt -e neomutt
-MimeType=x-scheme-handler/mailto
+Icon=mutt
+StartupNotify=false
+Terminal=false
+Type=Application
+MimeType=x-scheme-handler/mailto;
+Categories=ConsoleOnly;Network;Email

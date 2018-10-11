@@ -41,7 +41,7 @@ maxage = 120
 keepalive = 60
 holdconnectionopen = yes
 nametrans = lambda folder: {'[Gmail]/Drafts': 'drafts', '[Gmail]/Sent Mail': 'sent', '[Gmail]/Starred': 'flagged', '[Gmail]/Trash': 'trash'}.get(folder, folder)
-folderfilter = lambda folder: folder in ['INBOX', '[Gmail]/Drafts', '[Gmail]/Sent Mail', '[Gmail]/Starred', '[Gmail]/Trash', ]
+folderfilter = lambda folder: folder in ['INBOX', '[Gmail]/Drafts', '[Gmail]/Sent Mail', '[Gmail]/Starred', '[Gmail]/Trash' ]
 
 
 #
