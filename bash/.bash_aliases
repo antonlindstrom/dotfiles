@@ -5,3 +5,4 @@ alias mysqlc="docker run -it -v \$(pwd):/data --rm mysql mysql"
 alias psqlc='docker run -it --rm postgres psql'
 alias e="\$EDITOR -p"
 alias k="kubectl"
+alias clipit="xclip -i -selection clipboard"

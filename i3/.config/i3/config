@@ -306,7 +306,6 @@ for_window [class="(?i)plexmediaplayer"] move window to workspace $ws_music
 # assign placement rules
 assign [class="^qutebrowser$"] → 2
 
-exec --no-startup-id "caffeine &"
 exec --no-startup-id "xset s 180 120"
 exec --no-startup-id "xss-lock -n /usr/share/doc/xss-lock/dim-screen.sh -- betterlockscreen --lock &"
 exec --no-startup-id "betterlockscreen -w"
