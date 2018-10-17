@@ -236,14 +236,14 @@ mode "$mode_system" {
 
 bindsym $mod+shift+e mode "$mode_system"
 
-set $mode_brightness Brightness (j) down, (k) up, (n) DP-1-1 night mode, (d) DP-1-1 dimmed, (b) DP-1-1 bright
+set $mode_brightness Brightness (j) down, (k) up, (n) DP night mode, (d) DP dimmed, (b) DP bright
 mode "$mode_brightness" {
 	bindsym j exec --no-startup-id brightnessctl set 10%-
 	bindsym k exec --no-startup-id brightnessctl set +10%
 
-	bindsym n exec --no-startup-id xrandr --output DP-1-1 --brightness 0.4
-	bindsym d exec --no-startup-id xrandr --output DP-1-1 --brightness 0.7
-	bindsym b exec --no-startup-id xrandr --output DP-1-1 --brightness 1.0
+	bindsym n exec --no-startup-id "xrandr --output DP-1-1 --brightness 0.4; xrandr --output DP-2-2 --brightness 0.4"
+	bindsym d exec --no-startup-id "xrandr --output DP-1-1 --brightness 0.7; xrandr --output DP-2-2 --brightness 0.7"
+	bindsym b exec --no-startup-id "xrandr --output DP-1-1 --brightness 1.0; xrandr --output DP-2-2 --brightness 1.0"
 
 	# back to normal: Enter or Escape
 	bindsym Return mode "default"
@@ -308,6 +308,7 @@ assign [class="^qutebrowser$"] → 2
 
 exec --no-startup-id "xset s 180 120"
 exec --no-startup-id "xss-lock -n /usr/share/doc/xss-lock/dim-screen.sh -- betterlockscreen --lock &"
+exec --no-startup-id "autorandr -c"
 exec --no-startup-id "betterlockscreen -w"
 exec --no-startup-id "setxkbmap -option caps:escape se"
 
