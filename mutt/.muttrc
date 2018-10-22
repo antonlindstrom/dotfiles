@@ -38,8 +38,8 @@ bind index gg       first-entry
 bind index G        last-entry
 
 bind index R        group-reply
-bind index <tab>    sync-mailbox
 bind index <space>  collapse-thread
+bind index <tab>    collapse-all
 
 # Ctrl-R to mark all as read
 macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all messages as read"
@@ -64,6 +64,8 @@ set virtual_spoolfile=yes
 # notmuch shortcuts
 macro index A "<modify-labels>+archive -unread -inbox\\n" "Archive message"
 macro index gu "<change-vfolder>notmuch://?query=tag:unread\n" "Change to all unreads"
+macro index gw "<change-vfolder>notmuch://?query=tag:work\n" "Change to work"
+macro index gc "<change-vfolder>notmuch://?query=tag:code\n" "Change to code"
 macro index \\\\ "<vfolder-from-query>" "Search mailbox"
 
 # Filter out some headers
@@ -116,9 +118,10 @@ set spoolfile = "+anton@lindstrom.sh/INBOX"
 
 source ~/.mutt/accounts/anton@lindstrom.sh
 
-folder-hook anton@lindstrom.sh/*           source ~/.mutt/accounts/anton@lindstrom.sh
-folder-hook lindstrom.anton@outlook.com/*  source ~/.mutt/accounts/lindstrom.anton@outlook.com
-folder-hook antonlindstrom.com/*           source ~/.mutt/accounts/antonlindstrom.com
+folder-hook anton@lindstrom.sh/*                       source ~/.mutt/accounts/anton@lindstrom.sh
+folder-hook lindstrom.anton@outlook.com/*              source ~/.mutt/accounts/lindstrom.anton@outlook.com
+folder-hook antonlindstrom.com/*                       source ~/.mutt/accounts/antonlindstrom.com
+folder-hook anton.lindstrom@frontiercargroup.com/*     source ~/.mutt/accounts/anton.lindstrom@frontiercargroup.com
 
 # Get mailboxes
 source ~/.mutt/mailboxes
@@ -146,6 +149,10 @@ color indicator     brightcyan      black
 color index         yellow          default         "~N"                        # new messages
 color index         default         red             "~D"                        # deleted messages
 color index         red             default         "~F"                        # flagged messages
+
+color index         brightwhite     default         "~v~(!~F)~(!~N)"            # collapsed thread
+color index         yellow          default         "~v~(~N)"                   # collapsed thread with New
+color index         red             default         "~v~(~F)~(!~N)"             # collapsed thread with flagged messages
 
 color hdrdefault    green           default
 color header        brightgreen     default         "^(From)"

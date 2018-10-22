@@ -1,6 +1,6 @@
 [general]
 ui = ttyui
-accounts = lindstrom.anton@outlook.com, anton@lindstrom.sh, antonlindstrom.com
+accounts = lindstrom.anton@outlook.com, anton@lindstrom.sh, antonlindstrom.com, anton.lindstrom@frontiercargroup.com
 fsync = False
 
 [mbnames]
@@ -20,7 +20,7 @@ footer = "\n"
 [Account antonlindstrom.com]
 localrepository = AntonLindstrom-Local
 remoterepository = AntonLindstrom-Remote
-postsynchook = notmuch new
+postsynchook = ~/.offlineimap/postsync.sh
 quick = 10
 maxage = 120
 
@@ -51,7 +51,7 @@ folderfilter = lambda folder: folder in ['INBOX', '[Gmail]/Drafts', '[Gmail]/Sen
 [Account lindstrom.anton@outlook.com]
 localrepository = outlook-Local
 remoterepository = outlook-Remote
-postsynchook = notmuch new
+postsynchook = ~/.offlineimap/postsync.sh
 quick = 10
 maxage = 120
 
@@ -83,7 +83,7 @@ folderfilter = lambda folder: folder in [ 'Sent', 'Inbox', 'Archive' ]
 [Account anton@lindstrom.sh]
 localrepository = private-Local
 remoterepository = private-Remote
-postsynchook = notmuch new
+postsynchook = ~/.offlineimap/postsync.sh
 quick = 10
 maxage = 120
 
@@ -107,3 +107,35 @@ holdconnectionopen = yes
 # nametrans = lambda folder: {'Inbox':  'INBOX'}.get(folder, folder)
 folderfilter = lambda folder: folder in [ 'Sent', 'INBOX', 'Archive' ]
 
+
+#
+##  work account
+#
+
+[Account anton.lindstrom@frontiercargroup.com]
+localrepository = work-Local
+remoterepository = work-Remote
+postsynchook = ~/.offlineimap/postsync.sh
+quick = 10
+maxage = 120
+
+[Repository work-Local]
+type = Maildir
+localfolders = ~/.mail/anton.lindstrom@frontiercargroup.com
+nametrans = lambda folder: {'drafts':  '[Gmail]/Drafts', 'sent': '[Gmail]/Sent Mail', 'flagged': '[Gmail]/Starred', 'trash': '[Gmail]/Trash', 'archive': '[Gmail]/All Mail'}.get(folder, folder)
+
+[Repository work-Remote]
+maxconnections = 2
+type = Gmail
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+ssl_version = tls1_2
+remoteuser = anton.lindstrom@frontiercargroup.com
+remotepassfile = ~/.offlineimap/anton.lindstrom@frontiercargroup.com
+realdelete = no
+maxage = 120
+keepalive = 60
+holdconnectionopen = yes
+nametrans = lambda folder: {'[Gmail]/Drafts': 'drafts', '[Gmail]/Sent Mail': 'sent', '[Gmail]/Starred': 'flagged', '[Gmail]/Trash': 'trash'}.get(folder, folder)
+folderfilter = lambda folder: folder in ['INBOX', '[Gmail]/Drafts', '[Gmail]/Sent Mail', '[Gmail]/Starred', '[Gmail]/Trash' ]
+
+# vim: ft=conf
