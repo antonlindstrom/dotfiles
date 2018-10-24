@@ -3,7 +3,7 @@ set realname  = "Anton Lindstrom"
 
 set mbox      = "+anton@lindstrom.sh/Archive"
 set postponed = "+anton@lindstrom.sh/Drafts"
-set record    = "+antonlindstrom.com/Sent"
+set record    = "+anton@lindstrom.sh/Sent"
 
 set sendmail  = "/usr/bin/msmtp -a lindstrom.sh"
 set sendmail_wait = 0

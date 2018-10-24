@@ -2,7 +2,7 @@
 Description=offlineimap sync timer
 
 [Timer]
-OnCalendar=*:0/5
+OnCalendar=*:0/3
 Unit=offlineimap.service
 
 [Install]
