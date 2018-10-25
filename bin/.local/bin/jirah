@@ -1,0 +1,74 @@
+#!/bin/bash
+
+cfg="$HOME/.kanban.local.json"
+endpoint=$(jq -r .endpoint "$cfg")
+username=$(jq -r .username "$cfg")
+password=$(jq -r .password "$cfg")
+
+function search() {
+	payload="{
+			\"jql\": \"$1\",
+			\"startAt\": 0,
+			\"maxResults\": 100,
+			\"fields\": [
+				\"summary\",
+				\"status\"
+			],
+			\"fieldsByKeys\": false
+		}"
+
+	curl -s --request POST \
+		--url "$endpoint/rest/api/3/search"  \
+		-u "$username:$password" \
+		--header 'Accept: application/json' \
+		--header 'Content-Type: application/json' \
+		--data "$payload" | jq -r '.issues[] | "\(.key)\t\(.fields.summary) (\(.fields.status.name))"'
+}
+
+function cmd_endpoint() {
+	echo "$endpoint";
+}
+
+function cmd_working_on() {
+	search '(status=\"In Progress\" OR status=\"In development\") AND assignee = currentUser()'
+}
+
+function cmd_all_mine() {
+	search "assignee = currentUser()"
+}
+
+function cmd_find() {
+	search "key=$1"
+}
+
+function cmd_usage()  {
+	program=$(basename "$0")
+	echo "usage: $program [command]"
+	echo
+	echo "  help            show this text"
+	echo "  lookup [key]    show summary for issue"
+	echo "  current         display issues assigned to you and in progress"
+	echo "  mine            display all issues assigned to you"
+	echo "  endpoint        show the endpoint for this JIRA instance"
+	echo
+	echo "examples:"
+	echo "  $program lookup KEY-101"
+	echo "  $program mine"
+	echo
+}
+
+if [ $# == 0 ]; then
+	cmd_usage
+	exit 1
+fi
+
+case "$1" in
+	help|--help) shift;		cmd_usage ;;
+	key) shift;			cmd_find "$@" ;;
+	current|working_on) shift;	cmd_working_on ;;
+	mine) shift;			cmd_all_mine ;;
+	endpoint) shift;		cmd_endpoint "$@" ;;
+esac
+exit 0
+
+# vim: ft=sh
