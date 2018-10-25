@@ -2,7 +2,7 @@
 	path = ~/.gitconfig.private
 [core]
 	excludesfile = ~/.gitignore
-	editor = /usr/bin/vim
+	editor = /usr/bin/nvim
 [help]
 	autocorrect = 1
 [color]
@@ -28,6 +28,10 @@
 	lfm = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit master..
 	branches = branch -a --color -v
 	pr = "!git fetch origin pull/$1/head:pr$1"
+	ifup = "!git log --oneline --color | fzf --ansi --height=40% | awk '{ print $1 }' | xargs git commit --fixup"
+	irst = "!git log --oneline --color | fzf --ansi --height=40% | awk '{ print $1 }' | xargs git reset"
+	irbs = "!git log --oneline --color | fzf --ansi --height=40% | awk '{ print $1 }' | xargs git rebase -i"
+	ico = "!git branch | grep -v '*' | fzf --prompt=\"current: '$(git rev-parse --abbrev-ref HEAD)'> \" | xargs git checkout"
 [push]
 	default = current
 [pull]
