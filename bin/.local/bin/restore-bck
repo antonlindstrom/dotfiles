@@ -1,0 +1,27 @@
+#!/bin/bash
+
+set -euo pipefail
+
+snapshot=$(restic snapshots | grep -Pv "(\-\-\-|ID|snapshots)" | fzf --tac | awk '{ print $1 }')
+
+if [ -z "$snapshot" ]; then
+	echo "no snapshot selected"
+	exit 1
+fi
+
+echo "snapshot: $snapshot"
+echo "- listing files in 5s..."
+sleep 5
+
+file=$(restic ls "$snapshot" | fzf --tac)
+
+if [ -z "$file" ]; then
+	echo "no file selected"
+	exit 1
+fi
+
+echo "restic restore -i $file -t /tmp $snapshot"
+echo "- restoring in 5s..."
+sleep 5
+
+restic restore -i "$file" -t /tmp "$snapshot"
