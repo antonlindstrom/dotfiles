@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Gone
+GenericName=Pomodoro timer
+NoDisplay=false
+Exec=termite --geometry=500x300 --name gone --class gone -e "gone -n"
