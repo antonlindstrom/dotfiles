@@ -60,9 +60,9 @@ Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
 
 if has('nvim')
-	Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-	Plug 'zchee/deoplete-go', { 'do': 'make'}
-	Plug 'zchee/deoplete-clang'
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'zchee/deoplete-go', { 'do': 'make'}
+  Plug 'zchee/deoplete-clang'
 endif
 
 call plug#end()
@@ -73,7 +73,7 @@ call plug#end()
 
 " Use deoplete.
 try
-  let g:deoplete#enable_at_startup = 0
+  let g:deoplete#enable_at_startup = 1
   set completeopt=menu
 catch
   echo "Failed to enable deoplete."
