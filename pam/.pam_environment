@@ -11,7 +11,7 @@ GOPATH			DEFAULT=${HOME}/code
 PATH			DEFAULT=${HOME}/.local/bin:${HOME}/.fzf/bin::/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:${GOPATH}/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
 
 # FZF
-FZF_DEFAULT_COMMAND	DEFAULT='ag --hidden --ignore .git --ignore vendor/ -g ""'
+FZF_DEFAULT_COMMAND	DEFAULT="ag --hidden --ignore .git --ignore vendor/ -g ''"
 
 # XDG
 XDG_DESKTOP_DIR		DEFAULT=${HOME}

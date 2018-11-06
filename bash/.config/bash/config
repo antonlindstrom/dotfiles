@@ -1,4 +1,3 @@
-export GOPATH=~/code
 export PATH=$PATH:/sbin:/usr/sbin
 export PATH=/usr/src/go/bin:$PATH:$GOPATH/bin:$HOME/.local/bin
 
@@ -11,9 +10,6 @@ shopt -s histverify
 
 # Disable the freeze command (ctrl+s).
 stty -ixon
-
-# Set FZF command to ag.
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git --ignore vendor/ -g ""'
 
 # Set aliases in separate file
 [[ -f ~/.bash_aliases ]] && . ~/.bash_aliases
