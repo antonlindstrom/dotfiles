@@ -1,0 +1,75 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# List of valid properties:
+#
+# align
+# color
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+#
+# The top properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+command=/usr/lib/i3blocks/$BLOCK_NAME
+separator_block_width=15
+markup=none
+
+[vpn]
+label=
+command=~/.local/bin/vpn-status
+interval=15
+
+[toggl]
+label=
+command=echo $(toggl week-duration | awk -F: '{ print $1":"$2 }')
+interval=60
+
+[email]
+label=
+command=echo $(notmuch search "tag:unread" | wc -l)
+interval=15
+
+[temperature]
+label=
+interval=600
+command=echo "$(~/.local/bin/weather | awk '{print $NF }')"
+
+[disk-usage]
+label=
+command=echo "$(df / | awk '/\//{ print $5 }')"
+interval=120
+
+[ssid]
+label=
+command=~/.local/bin/wlinfo
+interval=30
+
+
+# Battery indicator
+#
+# The battery instance defaults to 0.
+[battery]
+label=
+instance=0
+interval=5
+
+# Time
+#
+[time]
+label=
+command=date '+%H:%M'
+interval=5

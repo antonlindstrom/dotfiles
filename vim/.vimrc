@@ -40,6 +40,7 @@ Plug 'posva/vim-vue'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'rodjek/vim-puppet'
+Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/vim-slumlord'
 Plug 'sickill/vim-monokai'
