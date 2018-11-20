@@ -1,0 +1,5 @@
+#!/bin/bash
+
+if [ -d /proc/sys/net/ipv4/conf/ppp0 ]; then
+	echo "on"
+fi

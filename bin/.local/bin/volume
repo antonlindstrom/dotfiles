@@ -12,6 +12,11 @@ function list_source_ids() {
 	sources=$(pactl list short sources | awk '{ print $1 }' )
 }
 
+# Active sink.
+function active_sink() {
+	sink=$(pactl list short | grep RUNNING | sed -e 's,^\([0-9][0-9]*\)[^0-9].*,\1,')
+}
+
 # Toggle output for speakers.
 function toggle_mute() {
 	list_sink_ids
@@ -30,10 +35,16 @@ function toggle_mute_microphone() {
 	done
 }
 
+# Current volume.
+function current() {
+	active_sink
+	pactl list sinks | grep '^[[:space:]]Volume:' | head -n $(( sink + 1)) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,' | sed -e 's/$/%/'
+}
+
 # Turn the volume up!
 function up() {
-	list_sink_ids
-	for sink in $sinks
+	list_source_ids
+	for source in $sources
 	do
  		pactl set-sink-volume "${sink}" +5%
 	done
@@ -41,8 +52,8 @@ function up() {
 
 # Turn the volume down.
 function down() {
-	list_sink_ids
-	for sink in $sinks
+	list_source_ids
+	for source in $sources
 	do
  		pactl set-sink-volume "${sink}" -5%
 	done
@@ -65,7 +76,10 @@ function help() {
 #
 # Parse parameters and offload to functions.
 function main() {
-	case "$1" in
+	case "${1}" in
+		"")
+			current
+			;;
 		"up")
 			up
 			;;
@@ -84,4 +98,4 @@ function main() {
 	esac
 }
 
-main "$1"
+main "${1:-}"

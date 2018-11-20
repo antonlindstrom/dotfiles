@@ -1,0 +1,19 @@
+#!/bin/bash
+
+INTERFACE=$(iw dev | awk '/Interface/ { print $2 }')
+
+dBm=$(iw dev "${INTERFACE}" link | awk '/signal/ { print $2 }')
+
+quality=""
+
+# Calculate quality in percentage.
+if [[ "$dBm" -ge "-50" ]]; then
+	quality=100;
+elif [[ "$dBm" -le "-100" ]]; then
+	quality=0
+else
+	ex=$(( dBm + 100))
+	quality=$(( 2 * ex));
+fi
+
+echo "$quality% $(iw dev "${INTERFACE}" link | awk -F ": " '/SSID/ { print $2 }')"

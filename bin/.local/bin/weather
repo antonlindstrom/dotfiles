@@ -7,33 +7,4 @@ json=$(curl -s "https://query.yahooapis.com/v1/public/yql?q=$(urlencode "$query"
 
 condition=$(echo "$json" | jq -r .query.results.channel.item.condition.text)
 
-case "$condition" in
-"Snow")
-	weather=
-	;;
-"Showers")
-	weather=
-	;;
-"Scattered Showers")
-	weather=
-	;;
-"Cloudy")
-	weather=
-	;;
-"Mostly Cloudy")
-	weather=
-	;;
-"Sunny")
-	weather=
-	;;
-"Windy")
-	weather=
-	;;
-"Breezy")
-	weather=
-	;;
-*)
-	weather=$condition
-esac
-
-echo "$json" | jq -r ".query.results.channel | \"$weather  \\(.item.condition.temp)°\\(.units.temperature)\""
+echo "$json" | jq -r ".query.results.channel | \"$condition \\(.item.condition.temp)°\\(.units.temperature)\""

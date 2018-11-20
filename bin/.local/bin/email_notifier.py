@@ -5,6 +5,7 @@
 import pyinotify
 import gi
 import glob
+import re
 
 gi.require_version('Notify', '0.7')
 
@@ -14,7 +15,7 @@ from mailbox import MaildirMessage
 from email.header import decode_header
 
 maildir_folder = expanduser(r"~/.mail/")
-new_mail_folders = glob.glob(maildir_folder+"*/INBOX/new")
+new_mail_folders = glob.glob(maildir_folder+"*/*/new")
 notification_timeout = 12000
 
 Notify.init(r'email_notifier.py')
@@ -42,11 +43,13 @@ def newfile(event):
 
     print("event: new message from '%s', sending notification" % from_header)
 
-    subject = to_header
-    if to_header == "":
+    if (mail['Delivered-To'] == None) or (mail['Delivered-To'] == ""):
+        subject = to_header
+    else:
         subject = dec_header(mail['Delivered-To'])
 
     subject = subject.replace("<", "").replace(">", "")
+    subject = (subject[:100] + '..') if len(subject) > 100 else subject
 
     n = Notify.Notification.new(subject, message, "mail-unread-new")
 
@@ -58,6 +61,10 @@ wm = pyinotify.WatchManager()
 notifier = pyinotify.Notifier(wm, newfile)
 
 for new_mail_folder in new_mail_folders:
+    # Skip some folders folders.
+    if re.match(r'(spam|trash|drafts|sent)', new_mail_folder, re.IGNORECASE):
+        continue
+
     print("adding watch on %s" % new_mail_folder)
     wm.add_watch(new_mail_folder, pyinotify.IN_CREATE | pyinotify.IN_MOVED_TO)
 
