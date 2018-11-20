@@ -10,6 +10,10 @@ set sendmail_wait = 0
 
 color status cyan default
 
+macro index A \
+    "<save-message>+anton@lindstrom.sh/Archive<enter>" \
+    "move message to the archive"
+
 macro index D \
     "<save-message>+anton@lindstrom.sh/Trash<enter>" \
     "move message to the trash"

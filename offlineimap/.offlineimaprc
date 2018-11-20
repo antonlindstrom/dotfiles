@@ -90,7 +90,6 @@ maxage = 120
 [Repository private-Local]
 type = Maildir
 localfolders = ~/.mail/anton@lindstrom.sh
-# nametrans = lambda folder: {'INBOX':  'Inbox'}.get(folder, folder)
 
 [Repository private-Remote]
 maxconnections = 2
@@ -104,8 +103,7 @@ realdelete = no
 maxage = 120
 keepalive = 60
 holdconnectionopen = yes
-# nametrans = lambda folder: {'Inbox':  'INBOX'}.get(folder, folder)
-folderfilter = lambda folder: folder in [ 'Sent', 'INBOX', 'Archive' ]
+nametrans = lambda folder: {'drafts':  'Drafts', 'sent': 'Sent', 'trash': 'Trash', 'archive': 'Archive'}.get(folder, folder)
 
 
 #

@@ -3,7 +3,7 @@ Type=Application
 Name=Mutt
 GenericName=Mail Client
 NoDisplay=false
-Exec=termite --geometry=1440x900 --name mutt --class mutt -e neomutt
+Exec=termite --name mutt --class mutt -e neomutt
 Icon=mutt
 StartupNotify=false
 Terminal=false
