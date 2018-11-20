@@ -3,4 +3,4 @@ Type=Application
 Name=Kanban
 GenericName=JIRA ncurses app
 NoDisplay=false
-Exec=termite --geometry=1024x640 --name kanban --class kanban -e "kanban -f /home/anton/.kanban.local.json"
+Exec=termite --name kanban --class kanban -e "kanban -f /home/anton/.kanban.local.json"
