@@ -243,9 +243,9 @@ mode "$mode_brightness" {
 	bindsym j exec --no-startup-id brightnessctl set 10%-
 	bindsym k exec --no-startup-id brightnessctl set +10%
 
-	bindsym n exec --no-startup-id "xrandr --output DP-1-1 --brightness 0.4; xrandr --output DP-2-2 --brightness 0.4"
-	bindsym d exec --no-startup-id "xrandr --output DP-1-1 --brightness 0.7; xrandr --output DP-2-2 --brightness 0.7"
-	bindsym b exec --no-startup-id "xrandr --output DP-1-1 --brightness 1.0; xrandr --output DP-2-2 --brightness 1.0"
+	bindsym n exec --no-startup-id "xrandr --output DP-1-1 --brightness 0.4; xrandr --output DP-2-1 --brightness 0.4"
+	bindsym d exec --no-startup-id "xrandr --output DP-1-1 --brightness 0.7; xrandr --output DP-2-1 --brightness 0.7"
+	bindsym b exec --no-startup-id "xrandr --output DP-1-1 --brightness 1.0; xrandr --output DP-2-1 --brightness 1.0"
 
 	# back to normal: Enter or Escape
 	bindsym Return mode "default"

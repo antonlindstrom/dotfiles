@@ -222,6 +222,11 @@ timeout = 12
     format = "<b>Spotify</b>\n<i>%b</i>"
     urgency = low
 
+[sound]
+    summary = "*"
+    urgency = normal
+    script = /home/anton/.local/share/dunst/sound.bash
+
 #[espeak]
 #    summary = "*"
 #    script = dunst_espeak.sh

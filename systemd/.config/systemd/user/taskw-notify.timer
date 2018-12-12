@@ -1,0 +1,9 @@
+[Unit]
+Description=Taskwarrior check for upcoming tasks
+
+[Timer]
+OnCalendar=*:0/3
+Unit=taskw-notify.service
+
+[Install]
+WantedBy=default.target

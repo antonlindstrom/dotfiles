@@ -31,7 +31,12 @@ markup=none
 [vpn]
 label=
 command=~/.local/bin/vpn-status
-interval=15
+interval=2
+
+[tasks]
+label=
+command=~/.local/bin/taskw-active
+interval=20
 
 [toggl]
 label=
@@ -40,7 +45,7 @@ interval=60
 
 [email]
 label=
-command=echo $(notmuch search "tag:unread" | wc -l)
+command=echo $(notmuch search "tag:unread and tag:inbox" | wc -l)
 interval=15
 
 [temperature]

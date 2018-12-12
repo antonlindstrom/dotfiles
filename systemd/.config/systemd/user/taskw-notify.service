@@ -1,0 +1,11 @@
+[Unit]
+Description=Taskwarrior notifier
+IgnoreOnIsolate=true
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/bash %h/.local/bin/taskw-notify
+TimeoutStartSec=1min30s
+
+[Install]
+WantedBy=default.target

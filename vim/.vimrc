@@ -55,7 +55,6 @@ Plug 'twitvim/twitvim'
 Plug 'udalov/kotlin-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-scripts/DoxygenToolkit.vim'
-Plug 'vimwiki/vimwiki'
 Plug 'wimstefan/Lightning'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
@@ -257,6 +256,8 @@ try
   let g:airline_left_sep=''
   let g:airline_right_sep=''
   let g:airline_powerline_fonts = 1
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#left_sep = ' '
 catch
 endtry
 
@@ -370,6 +371,9 @@ nnoremap  <leader>fi :call CscopeFind('i', expand('<cword>'))<CR>
 au FileType c,cpp nnoremap <leader>gd :LspDefinition<CR>
 au FileType c,cpp nnoremap <leader>rn :LspRename<CR>
 
+" sb: Shorthand for splitting the buffer vertically.
+nnoremap <leader>sb :vert sb<space>
+
 " fa: Find files that has this word.
 nnoremap <leader>fa :Ack! '<cword>'<CR>
 " ä: Open Ack.
@@ -385,6 +389,7 @@ nmap <left> :bp<cr>
 nmap <right> :bn<cr>
 
 nmap <leader>b :Buffers<cr>
+nmap <leader>c :bd<cr>
 
 " down/up to step through quickfix list
 nmap <down> :cn<cr>zz

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+task status:pending tags.hasnt:notified due.before:now+2h export | jq -r ".[].description" |
+while IFS= read -r line
+do
+   notify-send 'A task is due in less than 2h' "$line"
+done
+
+task status:pending tags.hasnt:notified due.before:now+2h modify +notified

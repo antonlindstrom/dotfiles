@@ -1,0 +1,11 @@
+#!/bin/bash
+
+id=$(task active limit:1 2>/dev/null | tail -n +4 | head -n 1 | sed 's/^ //' | cut -d ' ' -f1)
+
+if [ "$id" == "" ]; then
+	exit 0
+fi
+
+task _get "$id".description
+
+# vim: ft=sh

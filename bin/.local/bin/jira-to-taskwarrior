@@ -1,0 +1,43 @@
+#!/bin/bash
+
+cfg="$HOME/.kanban.local.json"
+endpoint=$(jq -r .endpoint "$cfg")
+username=$(jq -r .username "$cfg")
+password=$(jq -r .password "$cfg")
+
+function search() {
+	payload="{
+			\"jql\": \"$1\",
+			\"startAt\": 0,
+			\"maxResults\": 100,
+			\"fields\": [
+				\"summary\",
+				\"status\"
+			],
+			\"fieldsByKeys\": false
+		}"
+
+	curl -s --request POST \
+		--url "$endpoint/rest/api/3/search"  \
+		-u "$username:$password" \
+		--header 'Accept: application/json' \
+		--header 'Content-Type: application/json' \
+		--data "$payload" | jq -r '.issues[] | "\(.key): \(.fields.summary)"'
+}
+
+function cmd_working_on() {
+	search 'assignee = currentUser()'
+}
+
+IFS=$'\n'
+for line in $(cmd_working_on)
+do
+	read -r -p "Add \"$line\"? (y/N): " prompt
+	if [ "$prompt" = "y" ]; then
+		task add "\"$line\"" project:fcg prio:M
+		id=$(task +LATEST ids)
+		task "$id" annotate "$endpoint/browse/$(echo "$line" | cut -d: -f 1)"
+	fi
+done
+
+# vim: ft=sh

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+active_task=$(taskw-active)
+id=$(echo "$active_task" | awk -F: '{ print tolower($1) }')
+
+task fcg-active
+
+echo
+echo
+echo "Can you describe the branch shortly?"
+read -r -p "Summary: " branch_desc
+
+branch_name=$id-$(echo "$branch_desc" | awk '{ gsub(" ", "-"); print tolower($0) }')
+
+echo
+echo "Ok, so the branch name will be: $branch_name"
+read -r -p "Sounds good? (y/N) " confirm
+
+if [ "$confirm" = "y" ]; then
+	echo
+	git checkout -b "$branch_name"
+	echo
+fi
