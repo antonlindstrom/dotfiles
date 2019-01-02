@@ -165,6 +165,7 @@ try
     \   '-E', 'unused',
     \   '-E', 'unconvert',
     \   '-E', 'interfacer',
+    \   '-E', 'megacheck',
     \   '%:p:h',
     \ ],
     \ 'append_file': 0,
