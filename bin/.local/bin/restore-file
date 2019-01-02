@@ -1,0 +1,46 @@
+#!/bin/bash
+
+set -euo pipefail
+
+first_arg=${1:-}
+RESTIC_REPOSITORY=${RESTIC_REPOSITORY:-}
+
+if [ "$first_arg" == "--help" ]; then
+	echo "interactively restores a file or directory from restic with the help of fzf"
+	exit 1
+fi
+
+if [ -z "$RESTIC_REPOSITORY" ]; then
+	echo "RESTIC_REPOSITORY required but not set!"
+	exit 1
+fi
+
+echo "fetching snapshots (this might take a while).."
+if ! snapshots=$(restic snapshots | grep -Pv "(\-\-\-|ID|snapshots)"); then
+	echo "failed to fetch snapshots."
+	exit 1
+fi
+
+snapshot=$(echo "$snapshots" | fzf --prompt "$RESTIC_REPOSITORY snapshots> " --tac | awk '{ print $1 }')
+
+if [ -z "$snapshot" ]; then
+	echo "no snapshot selected"
+	exit 1
+fi
+
+echo "snapshot: $snapshot"
+echo "- listing files in 5s..."
+sleep 5
+
+file=$(restic ls "$snapshot" | fzf --prompt "$RESTIC_REPOSITORY files> " --tac)
+
+if [ -z "$file" ]; then
+	echo "no file selected"
+	exit 1
+fi
+
+echo "restic restore -i $file -t /tmp $snapshot"
+echo "- restoring in 5s..."
+sleep 5
+
+restic restore -i "$file" -t /tmp "$snapshot"
