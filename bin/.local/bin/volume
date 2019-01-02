@@ -2,10 +2,8 @@
 
 set -eou pipefail
 
-# List sinks (outputs).
-function list_sink_ids() {
-	sinks=$(pactl list short sinks | awk '{ print $1 }' )
-}
+# Volume steps.
+STEP=5
 
 # List sources (inputs).
 function list_source_ids() {
@@ -19,11 +17,13 @@ function active_sink() {
 
 # Toggle output for speakers.
 function toggle_mute() {
-	list_sink_ids
-	for sink in $sinks
-	do
- 		pactl set-sink-mute "${sink}" toggle
-	done
+	pactl set-sink-mute @DEFAULT_SINK@ toggle
+	notify_volume
+}
+
+# Reset volume.
+function reset() {
+	pactl set-sink-mute 0 0 && pactl set-sink-volume @DEFAULT_SINK@ 50%
 }
 
 # Toggle microphones.
@@ -38,26 +38,41 @@ function toggle_mute_microphone() {
 # Current volume.
 function current() {
 	active_sink
-	pactl list sinks | grep '^[[:space:]]Volume:' | head -n $(( sink + 1)) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,' | sed -e 's/$/%/'
+	current_volume=$(pactl list sinks | grep '^[[:space:]]Volume:' | head -n $(( sink + 1)) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')
+	echo "$current_volume%"
 }
 
 # Turn the volume up!
 function up() {
-	list_source_ids
-	for source in $sources
-	do
- 		pactl set-sink-volume "${sink}" +5%
-	done
+	pactl set-sink-mute 0 0 && pactl set-sink-volume @DEFAULT_SINK@ +$STEP%
+	notify_volume
 }
 
 # Turn the volume down.
 function down() {
-	list_source_ids
-	for source in $sources
-	do
- 		pactl set-sink-volume "${sink}" -5%
-	done
+	pactl set-sink-mute 0 0 && pactl set-sink-volume @DEFAULT_SINK@ -$STEP%
+	notify_volume
 }
+
+# Send notification to dunst (make sure dunstify exists).
+function notify_volume {
+	current
+	# Make the bar with the special character ─ (it's not dash -)
+	# https://en.wikipedia.org/wiki/Box-drawing_character
+	bar=$(seq -s "─" "$((current_volume / 5))" | sed 's/[0-9]//g')
+
+	icon_path="/usr/share/icons/Faba/48x48/notifications"
+
+	# Send the notification if dunstify exists.
+	if command -v dunstify &> /dev/null; then
+		if pactl list sinks | grep -A 8 "State: RUNNING" | grep "Mute: yes"; then
+			dunstify -i "${icon_path}/notification-audio-volume-muted.svg" -t 2000 -r 2593 -u normal "mute"
+		else
+			dunstify -i "${icon_path}/notification-audio-volume-medium.svg" -t 2000 -r 2593 -u normal "$current_volume%   $bar"
+		fi
+	fi
+}
+
 
 # Help, outputs help.
 function help() {
@@ -66,6 +81,7 @@ function help() {
 	echo "usage:"
 	echo "  up                turn the volume up"
 	echo "  down              turn the volume down"
+	echo "  reset             reset volume (50%)"
 	echo "  mute              toggle output"
 	echo "  mute-microphone   toggle input"
 	echo
