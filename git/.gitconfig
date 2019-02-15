@@ -12,6 +12,7 @@
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	co = checkout -b
 	com = checkout master
+	uncommit = reset --soft HEAD^
 	rbr = "!for branch in `git branch -r | grep -v HEAD`;do echo `git -c color.ui=always log --format='%ai %Cred%h%Creset %C(green)(%cr)%Creset %C(bold blue)<%an>%Creset' -1 $branch` $branch; done | sort -r"
 	recent = for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(align:15,left)%(committerdate:relative)%(end) %(align:30,left)%(color:bold blue)%(authorname)%(end) %(color:bold red)%(objectname:short)%(color:reset) %(color:bold yellow)%(refname:short) %(upstream:track)'
 	delete-merged-branches = "!git branch --merged | grep -v master | xargs git branch --delete"
