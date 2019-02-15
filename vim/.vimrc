@@ -32,11 +32,11 @@ Plug 'kien/ctrlp.vim'
 Plug 'lifepillar/pgsql.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
+Plug 'mhinz/vim-startify'
 Plug 'mileszs/ack.vim'
 Plug 'neomake/neomake'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'peterhoeg/vim-qml'
-Plug 'posva/vim-vue'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'rodjek/vim-puppet'
@@ -143,7 +143,7 @@ try
   " neomake configuration for C++
   let g:neomake_cpp_enable_markers=['clang', 'cpplint']
   let g:neomake_cpp_lint_maker = { }
-  let g:neomake_cpp_clang_args = ["-std=c++14", "-Wextra", "-Wall", "-fsanitize=undefined", "-g", "-I", "."]
+  let g:neomake_cpp_clang_args = ["-std=c++17", "-Wextra", "-Wall", "-fsanitize=undefined", "-g", "-I", "."]
 
   " neomake configuration for Go.
   let g:neomake_go_enabled_makers = [ 'go', 'gometalinter', 'endsentence' ]
@@ -405,3 +405,5 @@ au FileType go nnoremap <leader>br :GoDebugBreakpoint<CR>
 au FileType go nnoremap <leader>bn :GoDebugNext<CR>
 au FileType go nnoremap <leader>bc :GoDebugContinue<CR>
 au FileType go nnoremap <leader>t :GoTest<CR>
+
+autocmd BufNewFile,BufRead *.vue   set syntax=html
