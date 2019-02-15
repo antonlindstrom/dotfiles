@@ -152,7 +152,7 @@ icon_position = off
 max_icon_size = 80
 
 # Paths to default icons.
-icon_folders = /usr/share/icons/Paper/16x16/mimetypes/:/usr/share/icons/Paper/48x48/status/:/usr/share/icons/Paper/16x16/devices/:/usr/share/icons/Paper/48x48/notifications/:/usr/share/icons/Paper/48x48/emblems/
+#icon_folders = /usr/share/icons/Faba/16x16/mimetypes/:/usr/share/icons/Faba/48x48/status/:/usr/share/icons/Faba/16x16/devices/:/usr/share/icons/Faba/48x48/notifications/:/usr/share/icons/Faba/48x48/emblems/
 
 # Frame
 frame_width = 1
