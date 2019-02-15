@@ -33,11 +33,6 @@ label=
 command=~/.local/bin/vpn-status
 interval=2
 
-[tasks]
-label=
-command=~/.local/bin/taskw-active
-interval=20
-
 [toggl]
 label=
 command=echo $(toggl week-duration | awk -F: '{ print $1":"$2 }')
