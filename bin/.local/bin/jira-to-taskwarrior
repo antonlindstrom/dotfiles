@@ -32,11 +32,17 @@ function cmd_working_on() {
 IFS=$'\n'
 for line in $(cmd_working_on)
 do
+	# Skip already added tasks.
+	issue_id=$(echo "$line" | cut -d: -f 1)
+	if task all 2>/dev/null | grep "$issue_id" >/dev/null; then
+		continue
+	fi
+
 	read -r -p "Add \"$line\"? (y/N): " prompt
 	if [ "$prompt" = "y" ]; then
 		task add "\"$line\"" project:fcg prio:M
 		id=$(task +LATEST ids)
-		task "$id" annotate "$endpoint/browse/$(echo "$line" | cut -d: -f 1)"
+		task "$id" annotate "$endpoint/browse/$issue_id"
 	fi
 done
 
