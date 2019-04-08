@@ -32,9 +32,15 @@ function cmd_working_on() {
 IFS=$'\n'
 for line in $(cmd_working_on)
 do
-	# Skip already added tasks.
 	issue_id=$(echo "$line" | cut -d: -f 1)
-	if task all 2>/dev/null | grep "$issue_id" >/dev/null; then
+
+	# Skip upcoming tasks.
+	if task next 2>/dev/null | grep "$issue_id" >/dev/null; then
+		continue
+	fi
+
+	# Skip completed tasks.
+	if task completed 2>/dev/null | grep "$issue_id" >/dev/null; then
 		continue
 	fi
 

@@ -11,7 +11,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'arcticicestudio/nord-vim'
 Plug 'axiom/vim-memcolo'
 Plug 'brookhong/cscope.vim'
-Plug 'cespare/vim-toml'
 Plug 'dag/vim-fish'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'elzr/vim-json'
@@ -19,32 +18,26 @@ Plug 'ervandew/supertab'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries', 'tag': '*' }
 Plug 'garbas/vim-snipmate'
 Plug 'gilgigilgil/anderson.vim'
-Plug 'hashivim/vim-packer'
-Plug 'hashivim/vim-terraform'
 Plug 'honza/vim-snippets'
 Plug 'itchyny/calendar.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'keith/swift.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'lifepillar/pgsql.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
-Plug 'mhinz/vim-startify'
 Plug 'mileszs/ack.vim'
 Plug 'neomake/neomake'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'peterhoeg/vim-qml'
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
-Plug 'rodjek/vim-puppet'
 Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/vim-slumlord'
 Plug 'sickill/vim-monokai'
-Plug 'skreuzer/vim-prometheus'
 Plug 'tclh123/vim-thrift'
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-commentary'
@@ -146,8 +139,9 @@ try
   let g:neomake_cpp_clang_args = ["-std=c++17", "-Wextra", "-Wall", "-fsanitize=undefined", "-g", "-I", "."]
 
   " neomake configuration for Go.
-  let g:neomake_go_enabled_makers = [ 'go', 'gometalinter', 'endsentence' ]
+  let g:neomake_go_enabled_makers = [ 'go', 'gometalinter', 'endsentence', 'bodyclose' ]
   let g:neomake_go_endsentence_maker = { }
+  let g:neomake_go_bodyclose_maker = { }
   let g:neomake_go_gometalinter_maker = {
     \ 'args': [
     \   '--tests',
@@ -395,6 +389,10 @@ nmap <leader>c :bd<cr>
 " down/up to step through quickfix list
 nmap <down> :cn<cr>zz
 nmap <up> :cp<cr>zz
+
+" Sessions
+nmap <leader>s :SaveSession<cr>
+nmap <leader>l :OpenSession<cr>
 
 " ,d -> git diff
 nnoremap <leader>d :Gdiff<CR>

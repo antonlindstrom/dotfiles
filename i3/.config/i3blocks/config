@@ -28,8 +28,13 @@ command=/usr/lib/i3blocks/$BLOCK_NAME
 separator_block_width=15
 markup=none
 
+[win-title]
+command=echo [ $(~/.local/bin/win-title) ]
+color=#D8DEE9
+interval=1
+
 [vpn]
-label=
+label=
 command=~/.local/bin/vpn-status
 interval=2
 
@@ -43,10 +48,10 @@ label=
 command=echo $(notmuch search "tag:unread and tag:inbox" | wc -l)
 interval=15
 
-[temperature]
-label=
-interval=600
-command=echo "$(~/.local/bin/weather | awk '{print $NF }')"
+# [temperature]
+# label=
+# interval=600
+# command=echo "$(~/.local/bin/weather | awk '{print $NF }')"
 
 [disk-usage]
 label=

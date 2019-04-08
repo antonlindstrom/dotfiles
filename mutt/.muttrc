@@ -53,10 +53,6 @@ macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "ma
 macro index gi "<change-folder>!<return>" "go to inbox"
 macro index c '<change-folder>?<change-dir><home>^K=<enter>'<Paste>
 
-# Sync email
-macro index O "<shell-escape>offlineimap<enter>"           "run offlineimap to sync all mail"
-macro index o "<shell-escape>offlineimap -qf INBOX<enter>" "run offlineimap to sync inbox"
-
 # Saner copy/move dialogs
 macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
 macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
@@ -72,6 +68,7 @@ macro index A "<modify-labels>+archive -unread -inbox\\n" "Archive message"
 macro index gu "<change-vfolder>notmuch://?query=tag:unread\n" "Change to all unreads"
 macro index gw "<change-vfolder>notmuch://?query=tag:work\n" "Change to work"
 macro index gc "<change-vfolder>notmuch://?query=tag:code\n" "Change to code"
+macro index gr "<change-vfolder>notmuch://?query=tag:rollbar\n" "Change to rollbar"
 macro index \\\\ "<vfolder-from-query>" "Search mailbox"
 
 # Filter out some headers

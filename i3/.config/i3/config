@@ -24,7 +24,10 @@ client.focused #434C5E #3B4252 #D8DEE9 #434C5E
 client.unfocused #2E3440 #2E3440 #4C566A #434C5E
 client.focused_inactive #2E3440 #2E3440 #4C566A #434C5E
 client.urgent  #BF616A #BF616A #D8DEE9 #BF616A
-hide_edge_borders none
+hide_edge_borders smart
+
+title_align left
+default_border pixel 5
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -290,7 +293,7 @@ bindsym $mod+Escape exec $Locker
 #  A bar.
 bar {
 	status_command i3blocks
-	position bottom
+	position top
 
 	tray_padding 4
 
@@ -321,6 +324,7 @@ for_window [class="(?i)plexmediaplayer"] move window to workspace $ws_music
 
 # assign placement rules
 assign [class="^qutebrowser$"] → 2
+assign [title="^neomutt$"] → 3
 
 exec --no-startup-id "xset s 180 120"
 exec --no-startup-id "xss-lock -n /usr/share/doc/xss-lock/dim-screen.sh -- betterlockscreen --lock &"
