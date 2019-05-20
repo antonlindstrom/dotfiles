@@ -1,4 +1,4 @@
 [Desktop Entry]
 Type=Application
 Name=XClock
-Exec=xclock -update 1
+Exec=xclock -update 1 -bg white
