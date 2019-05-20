@@ -1,0 +1,14 @@
+#!/bin/bash
+
+main() {
+	echo
+	read -r -p "SSID: " ssid
+	read -r -s -p "Password: " wifi_password
+	echo
+	read -r -p "Encryption (WPA): " encryption
+	echo
+
+	echo "WIFI:S:${ssid};T:${encryption:-WPA};P:${wifi_password};;" | qrencode -t UTF8
+}
+
+main $1

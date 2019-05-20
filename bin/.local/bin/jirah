@@ -25,6 +25,14 @@ function search() {
 		--data "$payload" | jq -r '.issues[] | "\(.key)\t\(.fields.summary) (\(.fields.status.name))"'
 }
 
+function cmd_fields() {
+	curl -s --request GET \
+		--url "$endpoint/rest/api/3/field"  \
+		-u "$username:$password" \
+		--header 'Accept: application/json' \
+		--header 'Content-Type: application/json' | jq .
+}
+
 function cmd_endpoint() {
 	echo "$endpoint";
 }
@@ -46,6 +54,7 @@ function cmd_usage()  {
 	echo "usage: $program [command]"
 	echo
 	echo "  help            show this text"
+	echo "  fields          list fields"
 	echo "  lookup [key]    show summary for issue"
 	echo "  current         display issues assigned to you and in progress"
 	echo "  mine            display all issues assigned to you"
@@ -64,7 +73,8 @@ fi
 
 case "$1" in
 	help|--help) shift;		cmd_usage ;;
-	key) shift;			cmd_find "$@" ;;
+	lookup) shift;			cmd_find "$@" ;;
+	fields) shift;			cmd_fields ;;
 	current|working_on) shift;	cmd_working_on ;;
 	mine) shift;			cmd_all_mine ;;
 	endpoint) shift;		cmd_endpoint "$@" ;;
