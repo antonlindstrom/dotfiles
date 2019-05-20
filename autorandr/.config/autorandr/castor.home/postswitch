@@ -1,7 +1,6 @@
 #!/bin/bash
 
 xset -display ":0" r rate 300 80
-xset -display ":0" s off -dpms
 betterlockscreen -w
 
 notify-send -u normal "autorandr" "castor.home detected"

@@ -49,6 +49,9 @@ bindsym $mod+Shift+q kill
 bindsym $mod+o exec "rofi -combi-modi 'window#drun#display:~/.local/bin/monitor_layout.sh' -show combi -modi combi"
 bindsym $mod+p exec "passdmenu -x c"
 
+# emoji-picker :)
+bindsym $mod+i exec "emoji-picker"
+
 # move to urgent window
 bindsym $mod+u [urgent=latest] focus
 
@@ -202,17 +205,16 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# music control (volume, spotify etc).
-set $mode_music Music (j) vol down, (k) vol up , (m) mute, (i) mic toggle, (p) pause, (n) next track, (b) previous track
+# music control (volume, spotify, mpc etc).
+set $mode_music Music (j) vol down, (k) vol up, (m) mute, (i) mic toggle, (p) playerctl, (c) mpc controls
 mode "$mode_music" {
 	bindsym k exec --no-startup-id "volume up"
 	bindsym j exec --no-startup-id "volume down"
 	bindsym m exec --no-startup-id "volume mute"
 	bindsym i exec --no-startup-id "volume mute-microphone"
 
-	bindsym p exec --no-startup-id "playerctl --player=spotify play-pause"
-	bindsym n exec --no-startup-id "playerctl --player=spotify next"
-	bindsym b exec --no-startup-id "playerctl --player=spotify previous"
+	bindsym c mode "$mode_mpc"
+	bindsym p mode "$mode_playerctl"
 
 	# back to normal: Enter or Escape
 	bindsym Return mode "default"
@@ -220,6 +222,33 @@ mode "$mode_music" {
 }
 
 bindsym $mod+m mode "$mode_music"
+
+# mpc control (mpc).
+set $mode_mpc mpc (j) vol down, (k) vol up, (p) play/pause, (n) next, (b) previous
+mode "$mode_mpc" {
+	bindsym k exec --no-startup-id "mpc vol +10"
+	bindsym j exec --no-startup-id "mpc vol -10"
+
+	bindsym p exec --no-startup-id "mpc toggle"
+	bindsym n exec --no-startup-id "mpc next"
+	bindsym b exec --no-startup-id "mpc prev"
+
+	# back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+# mpc control (mpc).
+set $mode_playerctl playerctl (p) play/pause, (n) next, (b) previous
+mode "$mode_playerctl" {
+	bindsym p exec --no-startup-id "playerctl -a play-pause"
+	bindsym n exec --no-startup-id "playerctl -a next"
+	bindsym b exec --no-startup-id "playerctl -a previous"
+
+	# back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
 
 # Locker is i3lock.
 set $Locker betterlockscreen --lock
@@ -320,7 +349,6 @@ for_window [class="(?i)gone"] floating enable
 # placement rules
 for_window [class="(?i)slack"] move window to workspace 9
 for_window [class="(?i)spotify"] move window to workspace $ws_music
-for_window [class="(?i)plexmediaplayer"] move window to workspace $ws_music
 
 # assign placement rules
 assign [class="^qutebrowser$"] → 2
@@ -331,6 +359,7 @@ exec --no-startup-id "xss-lock -n /usr/share/doc/xss-lock/dim-screen.sh -- bette
 exec --no-startup-id "autorandr -c"
 exec --no-startup-id "betterlockscreen -w"
 exec --no-startup-id "setxkbmap -option caps:escape se"
+exec --no-startup-id "unclutter &"
 
 # get i3 events and publish them with notifyd, make sure to kill it also.
 exec_always --no-startup-id "killall i3events; /usr/bin/i3events"

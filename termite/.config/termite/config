@@ -1,5 +1,4 @@
 [options]
-font = FontAwesome 12
 font = Inconsolata
 mouse_autohide = true
 dynamic_title = true

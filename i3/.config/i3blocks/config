@@ -33,10 +33,19 @@ command=echo [ $(~/.local/bin/win-title) ]
 color=#D8DEE9
 interval=1
 
+[backup]
+command=~/.local/bin/backup-running
+interval=20
+
 [vpn]
 label=
 command=~/.local/bin/vpn-status
 interval=2
+
+[upgrades]
+label=
+command=echo "$(pacman -Qu | wc -l)"
+interval=120
 
 [toggl]
 label=
