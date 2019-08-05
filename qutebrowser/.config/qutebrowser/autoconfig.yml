@@ -14,6 +14,11 @@ settings:
         v: hint links spawn mpv {hint-url}
         zl: spawn --userscript ~/.config/qutebrowser/qute-pass
         zpl: spawn --userscript ~/.config/qutebrowser/qute-pass --password-only
+  editor.command:
+    global:
+    - termite
+    - -e
+    - nvim '{}'
   colors.webpage.bg:
     global: white
   confirm_quit:
@@ -23,3 +28,12 @@ settings:
     global: false
   new_instance_open_target:
     global: tab
+  url.searchengines:
+    global:
+      DEFAULT: https://duckduckgo.com/?q={}
+      google: https://www.google.com/search?hl=en&q={}
+      imdb: https://www.imdb.com/find?q={}
+      wiki: https://en.wikipedia.org/w/index.php?title=Special:Search&search={}
+      ytube: https://www.youtube.com/results?search_query={}
+      arch: https://wiki.archlinux.org/?search={}
+      netflix: https://www.netflix.com/search?q={}

@@ -73,9 +73,9 @@ macro index \\\\ "<vfolder-from-query>" "Search mailbox"
 
 # Filter out some headers
 ignore *
-unignore from: subject: to: date:
+unignore from: cc: subject: to: date:
 unhdr_order *                           # some distros order things by default
-hdr_order to: from: date: subject:
+hdr_order to: from: cc: date: subject:
 
 # View HTML automatically
 auto_view text/html
@@ -94,7 +94,7 @@ set mark_old=no
 set sort = 'threads'
 set sort_aux = last-date-received
 
-set index_format = "%Z %<[d?%[ %H:%M]&%[%b %d]> | %-20.20L (%?l?%4l&%4c?) %s"
+set index_format = "%Z %<[d?%[ %H:%M]&%[%b %d]> | %-25.25L (%?l?%4l&%4c?) %?M? [%M] -? %s"
 
 set status_chars  = " *%A"
 set status_format = "───[ Folder: %f%V ]───[%r%m messages%?n? (%n new)?%?o? (%o old)?%?d? (%d to delete)?%?t? (%t tagged)? %l ]───%>─%?p?( %p postponed )?───"
@@ -148,6 +148,11 @@ source $alias_file
 # Mailing lists: http://www.mutt.org/doc/manual/#lists
 lists arch-announce@archlinux.org
 subscribe arch-announce@archlinux.org
+color index blue default "~N ~C arch-announce@archlinux.org"
+
+lists bugs@archlinux.org
+subscribe bugs@archlinux.org
+color index red default "~N ~C bugs@archlinux.org"
 
 # Set preference of text/plain
 alternative_order text/plain text/enriched text/html
@@ -162,11 +167,11 @@ color indicator     brightcyan      black
 
 color index         yellow          default         "~N"                        # new messages
 color index         default         red             "~D"                        # deleted messages
-color index         red             default         "~F"                        # flagged messages
+color index         brightwhite     default         "~F"                        # flagged messages
 
-color index         brightwhite     default         "~v~(!~F)~(!~N)"            # collapsed thread
 color index         yellow          default         "~v~(~N)"                   # collapsed thread with New
-color index         red             default         "~v~(~F)~(!~N)"             # collapsed thread with flagged messages
+color index         brightwhite     default         "~v~(~F)~(!~N)"             # collapsed thread with flagged messages
+# color index         brightwhite     default         "~v~(!~F)~(!~N)"            # collapsed thread
 
 color hdrdefault    green           default
 color header        brightgreen     default         "^(From)"

@@ -8,6 +8,8 @@ set record    = "+anton.lindstrom@frontiercargroup.com/sent"
 set sendmail = "/usr/bin/msmtp -a anton.lindstrom@frontiercargroup.com"
 set sendmail_wait = 0
 
+folder-hook anton.lindstrom@frontiercargroup.com/* 'push <collapse-all>'
+
 color status green default
 
 macro index D \

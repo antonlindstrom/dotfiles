@@ -8,6 +8,8 @@ set record    = "+anton@lindstrom.sh/Sent"
 set sendmail  = "/usr/bin/msmtp -a lindstrom.sh"
 set sendmail_wait = 0
 
+folder-hook anton@lindstrom.sh/* 'push <collapse-all>'
+
 color status cyan default
 
 macro index A \

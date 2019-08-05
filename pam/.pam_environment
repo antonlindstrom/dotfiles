@@ -8,7 +8,7 @@ SSH_AUTH_SOCK		DEFAULT="${XDG_RUNTIME_DIR}/ssh-agent.socket"
 # Paths
 GOPATH			DEFAULT=${HOME}/code
 
-PATH			DEFAULT=${HOME}/.local/bin:${HOME}/.fzf/bin::/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:${GOPATH}/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl
+PATH			DEFAULT=${HOME}/.local/bin:${HOME}/.fzf/bin::/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:${GOPATH}/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:${HOME}/.cargo/bin
 
 # FZF
 FZF_DEFAULT_COMMAND	DEFAULT="ag --hidden --ignore .git --ignore vendor/ -g ''"

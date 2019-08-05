@@ -140,7 +140,7 @@ try
   let g:neomake_cpp_clang_args = ["-std=c++17", "-Wextra", "-Wall", "-fsanitize=undefined", "-g", "-I", "."]
 
   " neomake configuration for Go.
-  let g:neomake_go_enabled_makers = [ 'go', 'gometalinter', 'endsentence', 'bodyclose' ]
+  let g:neomake_go_enabled_makers = [ 'go', 'gometalinter', 'bodyclose' ]
   let g:neomake_go_endsentence_maker = { }
   let g:neomake_go_bodyclose_maker = { }
   let g:neomake_go_gometalinter_maker = {
@@ -300,6 +300,7 @@ set mat=5       " duration to show matching brace (1/10 sec)
 set showtabline=2 " Always show tab bar
 set backupdir=~/.vim/backup " Backupfiles
 set directory=~/.vim/tmp " Swapfiles
+set hidden " Fix buffers requiring a save.
 
 " autocomplete
 set omnifunc=syntaxcomplete#Complete

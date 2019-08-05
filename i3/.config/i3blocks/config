@@ -42,25 +42,10 @@ label=
 command=~/.local/bin/vpn-status
 interval=2
 
-[upgrades]
-label=
-command=echo "$(pacman -Qu | wc -l)"
-interval=120
-
 [toggl]
 label=
 command=echo $(toggl week-duration | awk -F: '{ print $1":"$2 }')
 interval=60
-
-[email]
-label=
-command=echo $(notmuch search "tag:unread and tag:inbox" | wc -l)
-interval=15
-
-# [temperature]
-# label=
-# interval=600
-# command=echo "$(~/.local/bin/weather | awk '{print $NF }')"
 
 [disk-usage]
 label=
