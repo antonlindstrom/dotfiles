@@ -38,6 +38,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/vim-slumlord'
 Plug 'sickill/vim-monokai'
+Plug 'sebdah/vim-delve'
 Plug 'tclh123/vim-thrift'
 Plug 'tomtom/tlib_vim'
 Plug 'tpope/vim-commentary'
