@@ -60,6 +60,9 @@ macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
 macro index,pager I  <set-flag>O  "Mark as read"
 macro index,pager U  <set-flag>N  "Mark as new"
 
+# Apply git patch
+macro index L '| git am -s'\n
+
 # Support for notmuch
 set virtual_spoolfile=yes
 

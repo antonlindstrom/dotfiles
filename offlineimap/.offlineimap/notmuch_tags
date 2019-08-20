@@ -9,3 +9,4 @@
 +rollbar from:notifier@mail.rollbar.com
 +rollbar-summary -rollbar from:notifier@mail.rollbar.com and 'Daily Summary'
 +deploy from:notifier@mail.rollbar.com and 'Deploy to production'
++payslip subject:'Lönebesked*'

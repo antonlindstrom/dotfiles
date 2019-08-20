@@ -8,3 +8,7 @@ notmuch search --format=text0 --output=files tag:company | \
 
 notmuch search --format=text0 --output=files tag:codepractice | \
     xargs -0 -I {} --no-run-if-empty mv {} ~/.mail/anton@lindstrom.sh/CodePractice/cur
+
+notmuch search --format=text0 --output=files tag:payslip and tag:work | \
+    xargs -0 -I {} --no-run-if-empty ripmime --overwrite -i {} -d ~/documents/payslips/; \
+    rm ~/documents/payslips/{textfile*,*.jpg}
