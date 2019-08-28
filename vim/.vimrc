@@ -402,9 +402,8 @@ nnoremap <leader>d :Gdiff<CR>
 
 " br: Toogle delve breakpoint
 au FileType go nnoremap <leader>c :GoCoverageToggle<CR>
-au FileType go nnoremap <leader>br :GoDebugBreakpoint<CR>
-au FileType go nnoremap <leader>bn :GoDebugNext<CR>
-au FileType go nnoremap <leader>bc :GoDebugContinue<CR>
+au FileType go nnoremap <leader>br :DlvToggleBreakpoint<CR>
+au FileType go nnoremap <leader>bt :DlvTest<CR>
 au FileType go nnoremap <leader>t :GoTest<CR>
 
 autocmd BufNewFile,BufRead *.vue   set syntax=html

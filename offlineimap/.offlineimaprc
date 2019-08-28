@@ -84,6 +84,7 @@ folderfilter = lambda folder: folder in [ 'Sent', 'Inbox', 'Archive' ]
 localrepository = private-Local
 remoterepository = private-Remote
 postsynchook = ~/.offlineimap/postsync.sh
+presynchook = imapfilter
 quick = 10
 maxage = 120
 

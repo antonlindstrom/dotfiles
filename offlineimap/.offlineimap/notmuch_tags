@@ -1,9 +1,6 @@
 +work to:anton.lindstrom@frontiercargroup.com
 +github +code from:notifications@github.com
 +gitlab +code from:gitlab@*
-+company -inbox from:*@lrfkonsult.se
-+codepractice -inbox from:*@interviewcake.com
-+codepractice -inbox from:*@hackerrankmail.com
 -inbox from:it@frontiercargroup.com
 +jira from:jira@*
 +rollbar from:notifier@mail.rollbar.com
