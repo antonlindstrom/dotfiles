@@ -1,6 +1,21 @@
 #!/bin/bash
+#
+# Create a QR code of a network configuration. The stdin takes a netctl
+# configuration and renders a QR code, if nothing is provided, an interactive
+# prompt is displayed.
 
-main() {
+read_stdin() {
+	while read -r line; do
+		eval "${line}"
+	done < /dev/stdin
+
+	Security=$(echo "$Security" | awk '{print toupper($0)}')
+
+	# shellcheck disable=SC2154
+	echo "WIFI:S:${ESSID};T:${Security:-WPA};P:${Key};;" | qrencode -t UTF8
+}
+
+read_interactive() {
 	echo
 	read -r -p "SSID: " ssid
 	read -r -s -p "Password: " wifi_password
@@ -11,4 +26,12 @@ main() {
 	echo "WIFI:S:${ssid};T:${encryption:-WPA};P:${wifi_password};;" | qrencode -t UTF8
 }
 
-main $1
+main() {
+	if [[ -p /dev/stdin ]]; then
+		read_stdin "$@"
+	else
+		read_interactive "$@"
+	fi
+}
+
+main "$@"
