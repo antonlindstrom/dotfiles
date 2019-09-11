@@ -22,8 +22,9 @@
 	sprint-overview = log --all --since='2 weeks' --no-merges --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	sprint-stats = shortlog -sn --since='2 weeks'
 	sprint-merges = log --all --since='2 weeks' --merges --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	sprint-mine = log --since='2 weeks' --no-merges --author=anton.lindstrom@frontiercargroup.com --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	all-merges = log --all --merges --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	all-mine = log --all --no-merges --author=lindztr@gmail.com --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	all-mine = log --all --no-merges --author=anton.lindstrom@frontiercargroup.com --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	today = log --since=00:00:00 --all --no-merges --pretty=format:'%Cred%h%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	graph = log --graph --all --decorate --stat --date=iso
 	lfm = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit master..
@@ -33,6 +34,7 @@
 	irst = "!git log --oneline --color | fzf --ansi --height=40% | awk '{ print $1 }' | xargs git reset"
 	irbs = "!git log --oneline --color | fzf --ansi --height=40% | awk '{ print $1 }' | xargs git rebase -i"
 	ico = "!git branch --color | grep -v '*' | fzf --ansi --prompt=\"current: '$(git rev-parse --abbrev-ref HEAD)'> \" | xargs git checkout"
+	isprint-mine = "!git sprint-mine | fzf --ansi | awk '{ print $1 }' | xargs git show"
 	meld = difftool -g
 	meld-dd = difftool --dir-diff -g
 	pom = pull origin master
@@ -47,7 +49,7 @@
 [submodule]
 	fetchJobs = 4
 [rebase]
-	autoSquash = 1
+	autosquash = true
 [ghq]
 	root = ~/code/src
 [http "https://gopkg.in"]
