@@ -1,6 +1,8 @@
 set -Uq fish_setup_done
 or fish_setup
 
+eval (starship init fish)
+
 set -x GPG_TTY (tty)
 set -x SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
 
