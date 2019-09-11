@@ -50,6 +50,7 @@ Plug 'udalov/kotlin-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-scripts/DoxygenToolkit.vim'
 Plug 'vim-scripts/Toggle'
+Plug 'vimwiki/vimwiki'
 Plug 'wimstefan/Lightning'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-session'
@@ -255,6 +256,12 @@ try
   let g:airline_powerline_fonts = 1
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#tabline#left_sep = ' '
+catch
+endtry
+
+" Vim wiki
+try
+  let g:vimwiki_list = [{'path': '~/.vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 catch
 endtry
 
