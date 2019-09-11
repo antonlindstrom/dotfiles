@@ -29,6 +29,16 @@ function cmd_working_on() {
 	search 'assignee = currentUser()'
 }
 
+function add_task() {
+	issue_id=$(echo "$line" | cut -d: -f 1)
+
+	task add "\"$1\"" project:fcg prio:M
+	id=$(task +LATEST ids)
+	task "$id" annotate "$endpoint/browse/$issue_id"
+}
+
+TASKS=()
+
 IFS=$'\n'
 for line in $(cmd_working_on)
 do
@@ -44,12 +54,12 @@ do
 		continue
 	fi
 
-	read -r -p "Add \"$line\"? (y/N): " prompt
-	if [ "$prompt" = "y" ]; then
-		task add "\"$line\"" project:fcg prio:M
-		id=$(task +LATEST ids)
-		task "$id" annotate "$endpoint/browse/$issue_id"
-	fi
+	TASKS+=("$line")
 done
+
+task="$(printf '%s\n' "${TASKS[@]}" | fzf)"
+if [ -n "$task" ]; then
+	add_task "$task"
+fi
 
 # vim: ft=sh
