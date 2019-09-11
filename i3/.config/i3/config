@@ -47,6 +47,7 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+o exec "rofi -combi-modi 'window#drun#display:~/.local/bin/monitor_layout.sh' -show combi -modi combi"
+bindsym $mod+c exec --no-startup-id "rofi -show calc -modi calc -no-show-match -no-sort"
 bindsym $mod+p exec "passdmenu -x c"
 
 # emoji-picker :)
@@ -296,7 +297,7 @@ mode "$mode_notifications" {
 	bindsym Escape mode "default"
 }
 
-bindsym $mod+l mode "$mode_notifications"
+bindsym $mod+n mode "$mode_notifications"
 
 # Locking
 bindsym $mod+Escape exec $Locker

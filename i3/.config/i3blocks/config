@@ -37,24 +37,23 @@ interval=1
 command=~/.local/bin/backup-running
 interval=20
 
-[vpn]
-label=
-command=~/.local/bin/vpn-status
-interval=2
-
 [toggl]
-label=
 command=echo $(toggl week-duration | awk -F: '{ print $1":"$2 }')
 interval=60
 
+[vpn]
+label=
+command=echo " $(~/.local/bin/vpn-status)"
+interval=2
+
 [disk-usage]
 label=
-command=echo "$(df / | awk '/\//{ print $5 }')"
+command=echo " $(df / | awk '/\//{ print $5 }')"
 interval=120
 
 [ssid]
 label=
-command=~/.local/bin/wlinfo
+command=echo " $(~/.local/bin/wlinfo)"
 interval=30
 
 
@@ -63,12 +62,12 @@ interval=30
 # The battery instance defaults to 0.
 [battery]
 label=
-instance=0
+command=echo " $(~/.local/bin/battery-status)"
 interval=5
 
 # Time
 #
 [time]
 label=
-command=date '+%H:%M'
+command=echo " $(date '+%H:%M')"
 interval=5
