@@ -1,0 +1,20 @@
+# vim: syntax=sh
+
+# CommitView.
+theme --name nord --component CommitView.Tag                  --bgcolor None   --fgcolor 81A1C1
+theme --name nord --component CommitView.LocalBranch          --bgcolor None   --fgcolor 81A1C1
+theme --name nord --component CommitView.RemoteBranch         --bgcolor None   --fgcolor 81A1C1
+
+# DiffView.
+theme --name nord --component DiffView.FancyLineAdded         --bgcolor None   --fgcolor A3BE8C
+theme --name nord --component DiffView.FancyLineAddedChange   --bgcolor A3BE8C --fgcolor 2E3440
+theme --name nord --component DiffView.FancyLineRemoved       --bgcolor None   --fgcolor BF616A
+theme --name nord --component DiffView.FancyLineRemovedChange --bgcolor BF616A --fgcolor 2E3440
+theme --name nord --component DiffView.AddedLine              --bgcolor None   --fgcolor A3BE8C
+theme --name nord --component DiffView.RemovedLine            --bgcolor None   --fgcolor BF616A
+
+# Create some kind of nord theme.
+set theme nord
+
+# Display a commit graph.
+set commit-graph true
