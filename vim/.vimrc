@@ -4,6 +4,9 @@
 
 call plug#begin('~/.vim/plugged')
 
+" let g:plug_url_format = "git://github.com/%s.git"
+let g:plug_threads = 1
+
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'aklt/plantuml-syntax'
 Plug 'AndrewRadev/splitjoin.vim'
@@ -197,6 +200,10 @@ try
   let g:go_highlight_structs = 1
   let g:go_highlight_operators = 1
   let g:go_highlight_build_constraints = 1
+
+  let g:go_auto_type_info = 1
+
+  let go_doc_popup_window = 1 " Vim 8.1.1513
 catch
 endtry
 
@@ -310,6 +317,8 @@ set backupdir=~/.vim/backup " Backupfiles
 set directory=~/.vim/tmp " Swapfiles
 set hidden " Fix buffers requiring a save.
 
+set updatetime=200
+
 " autocomplete
 set omnifunc=syntaxcomplete#Complete
 
@@ -406,11 +415,16 @@ nmap <leader>l :OpenSession<cr>
 
 " ,d -> git diff
 nnoremap <leader>d :Gdiff<CR>
+nnoremap <leader>b :Gblame<CR>
 
 " br: Toogle delve breakpoint
 au FileType go nnoremap <leader>c :GoCoverageToggle<CR>
 au FileType go nnoremap <leader>br :DlvToggleBreakpoint<CR>
 au FileType go nnoremap <leader>bt :DlvTest<CR>
 au FileType go nnoremap <leader>t :GoTest<CR>
+au FileType go nnoremap <leader>gd :GoDoc<CR>
+au FileType go nnoremap <leader>ga :GoAlternate<CR>
+au Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+
 
 autocmd BufNewFile,BufRead *.vue   set syntax=html
