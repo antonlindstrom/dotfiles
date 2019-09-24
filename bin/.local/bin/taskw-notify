@@ -1,9 +1,15 @@
 #!/bin/bash
 
-task status:pending tags.hasnt:notified due.before:now+2h export | jq -r ".[].description" |
-while IFS= read -r line
+v=$(task status:pending tags.hasnt:notified due.before:now+12h export | jq -r ".[].description")
+if [ -z "$v" ]; then
+	echo "No pending tasks"
+	exit 0
+fi
+
+IFS=$'\n'
+for line in $v
 do
-   notify-send 'A task is due in less than 2h' "$line"
+   notify-send 'A task is due in less than 12h' "$line"
 done
 
-task status:pending tags.hasnt:notified due.before:now+2h modify +notified
+task status:pending tags.hasnt:notified due.before:now+12h modify +notified
