@@ -158,6 +158,9 @@ max_icon_size = 80
 frame_width = 1
 frame_color = "#2E463E"
 
+# Let's round the corners a bit.
+corner_radius = 5
+
 [shortcuts]
 
 # Shortcuts are specified as [modifier+][modifier+]...key
