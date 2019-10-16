@@ -145,8 +145,14 @@ try
   let g:neomake_cpp_clang_args = ["-std=c++17", "-Wextra", "-Wall", "-fsanitize=undefined", "-g", "-I", "."]
 
   " neomake configuration for Go.
-  let g:neomake_go_enabled_makers = [ 'go', 'gometalinter', 'bodyclose' ]
-  let g:neomake_go_endsentence_maker = { }
+  let g:neomake_go_enabled_makers = [ 'go', 'gometalinter', 'bodyclose', 'endsentence' ]
+  let g:neomake_go_endsentence_maker = {
+    \ 'args': [
+    \   '.',
+    \ ],
+    \ 'append_file': 0,
+    \ 'cwd': '%:p:h',
+    \ }
   let g:neomake_go_bodyclose_maker = { }
   let g:neomake_go_gometalinter_maker = {
     \ 'args': [
@@ -169,6 +175,7 @@ try
     \   '%:p:h',
     \ ],
     \ 'append_file': 0,
+    \ 'cwd': '%:p:h',
     \ 'errorformat':
     \   '%E%f:%l:%c:%trror: %m,' .
     \   '%W%f:%l:%c:%tarning: %m,' .
@@ -189,7 +196,7 @@ endtry
 
 " Go
 try
-  let g:go_fmt_command = "goimports"
+  let g:go_fmt_command = "gofumports"
 
   let g:go_addtags_transform = "snakecase"
 
