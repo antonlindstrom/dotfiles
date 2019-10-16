@@ -1,0 +1,23 @@
+# Don't print a new line at the start of the prompt
+add_newline = false
+
+[character]
+symbol = "➜"
+
+[kubernetes]
+disabled = false
+
+[hostname]
+ssh_only = false
+style = "green"
+disabled = false
+
+[golang]
+symbol = "Go "
+
+[jobs]
+symbol = ""
+threshold = 0
+
+[cmd_duration]
+min_time = 1
