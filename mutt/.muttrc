@@ -148,6 +148,11 @@ set sort_alias = alias
 set reverse_alias = yes
 source $alias_file
 
+# Address book.
+set query_command = "abook --mutt-query '%s'"
+macro index,pager  a "<pipe-message>abook --add-email<return>" "Add this sender to Abook"
+bind editor        <Tab> complete-query
+
 # Mailing lists: http://www.mutt.org/doc/manual/#lists
 lists arch-announce@archlinux.org
 subscribe arch-announce@archlinux.org
@@ -185,6 +190,10 @@ color quoted1       cyan            default
 color quoted2       yellow          default
 color quoted3       red             default
 color quoted4       brightred       default
+
+# Give the arch linux mailing lists some color.
+color index brightblue default "~C bugs@archlinux.org"
+color index blue default "~C announce@archlinux.org"
 
 # Sidebar colors.
 color sidebar_highlight brightcyan  black
