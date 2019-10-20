@@ -47,10 +47,10 @@ function edit-modified() {
     echo "not a git directory"
     return 128
   fi
-  git status | awk '/modified/ { print $2 }' | xargs nvim -p
+  git status | awk '/modified/ { print $2 }' | xargs vim -p
 }
 
-export EDITOR=nvim
+export EDITOR=vim
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWCOLORHINTS=1
 export PS1="\u@\h:\[$(tput sgr0)\]\[\033[0;32m\]\W\[\033[38;5;11m\]\$(__git_ps1 ' (%s)')\[$(tput sgr0)\]\[\033[0;32m\]:\j\\$\[$(tput sgr0)\]\[\033[0;32m\] \[$(tput sgr0)\]"

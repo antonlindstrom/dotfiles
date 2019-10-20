@@ -2,7 +2,7 @@
 	path = ~/.gitconfig.private
 [core]
 	excludesfile = ~/.gitignore
-	editor = /usr/bin/nvim
+	editor = /usr/bin/vim
 [help]
 	autocorrect = 1
 [color]
