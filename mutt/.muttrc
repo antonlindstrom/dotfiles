@@ -27,7 +27,10 @@ set mail_check = 0       # minimum time between scans
 set mail_check_stats
 unset move               # gmail does that
 
-# set pager_index_lines=10
+set pager_index_lines=10
+
+# Print commands
+# set print_command="muttprint"
 
 set uncollapse_jump
 
@@ -43,19 +46,16 @@ bind index R        group-reply
 bind index <space>  collapse-thread
 bind index <tab>    collapse-all
 
-# Read manual.
-macro index,pager <F1> "<shell-escape>less /usr/share/doc/mutt/manual.txt<enter>" "Show Mutt documentation"
-
 # Ctrl-R to mark all as read
-macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "mark all messages as read"
+macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "Mark all messages as read"
 
 # Go to inbox
-macro index gi "<change-folder>!<return>" "go to inbox"
+macro index gi "<change-folder>!<return>" "Go to inbox"
 macro index c '<change-folder>?<change-dir><home>^K=<enter>'<Paste>
 
 # Saner copy/move dialogs
-macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
-macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
+macro index C "<copy-message>?<toggle-mailboxes>" "Copy a message to a mailbox"
+macro index M "<save-message>?<toggle-mailboxes>" "Move a message to a mailbox"
 
 macro index,pager I  <set-flag>O  "Mark as read"
 macro index,pager U  <set-flag>N  "Mark as new"
@@ -71,14 +71,13 @@ macro index A "<modify-labels>+archive -unread -inbox\\n" "Archive message"
 macro index gu "<change-vfolder>notmuch://?query=tag:unread\n" "Change to all unreads"
 macro index gw "<change-vfolder>notmuch://?query=tag:work\n" "Change to work"
 macro index gc "<change-vfolder>notmuch://?query=tag:code\n" "Change to code"
-macro index gr "<change-vfolder>notmuch://?query=tag:rollbar\n" "Change to rollbar"
-macro index \\\\ "<vfolder-from-query>" "Search mailbox"
+macro index gs "<vfolder-from-query>" "Search mailbox"
 
 # Filter out some headers
 ignore *
-unignore from: cc: subject: to: date:
+unignore from: cc: subject: to: date: list-unsubscribe:
 unhdr_order *                           # some distros order things by default
-hdr_order to: from: cc: date: subject:
+hdr_order to: from: cc: date: list-unsubscribe: subject:
 
 # View HTML automatically
 auto_view text/html
@@ -156,11 +155,12 @@ bind editor        <Tab> complete-query
 # Mailing lists: http://www.mutt.org/doc/manual/#lists
 lists arch-announce@archlinux.org
 subscribe arch-announce@archlinux.org
-color index blue default "~N ~C arch-announce@archlinux.org"
 
 lists bugs@archlinux.org
 subscribe bugs@archlinux.org
-color index red default "~N ~C bugs@archlinux.org"
+
+lists arch-general@archlinux.org
+subscribe arch-general@archlinux.org
 
 # Set preference of text/plain
 alternative_order text/plain text/enriched text/html
@@ -175,15 +175,16 @@ color indicator     brightcyan      black
 
 color index         yellow          default         "~N"                        # new messages
 color index         default         red             "~D"                        # deleted messages
-color index         brightwhite     default         "~F"                        # flagged messages
+color index         cyan            default         "~F"                        # flagged messages
 
 color index         yellow          default         "~v~(~N)"                   # collapsed thread with New
 color index         brightwhite     default         "~v~(~F)~(!~N)"             # collapsed thread with flagged messages
-# color index         brightwhite     default         "~v~(!~F)~(!~N)"            # collapsed thread
+color index         brightwhite     default         "~v~(!~F)~(!~N)"            # collapsed thread
 
 color hdrdefault    green           default
 color header        brightgreen     default         "^(From)"
-color header        blue            default         "^(Subject)"
+color header        brightcyan      default         "^(Subject)"
+color header        yellow          default         "^(List-Unsubscribe)"
 
 color quoted        blue            default
 color quoted1       cyan            default
@@ -192,8 +193,8 @@ color quoted3       red             default
 color quoted4       brightred       default
 
 # Give the arch linux mailing lists some color.
-color index brightblue default "~C bugs@archlinux.org"
-color index blue default "~C announce@archlinux.org"
+color index brightred default "~C bugs@archlinux.org (~N)"
+color index brightblue default "~C announce@archlinux.org (~N)"
 
 # Sidebar colors.
 color sidebar_highlight brightcyan  black

@@ -42,8 +42,7 @@ command=echo $(toggl week-duration | awk -F: '{ print $1":"$2 }')
 interval=60
 
 [vpn]
-label=
-command=echo " $(~/.local/bin/vpn-status)"
+command=echo "$(~/.local/bin/vpn-status)"
 interval=2
 
 [disk-usage]

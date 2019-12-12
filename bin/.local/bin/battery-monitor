@@ -34,10 +34,12 @@ while (( first_run == 1 )) || sleep 60; do
     perc=$(( now * 100 / full ))
 
     if (( perc <= WARN_PERC )); then
-        notify-send -u critical 'Battery critical' 'Reaching critical battery threshold'
+        notify-send -u critical 'Battery warning' 'Reaching low battery level'
     fi
 
     if (( perc <= SLEEP_PERC )); then
-        sudo sh -c 'printf mem > /sys/power/state'
+        notify-send -u critical 'Battery critical' 'Reaching critical battery level, hibernating'
+        sleep 10
+        systemctl hibernate
     fi
 done

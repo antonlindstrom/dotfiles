@@ -8,8 +8,6 @@ set record    = "+antonlindstrom.com/sent"
 set sendmail = "/usr/bin/msmtp -a me"
 set sendmail_wait = 0
 
-folder-hook antonlindstrom.com/* 'push <collapse-all>'
-
 color status green default
 
 macro index D \

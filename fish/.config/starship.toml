@@ -5,7 +5,7 @@ add_newline = false
 symbol = "➜"
 
 [kubernetes]
-disabled = false
+disabled = true
 
 [hostname]
 ssh_only = false

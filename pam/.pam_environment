@@ -6,20 +6,20 @@ SSH_AGENT_PID		DEFAULT=
 SSH_AUTH_SOCK		DEFAULT="${XDG_RUNTIME_DIR}/ssh-agent.socket"
 
 # Paths
-GOPATH			DEFAULT=${HOME}/code
+GOPATH			DEFAULT=@{HOME}/code
 
-PATH			DEFAULT=${HOME}/.local/bin:${HOME}/.fzf/bin::/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:${GOPATH}/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:${HOME}/.cargo/bin
+PATH			DEFAULT=@{HOME}/.local/bin:@{HOME}/.fzf/bin::/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:${GOPATH}/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:@{HOME}/.cargo/bin
 
 # FZF
 FZF_DEFAULT_COMMAND	DEFAULT="ag --hidden --ignore .git --ignore vendor/ -g ''"
 
 # XDG
-XDG_DESKTOP_DIR		DEFAULT=${HOME}
-XDG_DOCUMENTS_DIR	DEFAULT=${HOME}/documents
-XDG_DOWNLOAD_DIR	DEFAULT=${HOME}/downloads
-XDG_MUSIC_DIR		DEFAULT=${HOME}/music
-XDG_PICTURES_DIR	DEFAULT=${HOME}/pictures
-XDG_VIDEOS_DIR		DEFAULT=${HOME}/videos
+XDG_DESKTOP_DIR		DEFAULT=@{HOME}
+XDG_DOCUMENTS_DIR	DEFAULT=@{HOME}/documents
+XDG_DOWNLOAD_DIR	DEFAULT=@{HOME}/downloads
+XDG_MUSIC_DIR		DEFAULT=@{HOME}/music
+XDG_PICTURES_DIR	DEFAULT=@{HOME}/pictures
+XDG_VIDEOS_DIR		DEFAULT=@{HOME}/videos
 
 EDITOR			DEFAULT=vim
 BROWSER			DEFAULT=qutebrowser

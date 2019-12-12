@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ -d /proc/sys/net/ipv4/conf/ppp0 ]; then
-	echo "ppp0"
+	echo "    ppp0"
 elif [ -d /proc/sys/net/ipv4/conf/wg0 ]; then
-	echo "wg0"
+	echo "    wg0"
 fi

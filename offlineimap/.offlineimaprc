@@ -104,8 +104,6 @@ realdelete = no
 maxage = 120
 keepalive = 60
 holdconnectionopen = yes
-nametrans = lambda folder: {'drafts':  'Drafts', 'sent': 'Sent', 'trash': 'Trash', 'archive': 'Archive'}.get(folder, folder)
-
 
 #
 ##  work account
@@ -135,6 +133,6 @@ maxage = 120
 keepalive = 60
 holdconnectionopen = yes
 nametrans = lambda folder: {'[Gmail]/Drafts': 'drafts', '[Gmail]/Sent Mail': 'sent', '[Gmail]/Starred': 'flagged', '[Gmail]/Trash': 'trash'}.get(folder, folder)
-folderfilter = lambda folder: folder in ['INBOX', '[Gmail]/Drafts', '[Gmail]/Sent Mail', '[Gmail]/Starred', '[Gmail]/Trash' ]
+folderfilter = lambda folder: folder in ['INBOX', '[Gmail]/Drafts', '[Gmail]/Sent Mail', '[Gmail]/Starred', '[Gmail]/Trash', 'jira', 'code' ]
 
 # vim: ft=conf

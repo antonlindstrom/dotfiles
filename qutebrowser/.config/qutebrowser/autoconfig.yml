@@ -24,9 +24,16 @@ settings:
     - multiple-tabs
   content.autoplay:
     global: false
+  content.headers.do_not_track:
+    global: true
+  content.headers.user_agent:
+    global: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like
+      Gecko) Chrome/76.0.3809.132 Safari/537.36
   content.notifications:
     https://thecrucible.online: true
     https://www.reddit.com: true
+  content.register_protocol_handler:
+    https://mail.google.com?extsrc=mailto&url=%25s: false
   editor.command:
     global:
     - termite
