@@ -51,6 +51,7 @@ macro index \Cr "T~U<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter>" "Ma
 
 # Go to inbox
 macro index gi "<change-folder>!<return>" "Go to inbox"
+macro index gw "<change-folder>=anton@precisely.se/INBOX<return>" "Go to work inbox"
 macro index c '<change-folder>?<change-dir><home>^K=<enter>'<Paste>
 
 # Saner copy/move dialogs
@@ -67,9 +68,7 @@ macro index L '| git am -s'\n
 set virtual_spoolfile=yes
 
 # notmuch shortcuts
-macro index A "<modify-labels>+archive -unread -inbox\\n" "Archive message"
 macro index gu "<change-vfolder>notmuch://?query=tag:unread\n" "Change to all unreads"
-macro index gw "<change-vfolder>notmuch://?query=tag:work\n" "Change to work"
 macro index gc "<change-vfolder>notmuch://?query=tag:code\n" "Change to code"
 macro index gs "<vfolder-from-query>" "Search mailbox"
 
@@ -133,7 +132,7 @@ source ~/.mutt/accounts/anton@lindstrom.sh
 folder-hook anton@lindstrom.sh/*                       source ~/.mutt/accounts/anton@lindstrom.sh
 folder-hook lindstrom.anton@outlook.com/*              source ~/.mutt/accounts/lindstrom.anton@outlook.com
 folder-hook antonlindstrom.com/*                       source ~/.mutt/accounts/antonlindstrom.com
-folder-hook anton.lindstrom@frontiercargroup.com/*     source ~/.mutt/accounts/anton.lindstrom@frontiercargroup.com
+folder-hook anton@precisely.se/*                       source ~/.mutt/accounts/anton@precisely.se
 
 # Get mailboxes
 source ~/.mutt/mailboxes

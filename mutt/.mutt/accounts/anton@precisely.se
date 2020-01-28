@@ -1,0 +1,21 @@
+set from      = "anton@precisely.se"
+set realname  = "Anton Lindstrom"
+
+set mbox      = "+anton@precisely.se/archive"
+set postponed = "+anton@precisely.se/drafts"
+set record    = "+anton@precisely.se/sent"
+
+set sendmail = "/usr/bin/msmtp -a anton@precisely.se"
+set sendmail_wait = 0
+
+color status green default
+
+macro index D \
+    "<save-message>+anton@precisely.se/trash<enter>" \
+    "move message to the trash"
+
+macro index S \
+    "<save-message>+anton@precisely.se/spam<enter>"  \
+        "mark message as spam"
+
+# vim:filetype=muttrc

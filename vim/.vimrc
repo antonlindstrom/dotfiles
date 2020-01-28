@@ -179,7 +179,7 @@ try
   let g:go_highlight_operators = 1
   let g:go_highlight_build_constraints = 1
 
-  let g:go_auto_type_info = 1
+  let g:go_auto_type_info = 0
 
   let go_doc_popup_window = 1 " Vim 8.1.1513
 catch
@@ -295,7 +295,7 @@ set backupdir=~/.vim/backup " Backupfiles
 set directory=~/.vim/tmp " Swapfiles
 set hidden " Fix buffers requiring a save.
 
-set updatetime=200
+" set updatetime=200
 
 " autocomplete
 set omnifunc=syntaxcomplete#Complete

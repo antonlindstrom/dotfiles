@@ -38,10 +38,34 @@ account1 = IMAP {
   ssl = "ssl3"
 }
 
--- Move to CodingPractice folder.
+-- Move to arch-general mailing list folder.
+messages = account1["INBOX"]:contain_to("arch-general@archlinux.org")
+  + account1["INBOX"]:contain_from("arch-general-request@archlinux.org")
+  + account1["INBOX"]:contain_field("X-Original-Delivered-to", "arch-general@lists.archlinux.org")
+messages:move_messages(account1["lists/arch-general"])
+
+-- Move to arch-announce mailing list folder.
+messages = account1["INBOX"]:contain_to("arch-announce@archlinux.org")
+  + account1["INBOX"]:contain_from("arch-announce-request@archlinux.org")
+  + account1["INBOX"]:contain_field("X-Original-Delivered-to", "arch-announce@lists.archlinux.org")
+messages:move_messages(account1["lists/arch-announce"])
+
+-- Move to qutebrowser-announce mailing list folder.
+messages = account1["INBOX"]:contain_to("qutebrowser-announce@lists.qutebrowser.org")
+  + account1["INBOX"]:contain_from("qutebrowser-announce-request@lists.qutebrowser.org")
+  + account1["INBOX"]:contain_field("X-Original-Delivered-to", "qutebrowser-announce@lists.qutebrowser.org")
+messages:move_messages(account1["lists/qutebrowser-announce"])
+
+-- Move to vim-announce mailing list folder.
+messages = account1["INBOX"]:contain_to("vim-announce@vim.org")
+  + account1["INBOX"]:contain_from("vim_announce+subconfirm@googlegroups.com")
+  + account1["INBOX"]:contain_field("X-Original-Delivered-to", "vim_announce+subconfirm@googlegroups.com")
+messages:move_messages(account1["lists/vim-announce"])
+
+-- Move to CodePractice folder.
 messages = account1["INBOX"]:contain_from("@interviewcake.com")
   + account1["INBOX"]:contain_from("@hackerrankmail.com")
-messages:move_messages(account1["CodingPractice"])
+messages:move_messages(account1["CodePractice"])
 
 -- Move company emails to the Company folder.
 messages = account1["INBOX"]:contain_from("lrfkonsult.se")
