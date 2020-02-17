@@ -51,9 +51,9 @@ XTerm.vt100.translations: #override \n\
 rofi.font: Inconsolata 10, FontAwesome 10
 rofi.terminal: termite
 rofi.color-enabled: true
-rofi.color-window: nord4, nord5, nord0
+rofi.color-window: nord0, nord2, nord3
 ! #f2e5bc, #7c6f64, #7c6f64
 !                  bg       fg       bg-alt   hl-bg    hl-fg
-rofi.color-normal: nord4,   nord0,   nord5,   nord2,   nord5
-rofi.color-active: nord4,   nord0,   nord5,   nord2,   nord5
+rofi.color-normal: nord0,   nord3,   nord0,   nord0,   nord4
+rofi.color-active: nord0,   nord8,   nord0,   nord0,   nord14
 rofi.color-urgent: nord11,  nord0,   nord5,   nord2,   nord5

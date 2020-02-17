@@ -1,0 +1,30 @@
+#!/bin/bash
+
+read_stdin() {
+	email=$(< /dev/stdin)
+
+	headers_json=$(echo "$email" | jq .[0][][0].headers)
+	content_json=$(echo "$email" | jq .[0][][0].body)
+
+	subject=$(echo "$headers_json" | jq -r .Subject)
+	from=$(echo "$headers_json" | jq -r .From)
+	date=$(echo "$headers_json" | jq -r .Date)
+	content=$(echo "$content_json" | jq -r .[0].content[0].content)
+
+	echo "$from"
+	echo "$date"
+	echo "$subject"
+	echo
+	echo -e "$content"
+}
+
+main() {
+	if [[ -p /dev/stdin ]]; then
+		read_stdin "$@"
+	else
+		echo "requires piped in data"
+	fi
+}
+
+main "$@"
+

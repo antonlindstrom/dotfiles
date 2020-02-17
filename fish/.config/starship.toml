@@ -20,4 +20,12 @@ symbol = ""
 threshold = 0
 
 [cmd_duration]
-min_time = 1
+min_time = 250
+show_milliseconds = false
+
+[battery]
+disabled = false
+
+[[battery.display]]
+threshold = 25
+style = "bold red"

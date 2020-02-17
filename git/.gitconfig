@@ -34,6 +34,7 @@
 	irst = "!git log --oneline --color | fzf --ansi --height=40% --preview=\"git show --stat --color=always '{1}'\" | awk '{ print $1 }' | xargs git reset"
 	irbs = "!git log --oneline --color | fzf --ansi --height=40% --preview=\"git show --stat --color=always '{1}'\" | awk '{ print $1 }' | xargs git rebase -i"
 	ico = "!git branch --color | grep -v '*' | fzf --ansi --prompt=\"current: '$(git rev-parse --abbrev-ref HEAD)'> \" | xargs git checkout"
+	ijo = "!git branch --color | grep -v '*' | fzf --ansi --height=40% --preview=\"echo {1} | sed -e's%ftr/%%' | xargs jirah lookup\" --prompt=\"current: '$(git rev-parse --abbrev-ref HEAD)'> \" | xargs git checkout"
 	isprint-mine = "!git sprint-mine | fzf --ansi | awk '{ print $1 }' | xargs git show"
 	meld = difftool -g
 	meld-dd = difftool --dir-diff -g

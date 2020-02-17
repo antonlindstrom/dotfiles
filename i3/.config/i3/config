@@ -326,6 +326,8 @@ for_window [class="(?i)pinentry"] floating enable
 for_window [class="(?i)zenity"] floating enable
 for_window [class="(?i)xclock"] floating enable
 for_window [class="(?i)gone"] floating enable
+for_window [class="(?i)kunst"] floating enable
+for_window [class="(?i)sxiv"] floating enable
 
 # placement rules
 for_window [class="(?i)slack"] move window to workspace 9

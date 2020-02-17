@@ -54,6 +54,11 @@ macro index gi "<change-folder>!<return>" "Go to inbox"
 macro index gw "<change-folder>=anton@precisely.se/INBOX<return>" "Go to work inbox"
 macro index c '<change-folder>?<change-dir><home>^K=<enter>'<Paste>
 
+macro index gln "l ^a^k(~N|~O)\n"
+macro index glf "l ~F\n"
+macro index gls "l (~n5-100|~N)\n"
+macro index gla "l ^a^kall\n"
+
 # Saner copy/move dialogs
 macro index C "<copy-message>?<toggle-mailboxes>" "Copy a message to a mailbox"
 macro index M "<save-message>?<toggle-mailboxes>" "Move a message to a mailbox"
