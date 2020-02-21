@@ -1,0 +1,105 @@
+/**
+ * User: qball
+ * Copyright: Dave Davenport
+ */
+* {
+    nord0: #2e3440;
+    nord1: #3b4252;
+    nord2: #434c5e;
+    nord3: #4c566a;
+    nord4: #d8dee9;
+    nord5: #e5e9f0;
+    nord6: #eceff4;
+    nord7: #8fbcbb;
+    nord8: #88c0d0;
+    nord9: #81a1c1;
+    nord10: #5e81ac;
+    nord11: #bf616a;
+    nord12: #d08770;
+    nord13: #ebcb8b;
+    nord14: #a3be8c;
+    nord15: #b48ead;
+
+
+    background-color: @nord0;
+    text-color: @nord4;
+}
+
+#window {
+    location: west;
+    anchor: west;
+    height: 100%;
+    width: 30%;
+
+    orientation: horizontal;
+    children: [mainbox];
+
+    padding: 10px 10px 0px 0px;
+    border: 5px 3px 5px 0px;
+    border-color: @nord2;
+}
+
+#sidebar {
+    padding: 10px;
+}
+
+#inputbar {
+    margin: 0px 0px 0px 5px;
+    padding: 10px;
+}
+
+#mainbox {
+    expand: true;
+    spacing: 1em;
+}
+
+#listview {
+    padding: 0em 0.4em 0em 1em;
+    dynamic: false;
+    cycle:   true;
+}
+
+#element selected  normal {
+    background-color: @nord3;
+}
+
+#element normal active {
+    text-color: @nord8;
+}
+
+#element normal urgent {
+    text-color: @nord11;
+}
+
+#element alternate normal {
+}
+
+#element alternate active {
+    text-color: @nord9;
+}
+
+#element alternate urgent {
+    text-color: @nord11;
+}
+
+#element selected active {
+    background-color: @nord8;
+    text-color: @nord0;
+}
+
+#element selected urgent {
+    background-color: @nord11;
+    text-color: @nord1;
+}
+
+#inputbar {
+    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
+}
+
+#textbox-prompt-colon {
+    expand:     false;
+    str:        ":";
+    margin:     0px 0.3em 0em 0em ;
+}
+
+// vim: ft=css

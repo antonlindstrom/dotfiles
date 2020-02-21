@@ -1,0 +1,6 @@
+configuration {
+	font: "Inconsolata 10, FontAwesome 10";
+	terminal: "termite";
+	theme: "nord-sidebar";
+	cycle: true;
+}
