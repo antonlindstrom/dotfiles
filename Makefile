@@ -3,7 +3,12 @@
 DESTDIR  ?= $$HOME
 PKGS ?= $(sort $(filter-out _resources/, $(dir $(wildcard */))))
 
-REAL_DIRS := $(addprefix $(DESTDIR)/, .i3 .mutt .offlineimap .vim/autoload .config/termite .config/dunst .config/autorandr .config/qutebrowser .config/systemd/user/default.target.wants .config/i3 .local/bin .tmux/plugins .weechat .config/fish .config/mpd/playlists .imapfilter .config/grv .config/gtk-3.0)
+REAL_DIRS := $(addprefix $(DESTDIR)/, .i3 .mutt .offlineimap .vim/autoload .config/termite .config/dunst .config/autorandr .config/qutebrowser .config/systemd/user/default.target.wants .config/i3 .local/bin .tmux/plugins .weechat .config/fish .config/mpd/playlists .imapfilter .config/grv .config/gtk-3.0 .gnupg .config/rofi)
+
+# Binaries that collide with the package directories and will cause a
+# permission denied entry when it tries to execute.
+GIT_BIN=$(shell which git)
+VIM_BIN=$(shell which vim)
 
 $(REAL_DIRS):
 	@mkdir -p $@
@@ -17,7 +22,7 @@ dryrun: dirs
 .PHONY: preinstall
 preinstall: ## Preinstall target for git submodules.
 	$(info ===> Update submodules)
-	git submodule update --init
+	$(GIT_BIN) submodule update --init
 
 .PHONY: install
 install: ## Install packages and run preconfiguration
@@ -49,7 +54,7 @@ configure: ## Configure private files.
 
 .PHONY: vimplugs
 vimplugs: ## Install Vundle plugins in VIm.
-	vim -c 'PlugInstall | qa'
+	$(VIM_BIN) -c 'PlugInstall | qa'
 
 .PHONY: restore-config-backup
 restore-config-backup: ## Restore secret configuration from backup.
